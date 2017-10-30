@@ -1,14 +1,10 @@
 require 'sinatra'
 require 'sinatra/config_file'
 require 'json'
+require 'cgi'
 
 class PuppetWebhook < Sinatra::Application
-  config_file '/home/dhollinger/workspace/ruby/puppet-webhook/config.yml'
-
-  if settings.use_mcollective
-    require 'mcollective'
-    include MCollective::RPC
-  end
+  config_file '../config.yml'
 
   set :static, false
   set :lock, true if settings.enable_mutex_lock
@@ -39,7 +35,7 @@ class PuppetWebhook < Sinatra::Application
     return 200 if ignore_event?
 
     decoded = request.body.read
-    verify_signature(decoded) if settings.github_secret
+    verify_signature(decoded) if verify_signature?
     data = JSON.parse(decoded, quirks_mode: true)
 
     if data['repository'].has_key?('full_name')
@@ -76,7 +72,7 @@ class PuppetWebhook < Sinatra::Application
 
     # Check if content type is x-www-form-urlencoded
     if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
-      decoded = CGI::unescape(request.body.read).gsub(%r{^payload\=},'')
+      decoded = CGI.unescape(request.body.read).gsub(/^payload\=/,'')
     else
       decoded = request.body.read
     end
