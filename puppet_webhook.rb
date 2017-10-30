@@ -1,11 +1,9 @@
 require 'sinatra'
 require 'sinatra/config_file'
 require 'json'
-require_relative 'helpers/init'
 
 class PuppetWebhook < Sinatra::Application
-  register Sinatra::ConfigFile
-  config_file '/etc/puppet_webhook.yaml'
+  config_file '/home/dhollinger/workspace/ruby/puppet-webhook/config.yml'
 
   if settings.use_mcollective
     require 'mcollective'
@@ -14,6 +12,8 @@ class PuppetWebhook < Sinatra::Application
 
   set :static, false
   set :lock, true if settings.enable_mutex_lock
+
+  require_relative 'helpers/init'
 
   get '/' do
     raise Sinatra::NotFound

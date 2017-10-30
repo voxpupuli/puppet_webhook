@@ -1,3 +1,4 @@
 .idea/
 .ruby_version
-
+*.log
+logs/

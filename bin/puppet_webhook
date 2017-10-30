@@ -6,11 +6,11 @@ require 'webrick'
 require 'webrick/https'
 require_relative '../puppet_webhook.rb'
 
-config_file '/etc/puppet_webhook.yaml'
+config_file '../config.yml'
 
-PIDFILE = settings.pidfile || '/var/run/webhook/webhook.pid'
-LOCKFILE = settings.lockfile || '/var/run/webhook/webhook.lock'
-APP_ROOT = settings.approot || '/var/run/webhook'
+PIDFILE = settings.pidfile rescue nil || '/var/run/webhook/webhook.pid'
+LOCKFILE = settings.lockfile rescue nil || '/var/run/webhook/webhook.lock'
+APP_ROOT = settings.approot rescue nil || '/var/run/webhook'
 COMMAND_PREFIX = settings.command_prefix || ''
 LOGGER = WEBrick::Log::new(settings.logfile, WEBrick::Log::DEBUG)
 
@@ -18,7 +18,7 @@ opts = {
   Host: settings.bind_address,
   Port: settings.port,
   Logger: LOGGER,
-  ServerType: settings.server_type || WEBrick::Daemon,
+  ServerType: WEBrick::Daemon,
   ServerSoftware: settings.server_software,
   SSLEnable: settings.enable_ssl,
   StartCallBack: Proc.new { File.open(PIDFILE, 'w') { |f| f.write Process.pid } }
