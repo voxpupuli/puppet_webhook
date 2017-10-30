@@ -4,7 +4,7 @@ require 'sinatra'
 require 'sinatra/config_file'
 require 'webrick'
 require 'webrick/https'
-require_relative '../puppet_webhook.rb'
+require 'puppet_webhook'
 
 config_file '../config.yml'
 
