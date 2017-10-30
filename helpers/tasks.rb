@@ -30,7 +30,7 @@ module Tasks
     event = request.env['HTTP_X_GITHUB_EVENT']
 
     # Negate this, because we should respond if any of these conditions are true
-    ! (list.nil? or list == event ir list.include?(event))
+    ! (list.nil? or list == event or list.include?(event))
   end
 
   def run_command(command)

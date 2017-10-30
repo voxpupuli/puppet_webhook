@@ -1,9 +1,9 @@
-require 'sinatra/base'
+require 'sinatra'
 require 'sinatra/config_file'
 require 'json'
 require_relative 'helpers/init'
 
-class PuppetWebhook < Sinatra::Base
+class PuppetWebhook < Sinatra::Application
   register Sinatra::ConfigFile
   config_file '/etc/puppet_webhook.yaml'
 
@@ -146,6 +146,4 @@ class PuppetWebhook < Sinatra::Base
   not_found do
     halt 404, "You shall not pass! (page not found)\n"
   end
-
-
 end

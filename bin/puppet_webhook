@@ -31,6 +31,6 @@ if settings.enable_ssl
   opts[:SSLCertName] = [ [ 'CN', WEBrick::Utils::getservername ] ]
 end
 
-Rack::Handler::WEBrick.run(PuppetWebhook(config), opts) do |server|
+Rack::Handler::WEBrick.run(PuppetWebhook, opts) do |server|
   [:INT, :TERM].each { |sig| trap(sig) { server.stop} }
 end
