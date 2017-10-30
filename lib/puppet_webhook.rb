@@ -9,7 +9,7 @@ class PuppetWebhook < Sinatra::Application
   set :static, false
   set :lock, true if settings.enable_mutex_lock
 
-  require_relative 'helpers/init'
+  require 'helpers/init'
 
   get '/' do
     raise Sinatra::NotFound

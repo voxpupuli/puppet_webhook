@@ -10,14 +10,14 @@ Gem::Specification.new do |spec|
                    'CHANGELOG.md',
                    'README.md',
                    'LICENSE',
-                   'puppet_webhook.rb',
-                   'bin/*',
-                   'helpers/*'
+                   'config.yml',
+                   'lib/**/*',
+                   'bin/*'
                   ]
   spec.homepage = 'https://github.com/voxpupuli/puppet-webhook'
   spec.license = 'apache'
   spec.executables = ['puppet_webhook']
-  spec.require_paths = %w[lib helpers]
+  spec.require_paths = ['lib']
   spec.add_runtime_dependency 'sinatra'
   spec.add_runtime_dependency 'sinatra-contrib'
   spec.add_runtime_dependency 'slack-notifier'
