@@ -26,7 +26,8 @@ module Tasks
     # Explicitly ignore Github ping events
     return true if request.env['HTTP_X_GITHUB_EVENT'] == 'ping'
 
-    list = settings.repository_events
+    list = nil unless settings.repository_events
+    puts list
     event = request.env['HTTP_X_GITHUB_EVENT']
 
     # Negate this, because we should respond if any of these conditions are true
@@ -144,6 +145,10 @@ module Tasks
     @auth ||=  Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials &&
     @auth.credentials == [settings.user,settings.pass]
+  end
+
+  def verify_signature?
+    true unless settings.github_secret.nil?
   end
 
   def protected!
