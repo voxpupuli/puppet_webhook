@@ -1,10 +1,16 @@
-require 'sinatra'
+require 'sinatra/base'
 require 'sinatra/config_file'
 require 'json'
 require 'cgi'
+require 'webhook_json_parser'
 
-class PuppetWebhook < Sinatra::Application
+class PuppetWebhook < Sinatra::Base
+  use Rack::Parser, :parsers => {
+    'application/json' => Sinatra::WebhookJsonParser.new,
+  }
+  register Sinatra::ConfigFile
   config_file '../config.yml'
+
 
   set :static, false
   set :lock, true if settings.enable_mutex_lock
@@ -64,6 +70,7 @@ class PuppetWebhook < Sinatra::Application
   # curl -X POST -d '{ "push": { "changes": [ { "new": { "name": "production" } } ] } }' 'https://puppet:puppet@localhost:8088/payload' -k -q
 
   post '/payload' do
+    LOGGER.info "params = #{params}"
     protected! if settings.protected
     request.body.rewind  # in case someone already read it
 

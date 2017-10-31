@@ -24,5 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'mcollective-client'
   spec.add_runtime_dependency 'json'
   spec.add_runtime_dependency 'webrick'
+  spec.add_runtime_dependency 'rack-parser'
   spec.add_development_dependency 'github_changelog_generator'
 end
