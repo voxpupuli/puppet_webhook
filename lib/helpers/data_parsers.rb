@@ -2,7 +2,6 @@ require 'shellwords'
 
 module DataParsers
   def sanitize_input(input_string)
-    puts input_string
     sanitized = Shellwords.shellescape(input_string)
     LOGGER.info("Module or Branch name #{sanitized} had to be escaped") unless input_string == sanitized
     sanitized

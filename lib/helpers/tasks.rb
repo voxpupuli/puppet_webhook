@@ -27,7 +27,6 @@ module Tasks
     return true if request.env['HTTP_X_GITHUB_EVENT'] == 'ping'
 
     list = nil unless settings.repository_events
-    puts list
     event = request.env['HTTP_X_GITHUB_EVENT']
 
     # Negate this, because we should respond if any of these conditions are true

@@ -1,6 +1,5 @@
 *.gem
 webhook.lock
 .ruby_version
-*.log
-logs/
+logs/*.log
 .idea/
