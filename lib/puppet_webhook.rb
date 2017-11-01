@@ -2,11 +2,11 @@ require 'sinatra/base'
 require 'sinatra/config_file'
 require 'json'
 require 'cgi'
-require 'webhook_json_parser'
+require 'parsers/webhook_json_parser'
 
 class PuppetWebhook < Sinatra::Base
   use Rack::Parser, :parsers => {
-    'application/json' => Sinatra::WebhookJsonParser.new,
+    'application/json' => Sinatra::Parsers::WebhookJsonParser.new
   }
   register Sinatra::ConfigFile
   config_file '../config.yml'
@@ -87,13 +87,7 @@ class PuppetWebhook < Sinatra::Base
     data = JSON.parse(decoded, quirks_mode: true)
 
     # Iterate the data structure to determine what's should be deployed
-    branch = (
-        data['ref']                                          ||  # github & gitlab
-        data['refChanges'][0]['refId']            rescue nil ||  # stash
-        data['push']['changes'][0]['new']['name'] rescue nil ||  # bitbucket
-        data['resource']['refUpdates'][0]['name'] rescue nil ||  # TFS/VisualStudio-Git
-        data['repository']['default_branch']                     # github tagged release; no ref.
-      ).sub('refs/heads/', '') rescue nil
+    branch = params['branch']
 
     # If prefix is enabled in our config file, determine what the prefix should be
     prefix = case settings.prefix
@@ -109,18 +103,7 @@ class PuppetWebhook < Sinatra::Base
 
     # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
     # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
-    branch_deleted = (
-      data['deleted'] rescue false || # Github
-      data['push']['changes'][0]['closed'] rescue false || # Bitbucket
-      data['refChanges'][0]['type'] rescue false || # Stash/Bitbucket Server
-      data['after'] rescue false # Gitlab
-    )
-
-    if [true, 'DELETED', '0000000000000000000000000000000000000000'].include?(branch_deleted)
-      deleted = true
-    else
-      deleted = false
-    end
+    deleted = params['deleted']
 
     if deleted
       branch = settings.default_branch
