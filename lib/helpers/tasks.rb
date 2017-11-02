@@ -87,10 +87,10 @@ module Tasks
     if settings.slack_proxy_url
       uri = URI(settings.slack_proxy_url)
       http_options = {
-                       proxy_address:  uri.hostname,
-                       proxy_port:     uri.port,
-                       proxy_from_env: false
-                     }
+        proxy_address:  uri.hostname,
+        proxy_port:     uri.port,
+        proxy_from_env: false
+      }
     else
       http_options = {}
     end
