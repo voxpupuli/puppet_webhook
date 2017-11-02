@@ -10,10 +10,14 @@ before_install:
   - gem update bundler
   - bundle -v
 script:
-  - 'bundle exec rake test'
-rvm:
-  - 2.1.9
-  - 2.4.2
+  - 'bundle exec rake $CHECK'
+matrix:
+  fast_finish: true
+  include:
+    - rvm: 2.1.9
+      env: CHECK=test
+    - rvm: 2.4.2
+      env: CHECK=test_with_coveralls
 branches:
   only:
     - master
