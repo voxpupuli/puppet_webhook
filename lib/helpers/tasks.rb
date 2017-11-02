@@ -1,6 +1,7 @@
 require 'open3'
 require 'slack-notifier'
 require 'mcollective'
+require 'io'
 include MCollective::RPC
 
 module Tasks # rubocop:disable Style/Documentation
@@ -31,6 +32,18 @@ module Tasks # rubocop:disable Style/Documentation
 
     # Negate this, because we should respond if any of these conditions are true
     !(list.nil? || (list == event) || list.include?(event))
+  end
+
+  def run_prefix_command(payload)
+    IO.popen(settings.prefix_command, 'r+') do |io|
+      io.write payload.to_s
+      io.close_write
+      begin
+        io.readlines.first.chomp
+      rescue StandardError
+        ''
+      end
+    end
   end
 
   def run_command(command)
