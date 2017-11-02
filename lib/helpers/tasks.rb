@@ -55,18 +55,16 @@ module Tasks
   end
 
   def generate_types(environment)
-    begin
-      command = "#{COMMAND_PREFIX} /opt/puppetlabs/puppet/bin generate types --environment #{environment}"
+    command = "#{COMMAND_PREFIX} /opt/puppetlabs/puppet/bin generate types --environment #{environment}"
 
-      message = run_command(command)
-      LOGGER.info("message: #{message} environment: #{environment}")
-      status_message = { status: :success, message: message.to_s, environment: environment, status_code: 200 }
-      notify_slack(status_message) if slack?
-    rescue => e
-      LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
-      status_message = { status: :fail, message: e.message, trace: e.backtrace, environment: environment, status_code: 500 }
-      notify_slack(status_message) if slack?
-    end
+    message = run_command(command)
+    LOGGER.info("message: #{message} environment: #{environment}")
+    status_message = { status: :success, message: message.to_s, environment: environment, status_code: 200 }
+    notify_slack(status_message) if slack?
+  rescue => e
+    LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
+    status_message = { status: :fail, message: e.message, trace: e.backtrace, environment: environment, status_code: 500 }
+    notify_slack(status_message) if slack?
   end
 
   def notify_slack(status_message)
