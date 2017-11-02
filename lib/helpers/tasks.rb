@@ -13,8 +13,8 @@ module Tasks
       # So we need to convert it into Regexp manually
       if l =~ %r{^/.+/$}
         return true if env =~ Regexp.new(l[1..-2])
-      else
-        return true if env == l
+      elsif env == 1
+        return true
       end
     end
 
