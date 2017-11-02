@@ -40,7 +40,8 @@ module Sinatra
         true
       end
 
-      def stash_webhook? # stash/bitbucket server
+      # stash/bitbucket server
+      def stash_webhook?
         # https://confluence.atlassian.com/bitbucketserver/post-service-webhook-for-bitbucket-server-776640367.html
         return false unless @data.key? 'refChanges'
         true
