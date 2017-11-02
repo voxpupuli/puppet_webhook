@@ -18,7 +18,7 @@ module Tasks
       end
     end
 
-    return false
+    false
   end
 
   # Check to see if this is an event we care about. Default to responding to all events
