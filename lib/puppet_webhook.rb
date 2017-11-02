@@ -71,7 +71,7 @@ class PuppetWebhook < Sinatra::Base
   post '/payload' do
     LOGGER.info "params = #{params}"
     protected! if settings.protected
-    request.body.rewind  # in case someone already read it
+    request.body.rewind # in case someone already read it
 
     # Short circuit if we're ignoring this event
     return 200 if ignore_event?
