@@ -98,7 +98,7 @@ module Tasks
     notifier = Slack::Notifier.new settings.slack_webhook do
       defaults channel: slack_channel,
                username: slack_user,
-               icon_emoji: ":ocean:",
+               icon_emoji: ':ocean:',
                http_options: http_options
     end
 
@@ -116,13 +116,13 @@ module Tasks
     case status_message[:status_code]
     when 200
       message.merge!(
-        color: "good",
+        color: 'good',
         text: "Successfully deployed #{target}",
         fallback: "Successfully deployed #{target}"
       )
     when 500
       message.merge!(
-        color: "bad",
+        color: 'bad',
         text: "Failed to deploy #{target}",
         fallback: "Failed to deploy #{target}"
       )
