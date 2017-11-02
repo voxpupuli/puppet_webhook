@@ -46,7 +46,7 @@ module Tasks
         message = "triggered: #{command}\n#{stdout}\n#{stderr}"
       else
         message = "forked: #{command}"
-        Process.detach(fork{ exec "#{command} &"})
+        Process.detach(fork { exec "#{command} &" })
         exit_status = 0
       end
       raise "#{stdout}\n#{stderr}" if exit_status != 0
