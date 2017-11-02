@@ -35,7 +35,7 @@ if settings.enable_ssl
   opts[:SSLVerifyClient] = settings.verify_ssl
   opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(File.open(settings.public_key_path).read)
   opts[:SSLPrivateKey] = OpenSSL::PKey::RSA.new(File.open(settings.private_key_path).read)
-  opts[:SSLCertName] = [ [ 'CN', WEBrick::Utils.getservername ] ]
+  opts[:SSLCertName] = [['CN', WEBrick::Utils.getservername]]
 end
 
 Rack::Handler::WEBrick.run(PuppetWebhook, opts) do |server|
