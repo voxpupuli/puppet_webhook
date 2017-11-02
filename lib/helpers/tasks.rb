@@ -166,6 +166,6 @@ module Tasks
     client = rpcclient('r10k', exit_on_failure: false, options: options)
     client.discovery_timeout = settings.discovery_timeout
     client.timeout           = settings.client_timeout
-    result = client.send('deploy', environment: branch)
+    client.send('deploy', environment: branch)
   end
 end
