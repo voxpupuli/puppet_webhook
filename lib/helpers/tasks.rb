@@ -1,7 +1,6 @@
 require 'open3'
 require 'slack-notifier'
 require 'mcollective'
-require 'io'
 include MCollective::RPC
 
 module Tasks # rubocop:disable Style/Documentation

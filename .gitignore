@@ -3,3 +3,4 @@ webhook.lock
 .ruby_version
 logs/*.log
 .idea/
+coverage
