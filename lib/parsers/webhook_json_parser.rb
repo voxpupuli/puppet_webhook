@@ -3,7 +3,7 @@ require 'json'
 
 module Sinatra
   module Parsers
-    class WebhookJsonParser
+    class WebhookJsonParser # rubocop:disable Style/Documentation
       def call(body)
         @data = JSON.parse(body, quirks_mode: true)
         @vcs  = detect_vcs

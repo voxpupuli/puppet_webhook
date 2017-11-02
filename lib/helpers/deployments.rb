@@ -1,4 +1,4 @@
-module Deployments
+module Deployments # rubocop:disable Style/Documentation
   def deploy(branch, deleted)
     if settings.use_mco_ruby
       result = mco(branch).first
