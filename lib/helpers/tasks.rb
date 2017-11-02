@@ -140,12 +140,12 @@ module Tasks
   end
 
   def protected!
-    unless authorized?
+    if authorized?
+      LOGGER.info("Authenticated as user #{settings.user} from IP #{request.ip}")
+    else
       response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
       LOGGER.error("Authentication failure from IP #{request.ip}")
       throw(:halt, [401, "Not authorized\n"])
-    else
-      LOGGER.info("Authenticated as user #{settings.user} from IP #{request.ip}")
     end
   end
 
