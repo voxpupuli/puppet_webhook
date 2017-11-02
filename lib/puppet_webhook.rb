@@ -98,7 +98,7 @@ class PuppetWebhook < Sinatra::Base
                run_prefix_command(data.to_json)
              when String
                settings.prefix
-    end
+             end
 
     # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
     # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
