@@ -4,10 +4,10 @@ require 'json'
 require 'cgi'
 require 'parsers/webhook_json_parser'
 
-class PuppetWebhook < Sinatra::Base
+class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   use Rack::Parser,
-    :parsers  => { 'application/json' => Sinatra::Parsers::WebhookJsonParser.new },
-    :handlers => { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{error: e.to_s }.to_json] ] }}
+      parsers: { 'application/json' => Sinatra::Parsers::WebhookJsonParser.new },
+      handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
   register Sinatra::ConfigFile
   config_file '../config.yml'
 
@@ -25,10 +25,14 @@ class PuppetWebhook < Sinatra::Base
   end
 
   # Simulate a github post:
-  # curl -d '{ "repository": { "name": "puppetlabs-stdlib" } }' -H "Accept: application/json" 'https://puppet:487156B2-7E67-4E1C-B447-001603C6B8B2@localhost:8088/module' -k -q
+  # curl -d '{ "repository": { "name": "puppetlabs-stdlib" } }' \
+  #      -H "Accept: application/json" \
+  #      'https://puppet:487156B2-7E67-4E1C-B447-001603C6B8B2@localhost:8088/module' -k -q
   #
   # Simulate a BitBucket post:
-  # curl -X POST -d '{ "repository": { "full_name": "puppetlabs/puppetlabs-stdlib", "name": "PuppetLabs : StdLib" } }' 'https://puppet:puppet@localhost:8088/module' -k -q
+  # curl -X POST -d '{ "repository": { "full_name": "puppetlabs/puppetlabs-stdlib", "name": "PuppetLabs : StdLib" } }' \
+  #      'https://puppet:puppet@localhost:8088/module' -k -q
+  #
   # This example shows that, unlike github, BitBucket allows special characters
   # in repository names but translates it to generate a full_name which
   # is used in the repository URL and is most useful for this webhook handler.
@@ -43,12 +47,12 @@ class PuppetWebhook < Sinatra::Base
     verify_signature(decoded) if verify_signature?
     data = JSON.parse(decoded, quirks_mode: true)
 
-    if data['repository'].has_key?('full_name')
-      # Handle BitBucket webook
-      module_name = ( data['repository']['full_name'] ).sub(%r{^.*\/.*-}, '')
-    else
-      module_name = ( data['repository']['name'].sub(%r{^.*-}, ''))
-    end
+    module_name = if data['repository'].key?('full_name')
+                    # Handle BitBucket webook
+                    (data['repository']['full_name']).sub(%r{^.*\/.*-}, '')
+                  else
+                    data['repository']['name'].sub(%r{^.*-}, '')
+                  end
 
     module_name = sanitize_input(module_name)
     LOGGER.info("Deploying module #{module_name}")
@@ -66,22 +70,23 @@ class PuppetWebhook < Sinatra::Base
   # Yes, Gitorious does not support https...
   #
   # Simulate a BitBucket post:
-  # curl -X POST -d '{ "push": { "changes": [ { "new": { "name": "production" } } ] } }' 'https://puppet:puppet@localhost:8088/payload' -k -q
+  # curl -X POST -d '{ "push": { "changes": [ { "new": { "name": "production" } } ] } }' \
+  #      'https://puppet:puppet@localhost:8088/payload' -k -q
 
-  post '/payload' do
+  post '/payload' do # rubocop:disable Metrics/BlockLength
     LOGGER.info "params = #{params}"
     protected! if settings.protected
-    request.body.rewind  # in case someone already read it
+    request.body.rewind # in case someone already read it
 
     # Short circuit if we're ignoring this event
     return 200 if ignore_event?
 
     # Check if content type is x-www-form-urlencoded
-    if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
-      decoded = CGI.unescape(request.body.read).gsub(/^payload\=/,'')
-    else
-      decoded = request.body.read
-    end
+    decoded = if request.content_type.to_s.casecmp('application/x-www-form-urlencoded').zero?
+                CGI.unescape(request.body.read).gsub(%r{^payload\=}, '')
+              else
+                request.body.read
+              end
     verify_signature(decoded) if settings.github_secret
     data = JSON.parse(decoded, quirks_mode: true)
 
@@ -90,34 +95,34 @@ class PuppetWebhook < Sinatra::Base
 
     # If prefix is enabled in our config file, determine what the prefix should be
     prefix = case settings.prefix
-    when :repo
-      repo_name(data)
-    when :user
-      repo_user(data)
-    when :command, TrueClass
-      run_prefix_command(data.to_json)
-    when String
-      settings.prefix
-    end
+             when :repo
+               repo_name(data)
+             when :user
+               repo_user(data)
+             when :command, TrueClass
+               run_prefix_command(data.to_json)
+             when String
+               settings.prefix
+             end
 
     # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
     # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
     deleted = params['deleted']
 
-    if deleted
-      branch = settings.default_branch
-    else
-      branch = sanitize_input(branch)
-    end
+    branch = if deleted
+               settings.default_branch
+             else
+               sanitize_input(branch)
+             end
 
     # r10k doesn't yet know how to deploy all branches from a single source.
     # The best we can do is just deploy all environments by passing nil to
     # deploy() if we don't know the correct branch.
-    if prefix.nil? or prefix.empty? or branch.nil? or branch.empty?
-      env = normalize(branch)
-    else
-      env = normalize("#{prefix}_#{branch}")
-    end
+    env = if prefix.nil? || prefix.empty? || branch.nil? || branch.empty?
+            normalize(branch)
+          else
+            normalize("#{prefix}_#{branch}")
+          end
 
     if ignore_env?(env)
       LOGGER.info("Skipping deployment of environment #{env} according to ignore_environments configuration parameter")

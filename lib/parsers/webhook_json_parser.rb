@@ -3,7 +3,7 @@ require 'json'
 
 module Sinatra
   module Parsers
-    class WebhookJsonParser
+    class WebhookJsonParser # rubocop:disable Style/Documentation
       def call(body)
         @data = JSON.parse(body, quirks_mode: true)
         @vcs  = detect_vcs
@@ -28,7 +28,7 @@ module Sinatra
         return false unless @data.key? 'repository'
         return false unless @data['repository'].key? 'id'
         return false unless @data['repository'].key? 'html_url'
-        return false unless @data['repository']['html_url'] =~ /github\.com/
+        return false unless @data['repository']['html_url'] =~ %r{github\.com}
         true
       end
 
@@ -40,7 +40,8 @@ module Sinatra
         true
       end
 
-      def stash_webhook? # stash/bitbucket server
+      # stash/bitbucket server
+      def stash_webhook?
         # https://confluence.atlassian.com/bitbucketserver/post-service-webhook-for-bitbucket-server-776640367.html
         return false unless @data.key? 'refChanges'
         true

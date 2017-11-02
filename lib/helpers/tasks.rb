@@ -3,22 +3,22 @@ require 'slack-notifier'
 require 'mcollective'
 include MCollective::RPC
 
-module Tasks
+module Tasks # rubocop:disable Style/Documentation
   def ignore_env?(env)
     list = settings.ignore_environments
-    return false if list.nil? or list.empty?
+    return false if list.nil? || list.empty?
 
     list.each do |l|
       # Even unquoted array elements wrapped by slashes becomes strings after YAML parsing
       # So we need to convert it into Regexp manually
-      if l =~ /^\/.+\/$/
+      if l =~ %r{^/.+/$}
         return true if env =~ Regexp.new(l[1..-2])
-      else
-        return true if env == l
+      elsif env == 1
+        return true
       end
     end
 
-    return false
+    false
   end
 
   # Check to see if this is an event we care about. Default to responding to all events
@@ -30,7 +30,7 @@ module Tasks
     event = request.env['HTTP_X_GITHUB_EVENT']
 
     # Negate this, because we should respond if any of these conditions are true
-    ! (list.nil? or list == event or list.include?(event))
+    !(list.nil? || (list == event) || list.include?(event))
   end
 
   def run_command(command)
@@ -46,7 +46,7 @@ module Tasks
         message = "triggered: #{command}\n#{stdout}\n#{stderr}"
       else
         message = "forked: #{command}"
-        Process.detach(fork{ exec "#{command} &"})
+        Process.detach(fork { exec "#{command} &" })
         exit_status = 0
       end
       raise "#{stdout}\n#{stderr}" if exit_status != 0
@@ -55,42 +55,31 @@ module Tasks
   end
 
   def generate_types(environment)
-    begin
-      command = "#{COMMAND_PREFIX} /opt/puppetlabs/puppet/bin generate types --environment #{environment}"
+    command = "#{COMMAND_PREFIX} /opt/puppetlabs/puppet/bin generate types --environment #{environment}"
 
-      message = run_command(command)
-      LOGGER.info("message: #{message} environment: #{environment}")
-      status_message = {status: :success, message: message.to_s, environment: environment, status_code: 200 }
-      notify_slack(status_message) if slack?
-    rescue => e
-      LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
-      status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :environment => environment, :status_code => 500}
-      notify_slack(status_message) if slack?
-    end
+    message = run_command(command)
+    LOGGER.info("message: #{message} environment: #{environment}")
+    status_message = { status: :success, message: message.to_s, environment: environment, status_code: 200 }
+    notify_slack(status_message) if slack?
+  rescue StandardError => e
+    LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
+    status_message = { status: :fail, message: e.message, trace: e.backtrace, environment: environment, status_code: 500 }
+    notify_slack(status_message) if slack?
   end
 
   def notify_slack(status_message)
     return unless settings.slack_webhook
 
-    if settings.slack_channel
-      slack_channel = settings.slack_channel
-    else
-      slack_channel = '#default'
-    end
-
-    if settings.slack_username
-      slack_user = settings.slack_username
-    else
-      slack_user = 'r10k'
-    end
+    slack_channel = settings.slack_channel  || '#default'
+    slack_user    = settings.slack_username || 'r10k'
 
     if settings.slack_proxy_url
       uri = URI(settings.slack_proxy_url)
       http_options = {
-                       proxy_address:  uri.hostname,
-                       proxy_port:     uri.port,
-                       proxy_from_env: false
-                     }
+        proxy_address:  uri.hostname,
+        proxy_port:     uri.port,
+        proxy_from_env: false
+      }
     else
       http_options = {}
     end
@@ -98,7 +87,7 @@ module Tasks
     notifier = Slack::Notifier.new settings.slack_webhook do
       defaults channel: slack_channel,
                username: slack_user,
-               icon_emoji: ":ocean:",
+               icon_emoji: ':ocean:',
                http_options: http_options
     end
 
@@ -116,13 +105,13 @@ module Tasks
     case status_message[:status_code]
     when 200
       message.merge!(
-        color: "good",
+        color: 'good',
         text: "Successfully deployed #{target}",
         fallback: "Successfully deployed #{target}"
       )
     when 500
       message.merge!(
-        color: "bad",
+        color: 'bad',
         text: "Failed to deploy #{target}",
         fallback: "Failed to deploy #{target}"
       )
@@ -132,18 +121,20 @@ module Tasks
   end
 
   def slack?
-    !!settings.slack_webhook
+    return false if settings.slack_webhook.nil?
+    settings.slack_webhook
   end
 
   def types?
-    !!settings.generate_tasks
+    return false if settings.generate_tasks.nil?
+    settings.generate_tasks
   end
 
   def authorized?
-    # TODO add token-based authentication?
-    @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+    # TODO: add token-based authentication?
+    @auth ||= Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials &&
-    @auth.credentials == [settings.user,settings.pass]
+      @auth.credentials == [settings.user, settings.pass]
   end
 
   def verify_signature?
@@ -151,21 +142,21 @@ module Tasks
   end
 
   def protected!
-    unless authorized?
+    if authorized?
+      LOGGER.info("Authenticated as user #{settings.user} from IP #{request.ip}")
+    else
       response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
       LOGGER.error("Authentication failure from IP #{request.ip}")
       throw(:halt, [401, "Not authorized\n"])
-    else
-      LOGGER.info("Authenticated as user #{settings.user} from IP #{request.ip}")
     end
   end
 
   def mco(branch)
-    options =  MCollective::Util.default_options
+    options = MCollective::Util.default_options
     options[:config] = settings.client_cfg
-    client = rpcclient('r10k', :exit_on_failure => false,:options => options)
+    client = rpcclient('r10k', exit_on_failure: false, options: options)
     client.discovery_timeout = settings.discovery_timeout
     client.timeout           = settings.client_timeout
-    result = client.send('deploy',{:environment => branch})
+    client.send('deploy', environment: branch)
   end
 end

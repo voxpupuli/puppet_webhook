@@ -1,6 +1,6 @@
 require 'shellwords'
 
-module DataParsers
+module DataParsers # rubocop:disable Style/Documentation
   def sanitize_input(input_string)
     sanitized = Shellwords.shellescape(input_string)
     LOGGER.info("Module or Branch name #{sanitized} had to be escaped") unless input_string == sanitized
@@ -16,6 +16,8 @@ module DataParsers
     throw(:halt, [500, "Signatures didn't match!\n"]) unless Rack::Utils.secure_compare(signature, request.env['HTTP_X_HUB_SIGNATURE'])
   end
 
+  # rubocop:disable Style/RescueModifier
+  # TODO: Move the code from these methods to our parser class
   def repo_name(data)
     # Only tested with Github
     # TODO: Extend for Bitbucket, Bitbucket Server, and Gitlab
@@ -27,4 +29,5 @@ module DataParsers
     # TODO: Extend for Bitbucket, Bitbucket Server, and Gitlab
     data['repository']['owner']['login'] rescue nil
   end
+  # rubocop:enable Style/RescueModifier
 end
