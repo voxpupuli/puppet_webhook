@@ -73,7 +73,7 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   # curl -X POST -d '{ "push": { "changes": [ { "new": { "name": "production" } } ] } }' \
   #      'https://puppet:puppet@localhost:8088/payload' -k -q
 
-  post '/payload' do
+  post '/payload' do # rubocop:disable Metrics/BlockLength
     LOGGER.info "params = #{params}"
     protected! if settings.protected
     request.body.rewind # in case someone already read it
