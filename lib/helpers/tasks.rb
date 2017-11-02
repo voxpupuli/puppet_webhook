@@ -64,7 +64,7 @@ module Tasks
       notify_slack(status_message) if slack?
     rescue => e
       LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
-      status_message = {:status => :fail, :message => e.message, :trace => e.backtrace, :environment => environment, :status_code => 500}
+      status_message = {status: :fail, message: e.message, trace: e.backtrace, environment: environment, status_code: 500}
       notify_slack(status_message) if slack?
     end
   end
@@ -163,9 +163,9 @@ module Tasks
   def mco(branch)
     options =  MCollective::Util.default_options
     options[:config] = settings.client_cfg
-    client = rpcclient('r10k', :exit_on_failure => false,:options => options)
+    client = rpcclient('r10k', exit_on_failure: false,options: options)
     client.discovery_timeout = settings.discovery_timeout
     client.timeout           = settings.client_timeout
-    result = client.send('deploy',{:environment => branch})
+    result = client.send('deploy',{environment: branch})
   end
 end
