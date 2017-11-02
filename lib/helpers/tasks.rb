@@ -121,11 +121,13 @@ module Tasks
   end
 
   def slack?
-    !!settings.slack_webhook
+    return false if settings.slack_webhook.nil?
+    settings.slack_webhook
   end
 
   def types?
-    !!settings.generate_tasks
+    return false if settings.generate_tasks.nil?
+    settings.generate_tasks
   end
 
   def authorized?
