@@ -60,11 +60,11 @@ module Tasks
 
       message = run_command(command)
       LOGGER.info("message: #{message} environment: #{environment}")
-      status_message = {status: :success, message: message.to_s, environment: environment, status_code: 200 }
+      status_message = { status: :success, message: message.to_s, environment: environment, status_code: 200 }
       notify_slack(status_message) if slack?
     rescue => e
       LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
-      status_message = {status: :fail, message: e.message, trace: e.backtrace, environment: environment, status_code: 500}
+      status_message = { status: :fail, message: e.message, trace: e.backtrace, environment: environment, status_code: 500 }
       notify_slack(status_message) if slack?
     end
   end

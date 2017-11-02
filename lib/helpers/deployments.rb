@@ -25,7 +25,7 @@ module Deployments
       notify_slack(status_message) if slack?
       status_message.to_json
     rescue => e
-      status_message = {status: :fail, message: e.message, trace: e.backtrace, branch: branch, status_code: 500 }
+      status_message = { status: :fail, message: e.message, trace: e.backtrace, branch: branch, status_code: 500 }
       LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
       status 500
       notify_slack(status_message) if slack?
