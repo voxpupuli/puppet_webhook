@@ -43,12 +43,12 @@ class PuppetWebhook < Sinatra::Base
     verify_signature(decoded) if verify_signature?
     data = JSON.parse(decoded, quirks_mode: true)
 
-    if data['repository'].key?('full_name')
-      # Handle BitBucket webook
-      module_name = (data['repository']['full_name']).sub(%r{^.*\/.*-}, '')
-    else
-      module_name = data['repository']['name'].sub(%r{^.*-}, '')
-    end
+    module_name = if data['repository'].key?('full_name')
+                    # Handle BitBucket webook
+                    (data['repository']['full_name']).sub(%r{^.*\/.*-}, '')
+                  else
+                    data['repository']['name'].sub(%r{^.*-}, '')
+                  end
 
     module_name = sanitize_input(module_name)
     LOGGER.info("Deploying module #{module_name}")
@@ -77,11 +77,11 @@ class PuppetWebhook < Sinatra::Base
     return 200 if ignore_event?
 
     # Check if content type is x-www-form-urlencoded
-    if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
-      decoded = CGI.unescape(request.body.read).gsub(%r{^payload\=}, '')
-    else
-      decoded = request.body.read
-    end
+    decoded = if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
+                CGI.unescape(request.body.read).gsub(%r{^payload\=}, '')
+              else
+                request.body.read
+              end
     verify_signature(decoded) if settings.github_secret
     data = JSON.parse(decoded, quirks_mode: true)
 
@@ -104,20 +104,20 @@ class PuppetWebhook < Sinatra::Base
     # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
     deleted = params['deleted']
 
-    if deleted
-      branch = settings.default_branch
-    else
-      branch = sanitize_input(branch)
-    end
+    branch = if deleted
+               settings.default_branch
+             else
+               sanitize_input(branch)
+             end
 
     # r10k doesn't yet know how to deploy all branches from a single source.
     # The best we can do is just deploy all environments by passing nil to
     # deploy() if we don't know the correct branch.
-    if prefix.nil? or prefix.empty? or branch.nil? or branch.empty?
-      env = normalize(branch)
-    else
-      env = normalize("#{prefix}_#{branch}")
-    end
+    env = if prefix.nil? or prefix.empty? or branch.nil? or branch.empty?
+            normalize(branch)
+          else
+            normalize("#{prefix}_#{branch}")
+          end
 
     if ignore_env?(env)
       LOGGER.info("Skipping deployment of environment #{env} according to ignore_environments configuration parameter")

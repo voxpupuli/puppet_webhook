@@ -70,17 +70,8 @@ module Tasks
   def notify_slack(status_message)
     return unless settings.slack_webhook
 
-    if settings.slack_channel
-      slack_channel = settings.slack_channel
-    else
-      slack_channel = '#default'
-    end
-
-    if settings.slack_username
-      slack_user = settings.slack_username
-    else
-      slack_user = 'r10k'
-    end
+    slack_channel = settings.slack_channel  || '#default'
+    slack_user    = settings.slack_username || 'r10k'
 
     if settings.slack_proxy_url
       uri = URI(settings.slack_proxy_url)
