@@ -21,7 +21,7 @@ module Deployments
     end
     notify_slack(status_message) if slack?
     status_message.to_json
-  rescue => e
+  rescue StandardError => e
     status_message = { status: :fail, message: e.message, trace: e.backtrace, branch: branch, status_code: 500 }
     LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
     status 500
@@ -40,7 +40,7 @@ module Deployments
     status_message = { status: :success, message: message.to_s, module_name: module_name, status_code: 200 }
     notify_slack(status_message) if slack?
     status_message.to_json
-  rescue => e
+  rescue StandardError => e
     LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
     status 500
     status_message = { status: :fail, message: e.message, trace: e.backtrace, module_name: module_name, status_code: 500 }
