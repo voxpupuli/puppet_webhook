@@ -8,8 +8,10 @@ module Sinatra
         @data = JSON.parse(body, quirks_mode: true)
         @vcs  = detect_vcs
         {
-          branch:  branch,
-          deleted: deleted?
+          branch:    branch,
+          deleted:   deleted?,
+          repo_name: repo_name,
+          repo_user: repo_user
         }
       end
 
@@ -95,6 +97,26 @@ module Sinatra
           # TODO: TFS
           false
         end
+      end
+
+      def repo_name
+        case @vcs
+        when 'github'
+          @data['repository']['name']
+        when 'gitlab'
+          @data['project']['name']
+        end
+        # TODO: Bitbucket, Stash/Bitbucket Server, TFS
+      end
+
+      def repo_user
+        case @vcs
+        when 'github'
+          @data['repository']['owner']['login']
+        when 'gitlab'
+          @data['user_username']
+        end
+        # TODO: Bitbucket, Stash/Bitbucket Server, TFS
       end
     end
   end
