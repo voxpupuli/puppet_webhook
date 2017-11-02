@@ -1,0 +1,27 @@
+---
+sudo: false
+language: ruby
+cache: bundler
+dist: trusty
+before_install:
+  - bundle -v
+  - rm Gemfile.lock || true
+  - gem update --system
+  - gem update bundler
+  - bundle -v
+script:
+  - 'bundle exec rake test'
+rvm:
+  - 2.1.9
+  - 2.4.2
+branches:
+  only:
+    - master
+    - /^v\d/
+notifications:
+  email: false
+  irc:
+    on_success: always
+    on_failure: always
+    channels:
+      - "chat.freenode.org#voxpupuli-notifications"

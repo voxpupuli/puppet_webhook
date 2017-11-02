@@ -1,9 +1,10 @@
-# coding: utf-8
+# rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
   spec.name = 'puppet_webhook'
   spec.summary = 'Sinatra Webhook Server for Puppet/R10K'
   spec.version = '0.0.1'
   spec.platform = Gem::Platform::RUBY
+  spec.required_ruby_version = '>= 2.1.9'
   spec.authors = ['Vox Pupuli']
   spec.email = 'voxpupuli@groups.io'
   spec.files = Dir[
@@ -26,4 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'slack-notifier'
   spec.add_runtime_dependency 'webrick'
   spec.add_development_dependency 'github_changelog_generator'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
 end
