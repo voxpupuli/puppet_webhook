@@ -129,7 +129,7 @@ module Tasks
   end
 
   def authorized?
-    # TODO add token-based authentication?
+    # TODO: add token-based authentication?
     @auth ||= Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials &&
       @auth.credentials == [settings.user, settings.pass]
