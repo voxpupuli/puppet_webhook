@@ -25,10 +25,14 @@ class PuppetWebhook < Sinatra::Base
   end
 
   # Simulate a github post:
-  # curl -d '{ "repository": { "name": "puppetlabs-stdlib" } }' -H "Accept: application/json" 'https://puppet:487156B2-7E67-4E1C-B447-001603C6B8B2@localhost:8088/module' -k -q
+  # curl -d '{ "repository": { "name": "puppetlabs-stdlib" } }' \
+  #      -H "Accept: application/json" \
+  #      'https://puppet:487156B2-7E67-4E1C-B447-001603C6B8B2@localhost:8088/module' -k -q
   #
   # Simulate a BitBucket post:
-  # curl -X POST -d '{ "repository": { "full_name": "puppetlabs/puppetlabs-stdlib", "name": "PuppetLabs : StdLib" } }' 'https://puppet:puppet@localhost:8088/module' -k -q
+  # curl -X POST -d '{ "repository": { "full_name": "puppetlabs/puppetlabs-stdlib", "name": "PuppetLabs : StdLib" } }' \
+  #      'https://puppet:puppet@localhost:8088/module' -k -q
+  #
   # This example shows that, unlike github, BitBucket allows special characters
   # in repository names but translates it to generate a full_name which
   # is used in the repository URL and is most useful for this webhook handler.
@@ -66,7 +70,8 @@ class PuppetWebhook < Sinatra::Base
   # Yes, Gitorious does not support https...
   #
   # Simulate a BitBucket post:
-  # curl -X POST -d '{ "push": { "changes": [ { "new": { "name": "production" } } ] } }' 'https://puppet:puppet@localhost:8088/payload' -k -q
+  # curl -X POST -d '{ "push": { "changes": [ { "new": { "name": "production" } } ] } }' \
+  #      'https://puppet:puppet@localhost:8088/payload' -k -q
 
   post '/payload' do
     LOGGER.info "params = #{params}"
