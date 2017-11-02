@@ -39,5 +39,5 @@ if settings.enable_ssl
 end
 
 Rack::Handler::WEBrick.run(PuppetWebhook, opts) do |server|
-  [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
+  %i[INT TERM].each { |sig| trap(sig) { server.stop } }
 end
