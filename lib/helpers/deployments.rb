@@ -2,7 +2,7 @@ module Deployments
   def deploy(branch, deleted)
     if settings.use_mco_ruby
       result = mco(branch).first
-      if result.results[:statuscode] == 0
+      if result.results[:statuscode].zero?
         message = result.results[:statusmsg]
       else
         raise result.results[:statusmsg]
