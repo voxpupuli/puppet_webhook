@@ -78,7 +78,7 @@ class PuppetWebhook < Sinatra::Base
 
     # Check if content type is x-www-form-urlencoded
     if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
-      decoded = CGI.unescape(request.body.read).gsub(/^payload\=/,'')
+      decoded = CGI.unescape(request.body.read).gsub(/^payload\=/, '')
     else
       decoded = request.body.read
     end

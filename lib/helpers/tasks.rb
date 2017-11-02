@@ -143,7 +143,7 @@ module Tasks
     # TODO add token-based authentication?
     @auth ||=  Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials &&
-    @auth.credentials == [settings.user,settings.pass]
+    @auth.credentials == [settings.user, settings.pass]
   end
 
   def verify_signature?
@@ -163,9 +163,9 @@ module Tasks
   def mco(branch)
     options =  MCollective::Util.default_options
     options[:config] = settings.client_cfg
-    client = rpcclient('r10k', exit_on_failure: false,options: options)
+    client = rpcclient('r10k', exit_on_failure: false, options: options)
     client.discovery_timeout = settings.discovery_timeout
     client.timeout           = settings.client_timeout
-    result = client.send('deploy',{environment: branch})
+    result = client.send('deploy', {environment: branch})
   end
 end
