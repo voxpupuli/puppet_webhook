@@ -101,8 +101,8 @@ module Sinatra
       end
 
       def module_name
-        if @data['repository'].key?('fullname')
-          @data['repository']['full_name'].sub(%r{^.*\/.*-}, '')
+        if @vcs == 'gitlab'
+          @data['project']['name'].sub(%r{^.*-}, '')
         else
           @data['repository']['name'].sub(%r{^.*-}, '')
         end

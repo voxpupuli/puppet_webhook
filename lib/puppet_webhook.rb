@@ -25,12 +25,28 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   end
 
   # Simulate a github post:
-  # curl -d '{ "repository": { "name": "puppetlabs-stdlib" } }' \
-  #      -H "Accept: application/json" \
-  #      'https://puppet:487156B2-7E67-4E1C-B447-001603C6B8B2@localhost:8088/module' -k -q
+  # curl -X POST \
+  #      -H "Content-Type: application/json" \
+  #      -d '{ \
+  #            "repository": { \
+  #              "id": 12345, \
+  #              "name": "puppetlabs-stdlib", \
+  #              "html_url": "http://github.com", \
+  #              "owner": {\
+  #                "login": "foo"
+  #              } \
+  #            } \
+  #          }' \
+  #      'https://puppet:puppet@localhost:8088/module' -k -q
   #
   # Simulate a BitBucket post:
-  # curl -X POST -d '{ "repository": { "full_name": "puppetlabs/puppetlabs-stdlib", "name": "PuppetLabs : StdLib" } }' \
+  # curl -X POST \
+  #      -H "Content-Type: application/json" \
+  #      -d '{ \
+  #            "repository": { \
+  #              "full_name": "puppetlabs/puppetlabs-stdlib", \
+  #              "name": "PuppetLabs : StdLib"
+  #        } }' \
   #      'https://puppet:puppet@localhost:8088/module' -k -q
   #
   # This example shows that, unlike github, BitBucket allows special characters
