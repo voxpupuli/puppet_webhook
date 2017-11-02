@@ -3,14 +3,14 @@ require 'json'
 
 module Sinatra
   module Parsers
-    class WebhookJsonParser # rubocop:disable Style/Documentation, Metrics/ClassLength
+    class WebhookJsonParser # rubocop:disable Style/Documentation
       def call(body)
         @data = JSON.parse(body, quirks_mode: true)
         @vcs  = detect_vcs
         {
           branch:    branch,
           deleted:   deleted?,
-          module_name: module_name,
+          module_name: repo_name.sub(%r{^.*-}, ''),
           repo_name: repo_name,
           repo_user: repo_user
         }
@@ -100,22 +100,12 @@ module Sinatra
         end
       end
 
-      def module_name
-        if @vcs == 'gitlab'
-          @data['project']['name'].sub(%r{^.*-}, '')
-        else
-          @data['repository']['name'].sub(%r{^.*-}, '')
-        end
-      end
-
       def repo_name
-        case @vcs
-        when 'github'
-          @data['repository']['name']
-        when 'gitlab'
+        if @vcs == 'gitlab'
           @data['project']['name']
+        else
+          @data['repository']['name']
         end
-        # TODO: Bitbucket, Stash/Bitbucket Server, TFS
       end
 
       def repo_user
