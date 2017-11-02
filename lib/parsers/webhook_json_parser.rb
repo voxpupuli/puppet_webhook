@@ -10,6 +10,7 @@ module Sinatra
         {
           branch:    branch,
           deleted:   deleted?,
+          module_name: module_name,
           repo_name: repo_name,
           repo_user: repo_user
         }
@@ -96,6 +97,14 @@ module Sinatra
         else
           # TODO: TFS
           false
+        end
+      end
+
+      def module_name
+        if @data['repository'].key?('fullname')
+          @data['repository']['full_name'].sub(%r{^.*\/.*-}, '')
+        else
+          @data['repository']['name'].sub(%r{^.*-}, '')
         end
       end
 

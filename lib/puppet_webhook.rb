@@ -43,16 +43,11 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
     # Short circuit if we're ignoring this event
     return 200 if ignore_event?
 
+    # TODO: Move these two lines of code into the parser
     decoded = request.body.read
     verify_signature(decoded) if verify_signature?
-    data = JSON.parse(decoded, quirks_mode: true)
 
-    module_name = if data['repository'].key?('full_name')
-                    # Handle BitBucket webook
-                    (data['repository']['full_name']).sub(%r{^.*\/.*-}, '')
-                  else
-                    data['repository']['name'].sub(%r{^.*-}, '')
-                  end
+    module_name = params['module_name']
 
     module_name = sanitize_input(module_name)
     LOGGER.info("Deploying module #{module_name}")
@@ -87,7 +82,7 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
               else
                 request.body.read
               end
-    verify_signature(decoded) if settings.github_secret
+    verify_signature(decoded) if verify_signature?
     data = JSON.parse(decoded, quirks_mode: true)
 
     # Iterate the data structure to determine what's should be deployed
