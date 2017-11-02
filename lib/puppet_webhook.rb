@@ -43,7 +43,7 @@ class PuppetWebhook < Sinatra::Base
     verify_signature(decoded) if verify_signature?
     data = JSON.parse(decoded, quirks_mode: true)
 
-    if data['repository'].has_key?('full_name')
+    if data['repository'].key?('full_name')
       # Handle BitBucket webook
       module_name = (data['repository']['full_name']).sub(%r{^.*\/.*-}, '')
     else
