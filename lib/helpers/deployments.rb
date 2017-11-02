@@ -17,7 +17,7 @@ module Deployments
         end
         message = run_command(command)
       end
-      status_message =  { status: :success, message: message.to_s, branch: branch, status_code: 200 }
+      status_message = { status: :success, message: message.to_s, branch: branch, status_code: 200 }
       LOGGER.info("message: #{message} branch: #{branch}")
       unless deleted
         generate_types(branch) if types?

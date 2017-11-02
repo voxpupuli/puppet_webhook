@@ -141,7 +141,7 @@ module Tasks
 
   def authorized?
     # TODO add token-based authentication?
-    @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+    @auth ||= Rack::Auth::Basic::Request.new(request.env)
     @auth.provided? && @auth.basic? && @auth.credentials &&
     @auth.credentials == [settings.user, settings.pass]
   end
@@ -161,7 +161,7 @@ module Tasks
   end
 
   def mco(branch)
-    options =  MCollective::Util.default_options
+    options = MCollective::Util.default_options
     options[:config] = settings.client_cfg
     client = rpcclient('r10k', exit_on_failure: false, options: options)
     client.discovery_timeout = settings.discovery_timeout
