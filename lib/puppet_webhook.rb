@@ -77,7 +77,7 @@ class PuppetWebhook < Sinatra::Base
     return 200 if ignore_event?
 
     # Check if content type is x-www-form-urlencoded
-    decoded = if request.content_type.to_s.downcase.eql?('application/x-www-form-urlencoded')
+    decoded = if request.content_type.to_s.casecmp('application/x-www-form-urlencoded').zero?
                 CGI.unescape(request.body.read).gsub(%r{^payload\=}, '')
               else
                 request.body.read
