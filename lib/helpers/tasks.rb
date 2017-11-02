@@ -6,7 +6,7 @@ include MCollective::RPC
 module Tasks
   def ignore_env?(env)
     list = settings.ignore_environments
-    return false if list.nil? or list.empty?
+    return false if list.nil? || list.empty?
 
     list.each do |l|
       # Even unquoted array elements wrapped by slashes becomes strings after YAML parsing
@@ -30,7 +30,7 @@ module Tasks
     event = request.env['HTTP_X_GITHUB_EVENT']
 
     # Negate this, because we should respond if any of these conditions are true
-    ! (list.nil? or list == event or list.include?(event))
+    ! (list.nil? || (list == event) || list.include?(event))
   end
 
   def run_command(command)

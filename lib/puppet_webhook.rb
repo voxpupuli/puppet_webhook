@@ -113,7 +113,7 @@ class PuppetWebhook < Sinatra::Base
     # r10k doesn't yet know how to deploy all branches from a single source.
     # The best we can do is just deploy all environments by passing nil to
     # deploy() if we don't know the correct branch.
-    env = if prefix.nil? or prefix.empty? or branch.nil? or branch.empty?
+    env = if prefix.nil? || prefix.empty? || branch.nil? || branch.empty?
             normalize(branch)
           else
             normalize("#{prefix}_#{branch}")
