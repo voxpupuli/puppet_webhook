@@ -6,8 +6,8 @@ require 'parsers/webhook_json_parser'
 
 class PuppetWebhook < Sinatra::Base
   use Rack::Parser,
-    parsers: { 'application/json' => Sinatra::Parsers::WebhookJsonParser.new },
-    handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
+      parsers: { 'application/json' => Sinatra::Parsers::WebhookJsonParser.new },
+      handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
   register Sinatra::ConfigFile
   config_file '../config.yml'
 
