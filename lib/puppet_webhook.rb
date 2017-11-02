@@ -90,14 +90,14 @@ class PuppetWebhook < Sinatra::Base
 
     # If prefix is enabled in our config file, determine what the prefix should be
     prefix = case settings.prefix
-    when :repo
-      repo_name(data)
-    when :user
-      repo_user(data)
-    when :command, TrueClass
-      run_prefix_command(data.to_json)
-    when String
-      settings.prefix
+             when :repo
+               repo_name(data)
+             when :user
+               repo_user(data)
+             when :command, TrueClass
+               run_prefix_command(data.to_json)
+             when String
+               settings.prefix
     end
 
     # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
