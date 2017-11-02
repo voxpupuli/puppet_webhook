@@ -28,7 +28,7 @@ module Sinatra
         return false unless @data.key? 'repository'
         return false unless @data['repository'].key? 'id'
         return false unless @data['repository'].key? 'html_url'
-        return false unless @data['repository']['html_url'] =~ /github\.com/
+        return false unless @data['repository']['html_url'] =~ %r{github\.com}
         true
       end
 
