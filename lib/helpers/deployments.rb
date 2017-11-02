@@ -2,11 +2,9 @@ module Deployments
   def deploy(branch, deleted)
     if settings.use_mco_ruby
       result = mco(branch).first
-      if result.results[:statuscode].zero?
-        message = result.results[:statusmsg]
-      else
-        raise result.results[:statusmsg]
-      end
+      raise result.results[:statusmsg] unless result.results[:statuscode].zero?
+
+      message = result.results[:statusmsg]
     else
       command = if settings.use_mcollective
                   "#{COMMAND_PREFIX} mco r10k deploy #{branch} #{settings.mco_arguments}"
