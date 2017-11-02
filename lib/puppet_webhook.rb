@@ -45,9 +45,9 @@ class PuppetWebhook < Sinatra::Base
 
     if data['repository'].has_key?('full_name')
       # Handle BitBucket webook
-      module_name = ( data['repository']['full_name'] ).sub(%r{^.*\/.*-}, '')
+      module_name = (data['repository']['full_name']).sub(%r{^.*\/.*-}, '')
     else
-      module_name = ( data['repository']['name'].sub(%r{^.*-}, ''))
+      module_name = (data['repository']['name'].sub(%r{^.*-}, ''))
     end
 
     module_name = sanitize_input(module_name)
