@@ -4,3 +4,4 @@ webhook.lock
 logs/*.log
 .idea/
 coverage
+Gemfile.lock

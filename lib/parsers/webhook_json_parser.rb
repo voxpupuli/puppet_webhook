@@ -10,6 +10,7 @@ module Sinatra
         {
           branch:    branch,
           deleted:   deleted?,
+          module_name: repo_name.sub(%r{^.*-}, ''),
           repo_name: repo_name,
           repo_user: repo_user
         }
@@ -100,13 +101,11 @@ module Sinatra
       end
 
       def repo_name
-        case @vcs
-        when 'github'
-          @data['repository']['name']
-        when 'gitlab'
+        if @vcs == 'gitlab'
           @data['project']['name']
+        else
+          @data['repository']['name']
         end
-        # TODO: Bitbucket, Stash/Bitbucket Server, TFS
       end
 
       def repo_user
