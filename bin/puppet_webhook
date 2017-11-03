@@ -6,7 +6,15 @@ require 'webrick'
 require 'webrick/https'
 require 'puppet_webhook'
 
-config_file '../config.yml'
+server_conf = File.join(__dir__, '..', 'config', 'server.yml')
+
+if File.exist?('/etc/puppet-webhook/server.yml')
+  config_file '/etc/puppet-webhook/server.yml'
+elsif File.exist?(server_conf)
+  config_file server_conf
+else
+  raise "Can't find server.yml. No such file or directory\n"
+end
 
 PIDFILE = settings.pidfile
 LOCKFILE = settings.lockfile

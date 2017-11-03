@@ -11,14 +11,14 @@ Gem::Specification.new do |spec|
                    'CHANGELOG.md',
                    'README.md',
                    'LICENSE',
-                   'config.yml',
+                   'config/*',
                    'lib/**/*',
                    'bin/*'
                   ]
   spec.homepage = 'https://github.com/voxpupuli/puppet-webhook'
   spec.license = 'apache'
   spec.executables = ['puppet_webhook']
-  spec.require_paths = ['lib']
+  spec.require_paths = %w[lib config]
   spec.add_runtime_dependency 'json'
   spec.add_runtime_dependency 'mcollective-client'
   spec.add_runtime_dependency 'rack-parser'

@@ -5,11 +5,20 @@ require 'cgi'
 require 'parsers/webhook_json_parser'
 
 class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
+  set :root, File.dirname(__FILE__)
   use Rack::Parser,
       parsers: { 'application/json' => Sinatra::Parsers::WebhookJsonParser.new },
       handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
   register Sinatra::ConfigFile
-  config_file '../config.yml'
+
+  app_conf = File.join(__dir__, '..', 'config', 'app.yml')
+  if File.exist?('/etc/puppet-webhook/app.yml')
+    config_file '/etc/puppet-webhook/app.yml'
+  elsif File.exist?(app_conf)
+    config_file app_conf
+  else
+    raise "Can't load app.yml: No such file or directory\n"
+  end
 
   set :static, false
   set :lock, true if settings.enable_mutex_lock

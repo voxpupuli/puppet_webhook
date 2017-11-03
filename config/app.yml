@@ -1,0 +1,31 @@
+enable_mutex_lock: false
+user: puppet
+pass: puppet
+protected: true
+client_cfg: "/var/lib/peadmin/.mcollective"
+client_timeout: "120"
+use_mco_ruby: false
+use_mcollective: false
+slack_webhook: false
+default_branch: production
+discovery_timeout: '10'
+ignore_environments: []
+prefix: false
+prefix_command: "/bin/echo example"
+r10k_deploy_arguments: "-pv"
+allow_uppercase: true
+github_secret:
+repository_events:
+server_type: simple
+logfile: /var/log/puppet-webhook/access.log
+pidfile: /var/run/puppet-webhook/webhook.pid
+lockfile: /var/run/puppet-webhook/webhook.lock
+approot: './'
+server_software: PuppetWebhook
+bind_address: 0.0.0.0
+port: 8088
+enable_ssl: false
+verify_ssl: false
+public_key_path: ''
+private_key_path: ''
+command_prefix: 'umask 0022;'
