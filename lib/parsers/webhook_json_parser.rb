@@ -13,7 +13,7 @@ module Sinatra
           module_name: repo_name.sub(%r{^.*-}, ''),
           repo_name: repo_name,
           repo_user: repo_user
-        }
+        }.delete_if { |_k, v| v.nil? }
       end
 
       def detect_vcs
@@ -91,7 +91,7 @@ module Sinatra
         when 'gitlab'
           @data['after'] == '0000000000000000000000000000000000000000'
         when 'stash'
-          @data['refChanges'][0]['type'] == 'DELETED'
+          @data['refChanges'][0]['type'] == 'DELETE'
         when 'bitbucket'
           @data['push']['changes'][0]['closed']
         else
@@ -109,6 +109,8 @@ module Sinatra
       end
 
       def repo_user
+        # TODO: Clarify what repo_user actually is.
+        # github is currently using the repo's 'owner', gitlab is using the user who pushed.
         case @vcs
         when 'github'
           @data['repository']['owner']['login']
