@@ -1,12 +1,6 @@
 require 'spec_helper'
 
-require 'puppet_webhook'
-
-describe 'PuppetWebhook' do
-  def app
-    PuppetWebhook
-  end
-
+describe PuppetWebhook do
   it '/heartbeat returns 200 ok and success message' do
     get '/heartbeat'
     expect(last_response).to be_ok
