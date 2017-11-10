@@ -5,11 +5,13 @@ require 'cgi'
 require 'parsers/webhook_json_parser'
 
 class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
+  set :root, File.dirname(__FILE__)
   use Rack::Parser,
       parsers: { 'application/json' => Sinatra::Parsers::WebhookJsonParser.new },
       handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
   register Sinatra::ConfigFile
-  config_file '../config.yml'
+
+  config_file(File.join(__dir__, '..', 'config', 'app.yml'), '/etc/puppet-webhook/app.yml')
 
   set :static, false
   set :lock, true if settings.enable_mutex_lock
@@ -24,6 +26,7 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
     return 200, { status: :success, message: 'running' }.to_json
   end
 
+  # TODO: Move examples into the README.md
   # Simulate a github post:
   # curl -X POST \
   #      -H "Content-Type: application/json" \
