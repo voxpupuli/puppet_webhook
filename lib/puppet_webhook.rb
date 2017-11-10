@@ -11,14 +11,7 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
       handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
   register Sinatra::ConfigFile
 
-  app_conf = File.join(__dir__, '..', 'config', 'app.yml')
-  if File.exist?('/etc/puppet-webhook/app.yml')
-    config_file '/etc/puppet-webhook/app.yml'
-  elsif File.exist?(app_conf)
-    config_file app_conf
-  else
-    raise "Can't load app.yml: No such file or directory\n"
-  end
+  config_file(File.join(__dir__, '..', 'config', 'app.yml'), '/etc/puppet-webhook/app.yml')
 
   set :static, false
   set :lock, true if settings.enable_mutex_lock
@@ -33,6 +26,7 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
     return 200, { status: :success, message: 'running' }.to_json
   end
 
+  # TODO: Move examples into the README.md
   # Simulate a github post:
   # curl -X POST \
   #      -H "Content-Type: application/json" \
