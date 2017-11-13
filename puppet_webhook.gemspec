@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
                    'lib/**/*',
                    'bin/*'
                   ]
-  spec.homepage = 'https://github.com/voxpupuli/puppet-webhook'
+  spec.homepage = 'https://github.com/voxpupuli/puppet_webhook'
   spec.license = 'apache'
   spec.executables = ['puppet_webhook']
   spec.require_paths = %w[lib config]
