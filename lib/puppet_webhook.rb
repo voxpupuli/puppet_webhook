@@ -11,7 +11,7 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
       handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
   register Sinatra::ConfigFile
 
-  config_file(File.join(__dir__, '..', 'config', 'app.yml'), '/etc/puppet-webhook/app.yml')
+  config_file(File.join(__dir__, '..', 'config', 'app.yml'), '/etc/puppet_webhook/app.yml')
 
   set :static, false
   set :lock, true if settings.enable_mutex_lock

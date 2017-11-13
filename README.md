@@ -42,17 +42,17 @@ NOTE: RPM, DEB, and Arch packages are planned for future releases.
 Once installed, you can run the application by simply executing the `puppet_webhook` binary.
 
 This binary will default to using the bundled configuration files and run in a non-daemon mode. This mode is useful for debugging purposes, but it probably not ideal for production use.
-You can also set the `server_type` option in `/etc/puppet-webhook/server.yml` to `daemon` to run the application in the background. By default the application will log to `/var/log/puppet-webhook/access.log`.
+You can also set the `server_type` option in `/etc/puppet_webhook/server.yml` to `daemon` to run the application in the background. By default the application will log to `/var/log/puppet_webhook/access.log`.
 
-NOTE: During the Prerelease stage, the `/etc/puppet-webhook` and `/var/log/puppet-webhook` directories need to be manually created. This will be fixed in for General Availability.
+NOTE: During the Prerelease stage, the `/etc/puppet_webhook` and `/var/log/puppet_webhook` directories need to be manually created. This will be fixed in for General Availability.
 
 ### Configuring puppet_webhook
 
 Puppet_webhook also has several configuration options that can be configured to each user's needs.
 
 The configuration is separated out into Server config (`server.yml`) and Application config (`app.yml`).
-There are default configuration files included in the application's config directory. While these files are editable, it is preferable to create these config files in `/etc/puppet-webhook` to limit potential problems with package updates.
-Any configuration option is placed in `/etc/puppet-webhook/server.yml` or `/etc/puppet-webhook/app.yml` will override the default config defined in `APPDIR/config/server.yml` and `APPDIR/config/app.yml`.
+There are default configuration files included in the application's config directory. While these files are editable, it is preferable to create these config files in `/etc/puppet_webhook` to limit potential problems with package updates.
+Any configuration option is placed in `/etc/puppet_webhook/server.yml` or `/etc/puppet_webhook/app.yml` will override the default config defined in `APPDIR/config/server.yml` and `APPDIR/config/app.yml`.
 
 #### Configuration options
 
@@ -65,15 +65,15 @@ Determines if the Webrick server should run in Simple or Daemon mode.
 
 ##### `logfile`
 Location to write the log file to.
-* Default: `/var/log/puppet-webhook/access.log`
+* Default: `/var/log/puppet_webhook/access.log`
 
 ##### `pidfile`
 Location of the application's PID file
-* Default: `/var/run/puppet-webhook/webhook.pid`
+* Default: `/var/run/puppet_webhook/webhook.pid`
 
 ##### `lockfile`
 Location of the application's Lockfile
-* Default: `/var/run/puppet-webhook/webhook.lock`
+* Default: `/var/run/puppet_webhook/webhook.lock`
 
 ##### `approot`
 Location of the Root of the application's directory
