@@ -1,7 +1,7 @@
 server_type: simple
-logfile: /var/log/puppet-webhook/access.log
-pidfile: /var/run/puppet-webhook/webhook.pid
-lockfile: /var/run/puppet-webhook/webhook.lock
+logfile: /var/log/puppet_webhook/access.log
+pidfile: /var/run/puppet_webhook/webhook.pid
+lockfile: /var/run/puppet_webhook/webhook.lock
 approot: './'
 server_software: PuppetWebhook
 bind_address: 0.0.0.0

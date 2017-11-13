@@ -6,7 +6,7 @@ require 'webrick'
 require 'webrick/https'
 require 'puppet_webhook'
 
-config_file(File.join(__dir__, '..', 'config', 'server.yml'), '/etc/puppet-webhook/server.yml')
+config_file(File.join(__dir__, '..', 'config', 'server.yml'), '/etc/puppet_webhook/server.yml')
 
 PIDFILE = settings.pidfile
 LOCKFILE = settings.lockfile
