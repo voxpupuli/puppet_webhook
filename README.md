@@ -22,7 +22,7 @@ puppet_webhook is a Sinatra-based application receiving REST-based calls to trig
 ## Prerequisites
 
 * Ruby 2.1.9 or greater
-* Puppet 4.7.0 or greater
+* Puppet 4.7.1 or greater
 * r10k gem
 * MCollective and MCollective-r10k (Only for multi-master syncronization)
     * Currently Mcollective-r10k is only available from [puppet-r10k](https://github.com/voxpupuli/puppet-r10k)
@@ -33,11 +33,12 @@ Currently the only supported installation method is via RubyGems.
 
 `gem install puppet_webhook`
 
-RPM and DEB packages are planned for future releases.
+NOTE: RPM, DEB, and Arch packages are planned for future releases.
 
 ## Usage
 
 ### Running puppet_webhook
+
 Once installed, you can run the application by simply executing the `puppet_webhook` binary.
 
 This binary will default to using the bundled configuration files and run in a non-daemon mode. This mode is useful for debugging purposes, but it probably not ideal for production use.
