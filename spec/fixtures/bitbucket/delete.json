@@ -1,0 +1,131 @@
+{
+  "push": {
+    "changes": [
+      {
+        "forced": false,
+        "old": {
+          "type": "branch",
+          "name": "add_branch",
+          "links": {
+            "commits": {
+              "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commits/add_branch"
+            },
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/refs/branches/add_branch"
+            },
+            "html": {
+              "href": "https://bitbucket.org/dhollinger3/puppet-r10k/branch/add_branch"
+            }
+          },
+          "target": {
+            "hash": "31dfeec60f7f864b3f91ec6c61264595e1198ab8",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/31dfeec60f7f864b3f91ec6c61264595e1198ab8"
+              },
+              "html": {
+                "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/31dfeec60f7f864b3f91ec6c61264595e1198ab8"
+              }
+            },
+            "author": {
+              "raw": "David Hollinger <david.hollinger@nttsecurity.com>",
+              "type": "author",
+              "user": {
+                "username": "dhollinger3",
+                "type": "user",
+                "display_name": "David Hollinger III",
+                "uuid": "{9a151b63-a0fb-4a20-a01f-99aefae76ac0}",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/dhollinger3"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/"
+                  },
+                  "avatar": {
+                    "href": "https://bitbucket.org/account/dhollinger3/avatar/32/"
+                  }
+                }
+              }
+            },
+            "parents": [
+              {
+                "type": "commit",
+                "hash": "65b4b4b14af68439fcd3ed0b7a13a80154e4735f",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+                  }
+                }
+              }
+            ],
+            "date": "2017-11-15T22:26:13+00:00",
+            "message": "Add .keep file\n",
+            "type": "commit"
+          }
+        },
+        "truncated": false,
+        "created": false,
+        "closed": true,
+        "new": null
+      }
+    ]
+  },
+  "actor": {
+    "username": "dhollinger3",
+    "type": "user",
+    "display_name": "David Hollinger III",
+    "uuid": "{9a151b63-a0fb-4a20-a01f-99aefae76ac0}",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/users/dhollinger3"
+      },
+      "html": {
+        "href": "https://bitbucket.org/dhollinger3/"
+      },
+      "avatar": {
+        "href": "https://bitbucket.org/account/dhollinger3/avatar/32/"
+      }
+    }
+  },
+  "repository": {
+    "scm": "git",
+    "website": "",
+    "name": "puppet-r10k",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k"
+      },
+      "html": {
+        "href": "https://bitbucket.org/dhollinger3/puppet-r10k"
+      },
+      "avatar": {
+        "href": "https://bitbucket.org/dhollinger3/puppet-r10k/avatar/32/"
+      }
+    },
+    "full_name": "dhollinger3/puppet-r10k",
+    "owner": {
+      "username": "dhollinger3",
+      "type": "user",
+      "display_name": "David Hollinger III",
+      "uuid": "{9a151b63-a0fb-4a20-a01f-99aefae76ac0}",
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/users/dhollinger3"
+        },
+        "html": {
+          "href": "https://bitbucket.org/dhollinger3/"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/account/dhollinger3/avatar/32/"
+        }
+      }
+    },
+    "type": "repository",
+    "is_private": true,
+    "uuid": "{f2d7282e-accb-46a1-b9d0-44bfe61b5af4}"
+  }
+}

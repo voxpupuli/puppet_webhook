@@ -78,7 +78,8 @@ module Sinatra
         when 'stash'
           @data['refChanges'][0]['refId'].sub('refs/heads/', '')
         when 'bitbucket'
-          @data['push']['changes'][0]['new']['name']
+          return @data['push']['changes'][0]['new']['name'] unless @data['push']['changes'][0]['new'].nil?
+          @data['push']['changes'][0]['old']['name']
         when 'tfs'
           @data['resource']['refUpdates'][0]['name'].sub('refs/heads/', '')
         end
