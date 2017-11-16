@@ -1,0 +1,83 @@
+{
+  "subscriptionId": "df711b37-de02-4655-be37-cef935040149",
+  "notificationId": 1,
+  "id": "592c6c87-803a-4e8c-854b-314add077839",
+  "eventType": "git.push",
+  "publisherId": "tfs",
+  "message": {
+    "text": "David Hollinger III pushed updates to puppet-r10k:feature_branch\r\n(https://moduletux.visualstudio.com/_git/puppet-r10k/#version=GBfeature_branch)",
+    "html": "David Hollinger III pushed updates to <a href=\"https://moduletux.visualstudio.com/_git/puppet-r10k/\">puppet-r10k</a>:<a href=\"https://moduletux.visualstudio.com/_git/puppet-r10k/#version=GBfeature_branch\">feature_branch</a>",
+    "markdown": "David Hollinger III pushed updates to [puppet-r10k](https://moduletux.visualstudio.com/_git/puppet-r10k/):[feature_branch](https://moduletux.visualstudio.com/_git/puppet-r10k/#version=GBfeature_branch)"
+  },
+  "detailedMessage": {
+    "text": "David Hollinger III pushed a commit to puppet-r10k:feature_branch\r\n - Add .keep file 31dfeec6 (https://moduletux.visualstudio.com/_git/puppet-r10k/commit/31dfeec60f7f864b3f91ec6c61264595e1198ab8)",
+    "html": "David Hollinger III pushed a commit to <a href=\"https://moduletux.visualstudio.com/_git/puppet-r10k/\">puppet-r10k</a>:<a href=\"https://moduletux.visualstudio.com/_git/puppet-r10k/#version=GBfeature_branch\">feature_branch</a>\r\n<ul>\r\n<li>Add .keep file <a href=\"https://moduletux.visualstudio.com/_git/puppet-r10k/commit/31dfeec60f7f864b3f91ec6c61264595e1198ab8\">31dfeec6</a></li>\r\n</ul>",
+    "markdown": "David Hollinger III pushed a commit to [puppet-r10k](https://moduletux.visualstudio.com/_git/puppet-r10k/):[feature_branch](https://moduletux.visualstudio.com/_git/puppet-r10k/#version=GBfeature_branch)\r\n* Add .keep file [31dfeec6](https://moduletux.visualstudio.com/_git/puppet-r10k/commit/31dfeec60f7f864b3f91ec6c61264595e1198ab8)"
+  },
+  "resource": {
+    "refUpdates": [
+      {
+        "name": "refs/heads/feature_branch",
+        "oldObjectId": "0000000000000000000000000000000000000000",
+        "newObjectId": "31dfeec60f7f864b3f91ec6c61264595e1198ab8"
+      }
+    ],
+    "repository": {
+      "id": "1ae20cf9-a815-46cb-95b6-5585f3157ab4",
+      "name": "puppet-r10k",
+      "url": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4",
+      "project": {
+        "id": "34e0cd1c-8a9b-46ab-a330-b0b9636acc54",
+        "name": "puppet-r10k",
+        "url": "https://moduletux.visualstudio.com/_apis/projects/34e0cd1c-8a9b-46ab-a330-b0b9636acc54",
+        "state": "wellFormed",
+        "visibility": "unchanged"
+      },
+      "defaultBranch": "refs/heads/master",
+      "remoteUrl": "https://moduletux.visualstudio.com/_git/puppet-r10k"
+    },
+    "pushedBy": {
+      "id": "3577b7f3-804d-64fc-9996-1cfc5b4cbf9e",
+      "displayName": "David Hollinger III",
+      "uniqueName": "EagleDelta2@gmail.com",
+      "url": "https://app.vssps.visualstudio.com/A445d5af8-e131-481e-8fe4-b849286482f0/_apis/Identities/3577b7f3-804d-64fc-9996-1cfc5b4cbf9e",
+      "imageUrl": "https://moduletux.visualstudio.com/_api/_common/identityImage?id=3577b7f3-804d-64fc-9996-1cfc5b4cbf9e"
+    },
+    "pushId": 4,
+    "date": "2017-11-16T17:28:06.2726562Z",
+    "url": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4/pushes/4",
+    "_links": {
+      "self": {
+        "href": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4/pushes/4"
+      },
+      "repository": {
+        "href": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4"
+      },
+      "commits": {
+        "href": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4/pushes/4/commits"
+      },
+      "pusher": {
+        "href": "https://app.vssps.visualstudio.com/A445d5af8-e131-481e-8fe4-b849286482f0/_apis/Identities/3577b7f3-804d-64fc-9996-1cfc5b4cbf9e"
+      },
+      "refs": {
+        "href": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4/refs"
+      }
+    }
+  },
+  "resourceVersion": "1.0",
+  "resourceContainers": {
+    "collection": {
+      "id": "7259039b-4e56-4202-aa03-8e6fed42959d",
+      "baseUrl": "https://moduletux.visualstudio.com/"
+    },
+    "account": {
+      "id": "445d5af8-e131-481e-8fe4-b849286482f0",
+      "baseUrl": "https://moduletux.visualstudio.com/"
+    },
+    "project": {
+      "id": "34e0cd1c-8a9b-46ab-a330-b0b9636acc54",
+      "baseUrl": "https://moduletux.visualstudio.com/"
+    }
+  },
+  "createdDate": "2017-11-16T17:28:10.1848746Z"
+}

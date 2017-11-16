@@ -1,0 +1,45 @@
+{
+  "object_kind": "push",
+  "event_name": "push",
+  "before": "0000000000000000000000000000000000000000",
+  "after": "31dfeec60f7f864b3f91ec6c61264595e1198ab8",
+  "ref": "refs/heads/feature_branch",
+  "checkout_sha": "31dfeec60f7f864b3f91ec6c61264595e1198ab8",
+  "message": null,
+  "user_id": 2,
+  "user_name": "David Hollinger",
+  "user_username": "dhollinger",
+  "user_email": "dhollinger@fuslab.net",
+  "user_avatar": "https://dev-fusion-gitlab.fuslab.net/uploads/-/system/user/avatar/2/avatar.png",
+  "project_id": 9367,
+  "project": {
+    "name": "puppet-r10k",
+    "description": "",
+    "web_url": "https://dev-fusion-gitlab.fuslab.net/dhollinger/puppet-r10k",
+    "avatar_url": null,
+    "git_ssh_url": "git@dev-fusion-gitlab.fuslab.net:dhollinger/puppet-r10k.git",
+    "git_http_url": "https://dev-fusion-gitlab.fuslab.net/dhollinger/puppet-r10k.git",
+    "namespace": "dhollinger",
+    "visibility_level": 0,
+    "path_with_namespace": "dhollinger/puppet-r10k",
+    "default_branch": "master",
+    "ci_config_path": null,
+    "homepage": "https://dev-fusion-gitlab.fuslab.net/dhollinger/puppet-r10k",
+    "url": "git@dev-fusion-gitlab.fuslab.net:dhollinger/puppet-r10k.git",
+    "ssh_url": "git@dev-fusion-gitlab.fuslab.net:dhollinger/puppet-r10k.git",
+    "http_url": "https://dev-fusion-gitlab.fuslab.net/dhollinger/puppet-r10k.git"
+  },
+  "commits": [
+
+  ],
+  "total_commits_count": 0,
+  "repository": {
+    "name": "puppet-r10k",
+    "url": "git@dev-fusion-gitlab.fuslab.net:dhollinger/puppet-r10k.git",
+    "description": "",
+    "homepage": "https://dev-fusion-gitlab.fuslab.net/dhollinger/puppet-r10k",
+    "git_http_url": "https://dev-fusion-gitlab.fuslab.net/dhollinger/puppet-r10k.git",
+    "git_ssh_url": "git@dev-fusion-gitlab.fuslab.net:dhollinger/puppet-r10k.git",
+    "visibility_level": 0
+  }
+}

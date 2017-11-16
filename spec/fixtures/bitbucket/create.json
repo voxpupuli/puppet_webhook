@@ -1,0 +1,411 @@
+{
+  "push": {
+    "changes": [
+      {
+        "forced": false,
+        "old": null,
+        "links": {
+          "commits": {
+            "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commits?include=65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+          },
+          "html": {
+            "href": "https://bitbucket.org/dhollinger3/puppet-r10k/branch/master"
+          }
+        },
+        "truncated": true,
+        "commits": [
+          {
+            "hash": "65b4b4b14af68439fcd3ed0b7a13a80154e4735f",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+              },
+              "comments": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/65b4b4b14af68439fcd3ed0b7a13a80154e4735f/comments"
+              },
+              "patch": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/patch/65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+              },
+              "html": {
+                "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+              },
+              "diff": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/diff/65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+              },
+              "approve": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/65b4b4b14af68439fcd3ed0b7a13a80154e4735f/approve"
+              },
+              "statuses": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/65b4b4b14af68439fcd3ed0b7a13a80154e4735f/statuses"
+              }
+            },
+            "author": {
+              "raw": "Tim Meusel <tim@bastelfreak.de>",
+              "type": "author"
+            },
+            "parents": [
+              {
+                "type": "commit",
+                "hash": "053ae795d57ebe1b435a9bdde47f8da72f179422",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/053ae795d57ebe1b435a9bdde47f8da72f179422"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/053ae795d57ebe1b435a9bdde47f8da72f179422"
+                  }
+                }
+              }
+            ],
+            "date": "2017-10-11T18:39:12+00:00",
+            "message": "[blacksmith] Bump version to 6.2.1-rc0\n",
+            "type": "commit"
+          },
+          {
+            "hash": "053ae795d57ebe1b435a9bdde47f8da72f179422",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/053ae795d57ebe1b435a9bdde47f8da72f179422"
+              },
+              "comments": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/053ae795d57ebe1b435a9bdde47f8da72f179422/comments"
+              },
+              "html": {
+                "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/053ae795d57ebe1b435a9bdde47f8da72f179422"
+              },
+              "diff": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/diff/053ae795d57ebe1b435a9bdde47f8da72f179422"
+              },
+              "approve": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/053ae795d57ebe1b435a9bdde47f8da72f179422/approve"
+              },
+              "statuses": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/053ae795d57ebe1b435a9bdde47f8da72f179422/statuses"
+              }
+            },
+            "author": {
+              "raw": "David Hollinger III <david.hollinger@moduletux.com>",
+              "type": "author",
+              "user": {
+                "username": "dhollinger",
+                "type": "user",
+                "display_name": "David Hollinger III",
+                "uuid": "{cd5a6b54-bdb7-470c-85c7-34698355f9f6}",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/dhollinger"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger/"
+                  },
+                  "avatar": {
+                    "href": "https://bitbucket.org/account/dhollinger/avatar/32/"
+                  }
+                }
+              }
+            },
+            "parents": [
+              {
+                "type": "commit",
+                "hash": "2bf7f541cca1f8a44795d5c0ec924b79c664c271",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/2bf7f541cca1f8a44795d5c0ec924b79c664c271"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/2bf7f541cca1f8a44795d5c0ec924b79c664c271"
+                  }
+                }
+              },
+              {
+                "type": "commit",
+                "hash": "ed3c4114312ebdfe66453cfe4c9319acff1fdf19",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/ed3c4114312ebdfe66453cfe4c9319acff1fdf19"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/ed3c4114312ebdfe66453cfe4c9319acff1fdf19"
+                  }
+                }
+              }
+            ],
+            "date": "2017-10-11T18:38:38+00:00",
+            "message": "Merge pull request #388 from bastelfreak/rel620\n\nrelease 6.2.0",
+            "type": "commit"
+          },
+          {
+            "hash": "ed3c4114312ebdfe66453cfe4c9319acff1fdf19",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/ed3c4114312ebdfe66453cfe4c9319acff1fdf19"
+              },
+              "comments": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/ed3c4114312ebdfe66453cfe4c9319acff1fdf19/comments"
+              },
+              "patch": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/patch/ed3c4114312ebdfe66453cfe4c9319acff1fdf19"
+              },
+              "html": {
+                "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/ed3c4114312ebdfe66453cfe4c9319acff1fdf19"
+              },
+              "diff": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/diff/ed3c4114312ebdfe66453cfe4c9319acff1fdf19"
+              },
+              "approve": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/ed3c4114312ebdfe66453cfe4c9319acff1fdf19/approve"
+              },
+              "statuses": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/ed3c4114312ebdfe66453cfe4c9319acff1fdf19/statuses"
+              }
+            },
+            "author": {
+              "raw": "Tim Meusel <tim@bastelfreak.de>",
+              "type": "author"
+            },
+            "parents": [
+              {
+                "type": "commit",
+                "hash": "2bf7f541cca1f8a44795d5c0ec924b79c664c271",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/2bf7f541cca1f8a44795d5c0ec924b79c664c271"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/2bf7f541cca1f8a44795d5c0ec924b79c664c271"
+                  }
+                }
+              }
+            ],
+            "date": "2017-10-11T17:39:01+00:00",
+            "message": "release 6.2.0\n",
+            "type": "commit"
+          },
+          {
+            "hash": "2bf7f541cca1f8a44795d5c0ec924b79c664c271",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/2bf7f541cca1f8a44795d5c0ec924b79c664c271"
+              },
+              "comments": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/2bf7f541cca1f8a44795d5c0ec924b79c664c271/comments"
+              },
+              "html": {
+                "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/2bf7f541cca1f8a44795d5c0ec924b79c664c271"
+              },
+              "diff": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/diff/2bf7f541cca1f8a44795d5c0ec924b79c664c271"
+              },
+              "approve": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/2bf7f541cca1f8a44795d5c0ec924b79c664c271/approve"
+              },
+              "statuses": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/2bf7f541cca1f8a44795d5c0ec924b79c664c271/statuses"
+              }
+            },
+            "author": {
+              "raw": "Tim Meusel <tim@bastelfreak.de>",
+              "type": "author"
+            },
+            "parents": [
+              {
+                "type": "commit",
+                "hash": "000a31c7a5c9c13035c589f5137aa827d6ee0fbf",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/000a31c7a5c9c13035c589f5137aa827d6ee0fbf"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/000a31c7a5c9c13035c589f5137aa827d6ee0fbf"
+                  }
+                }
+              },
+              {
+                "type": "commit",
+                "hash": "1ee5cd27d2c29450cc1af094e98b9e470269b8e2",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/1ee5cd27d2c29450cc1af094e98b9e470269b8e2"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/1ee5cd27d2c29450cc1af094e98b9e470269b8e2"
+                  }
+                }
+              }
+            ],
+            "date": "2017-09-20T20:17:18+00:00",
+            "message": "Merge pull request #387 from voxpupuli/modulesync\n\nmodulesync 1.1.0",
+            "type": "commit"
+          },
+          {
+            "hash": "1ee5cd27d2c29450cc1af094e98b9e470269b8e2",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/1ee5cd27d2c29450cc1af094e98b9e470269b8e2"
+              },
+              "comments": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/1ee5cd27d2c29450cc1af094e98b9e470269b8e2/comments"
+              },
+              "patch": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/patch/1ee5cd27d2c29450cc1af094e98b9e470269b8e2"
+              },
+              "html": {
+                "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/1ee5cd27d2c29450cc1af094e98b9e470269b8e2"
+              },
+              "diff": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/diff/1ee5cd27d2c29450cc1af094e98b9e470269b8e2"
+              },
+              "approve": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/1ee5cd27d2c29450cc1af094e98b9e470269b8e2/approve"
+              },
+              "statuses": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/1ee5cd27d2c29450cc1af094e98b9e470269b8e2/statuses"
+              }
+            },
+            "author": {
+              "raw": "Rob Nelson <rnelson0@gmail.com>",
+              "type": "author",
+              "user": {
+                "username": "rnelson0",
+                "type": "user",
+                "display_name": "Rob Nelson",
+                "uuid": "{3ed89436-0fd0-407d-a4fb-f73060407521}",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/users/rnelson0"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/rnelson0/"
+                  },
+                  "avatar": {
+                    "href": "https://bitbucket.org/account/rnelson0/avatar/32/"
+                  }
+                }
+              }
+            },
+            "parents": [
+              {
+                "type": "commit",
+                "hash": "da3deaf600be98284ea69a9e22dbb4d5ceeef395",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/da3deaf600be98284ea69a9e22dbb4d5ceeef395"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/da3deaf600be98284ea69a9e22dbb4d5ceeef395"
+                  }
+                }
+              }
+            ],
+            "date": "2017-09-20T20:09:57+00:00",
+            "message": "Puppet 5's parser fixes a few bugs from Puppet 4 and has highlighted a few missing pre_conditions in tests\n",
+            "type": "commit"
+          }
+        ],
+        "created": true,
+        "closed": false,
+        "new": {
+          "type": "branch",
+          "name": "master",
+          "links": {
+            "commits": {
+              "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commits/master"
+            },
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/refs/branches/master"
+            },
+            "html": {
+              "href": "https://bitbucket.org/dhollinger3/puppet-r10k/branch/master"
+            }
+          },
+          "target": {
+            "hash": "65b4b4b14af68439fcd3ed0b7a13a80154e4735f",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+              },
+              "html": {
+                "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/65b4b4b14af68439fcd3ed0b7a13a80154e4735f"
+              }
+            },
+            "author": {
+              "raw": "Tim Meusel <tim@bastelfreak.de>",
+              "type": "author"
+            },
+            "parents": [
+              {
+                "type": "commit",
+                "hash": "053ae795d57ebe1b435a9bdde47f8da72f179422",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k/commit/053ae795d57ebe1b435a9bdde47f8da72f179422"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/dhollinger3/puppet-r10k/commits/053ae795d57ebe1b435a9bdde47f8da72f179422"
+                  }
+                }
+              }
+            ],
+            "date": "2017-10-11T18:39:12+00:00",
+            "message": "[blacksmith] Bump version to 6.2.1-rc0\n",
+            "type": "commit"
+          }
+        }
+      }
+    ]
+  },
+  "actor": {
+    "username": "dhollinger3",
+    "type": "user",
+    "display_name": "David Hollinger III",
+    "uuid": "{9a151b63-a0fb-4a20-a01f-99aefae76ac0}",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/users/dhollinger3"
+      },
+      "html": {
+        "href": "https://bitbucket.org/dhollinger3/"
+      },
+      "avatar": {
+        "href": "https://bitbucket.org/account/dhollinger3/avatar/32/"
+      }
+    }
+  },
+  "repository": {
+    "scm": "git",
+    "website": "",
+    "name": "puppet-r10k",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/dhollinger3/puppet-r10k"
+      },
+      "html": {
+        "href": "https://bitbucket.org/dhollinger3/puppet-r10k"
+      },
+      "avatar": {
+        "href": "https://bitbucket.org/dhollinger3/puppet-r10k/avatar/32/"
+      }
+    },
+    "full_name": "dhollinger3/puppet-r10k",
+    "owner": {
+      "username": "dhollinger3",
+      "type": "user",
+      "display_name": "David Hollinger III",
+      "uuid": "{9a151b63-a0fb-4a20-a01f-99aefae76ac0}",
+      "links": {
+        "self": {
+          "href": "https://api.bitbucket.org/2.0/users/dhollinger3"
+        },
+        "html": {
+          "href": "https://bitbucket.org/dhollinger3/"
+        },
+        "avatar": {
+          "href": "https://bitbucket.org/account/dhollinger3/avatar/32/"
+        }
+      }
+    },
+    "type": "repository",
+    "is_private": true,
+    "uuid": "{f2d7282e-accb-46a1-b9d0-44bfe61b5af4}"
+  }
+}
