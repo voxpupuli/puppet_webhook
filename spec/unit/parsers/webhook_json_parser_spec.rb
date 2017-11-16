@@ -16,9 +16,9 @@ describe Sinatra::Parsers::WebhookJsonParser do
               repo_name: 'puppet-r10k'
             )
           end
-          it 'doesn\'t populate repo_user' do
+          it 'does not populate repo_user', unless: service =~ %r{github|gitlab} do
             # The stash payload doesn't contain anything we could use for repo_user
-            expect(result).not_to include(:repo_user) unless service =~ %r{github|gitlab}
+            expect(result).not_to include(:repo_user)
           end
         end
         context 'payload is for a delete' do
