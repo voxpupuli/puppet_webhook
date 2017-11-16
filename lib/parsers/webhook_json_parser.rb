@@ -61,7 +61,7 @@ module Sinatra
       def tfs_webhook?
         # https://docs.microsoft.com/en-us/vsts/service-hooks/services/webhooks
         return false unless @data.key? 'resource'
-        return false unless @data.key? 'event.type'
+        return false unless @data.key? 'eventType'
         true
       end
 
@@ -95,8 +95,9 @@ module Sinatra
           @data['refChanges'][0]['type'] == 'DELETE'
         when 'bitbucket'
           @data['push']['changes'][0]['closed']
+        when 'tfs'
+          @data['resource']['refUpdates'][0]['newObjectId'] == '0000000000000000000000000000000000000000'
         else
-          # TODO: TFS
           false
         end
       end
@@ -104,6 +105,8 @@ module Sinatra
       def repo_name
         if @vcs == 'gitlab'
           @data['project']['name']
+        elsif @vcs == 'tfs'
+          @data['resource']['repository']['name']
         else
           @data['repository']['name']
         end
