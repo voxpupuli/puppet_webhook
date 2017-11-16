@@ -1,0 +1,81 @@
+{
+  "id": "515e5a38-4fbf-47d5-8af3-8d1843d2045e",
+  "eventType": "git.push",
+  "publisherId": "tfs",
+  "message": {
+    "text": "David Hollinger III deleted puppet-r10k:feature_branch\r\n(https://moduletux.visualstudio.com/_git/puppet-r10k/#version=GBfeature_branch)",
+    "html": "David Hollinger III deleted <a href=\"https://moduletux.visualstudio.com/_git/puppet-r10k/\">puppet-r10k</a>:feature_branch",
+    "markdown": "David Hollinger III deleted [puppet-r10k](https://moduletux.visualstudio.com/_git/puppet-r10k/):feature_branch"
+  },
+  "detailedMessage": {
+    "text": "David Hollinger III deleted puppet-r10k:feature_branch",
+    "html": "David Hollinger III deleted <a href=\"https://moduletux.visualstudio.com/_git/puppet-r10k/\">puppet-r10k</a>:<a href=\"https://moduletux.visualstudio.com/_git/puppet-r10k/#version=GBfeature_branch\">feature_branch</a>",
+    "markdown": "David Hollinger III deleted [puppet-r10k](https://moduletux.visualstudio.com/_git/puppet-r10k/):[feature_branch](https://moduletux.visualstudio.com/_git/puppet-r10k/#version=GBfeature_branch)"
+  },
+  "resource": {
+    "refUpdates": [
+      {
+        "name": "refs/heads/feature_branch",
+        "oldObjectId": "31dfeec60f7f864b3f91ec6c61264595e1198ab8",
+        "newObjectId": "0000000000000000000000000000000000000000"
+      }
+    ],
+    "repository": {
+      "id": "1ae20cf9-a815-46cb-95b6-5585f3157ab4",
+      "name": "puppet-r10k",
+      "url": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4",
+      "project": {
+        "id": "34e0cd1c-8a9b-46ab-a330-b0b9636acc54",
+        "name": "puppet-r10k",
+        "url": "https://moduletux.visualstudio.com/_apis/projects/34e0cd1c-8a9b-46ab-a330-b0b9636acc54",
+        "state": "wellFormed",
+        "visibility": "unchanged"
+      },
+      "defaultBranch": "refs/heads/master",
+      "remoteUrl": "https://moduletux.visualstudio.com/_git/puppet-r10k"
+    },
+    "pushedBy": {
+      "id": "3577b7f3-804d-64fc-9996-1cfc5b4cbf9e",
+      "displayName": "David Hollinger III",
+      "uniqueName": "EagleDelta2@gmail.com",
+      "url": "https://app.vssps.visualstudio.com/A445d5af8-e131-481e-8fe4-b849286482f0/_apis/Identities/3577b7f3-804d-64fc-9996-1cfc5b4cbf9e",
+      "imageUrl": "https://moduletux.visualstudio.com/_api/_common/identityImage?id=3577b7f3-804d-64fc-9996-1cfc5b4cbf9e"
+    },
+    "pushId": 9,
+    "date": "2017-11-16T17:34:43.8652448Z",
+    "url": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4/pushes/9",
+    "_links": {
+      "self": {
+        "href": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4/pushes/9"
+      },
+      "repository": {
+        "href": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4"
+      },
+      "commits": {
+        "href": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4/pushes/9/commits"
+      },
+      "pusher": {
+        "href": "https://app.vssps.visualstudio.com/A445d5af8-e131-481e-8fe4-b849286482f0/_apis/Identities/3577b7f3-804d-64fc-9996-1cfc5b4cbf9e"
+      },
+      "refs": {
+        "href": "https://moduletux.visualstudio.com/_apis/git/repositories/1ae20cf9-a815-46cb-95b6-5585f3157ab4/refs"
+      }
+    }
+  },
+  "resourceVersion": "1.0",
+  "resourceContainers": {
+    "collection": {
+      "id": "7259039b-4e56-4202-aa03-8e6fed42959d",
+      "baseUrl": "https://moduletux.visualstudio.com/"
+    },
+    "account": {
+      "id": "445d5af8-e131-481e-8fe4-b849286482f0",
+      "baseUrl": "https://moduletux.visualstudio.com/"
+    },
+    "project": {
+      "id": "34e0cd1c-8a9b-46ab-a330-b0b9636acc54",
+      "baseUrl": "https://moduletux.visualstudio.com/"
+    }
+  },
+  "createdDate": "2017-11-16T17:34:47.237Z"
+}

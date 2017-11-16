@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Sinatra::Parsers::WebhookJsonParser do
-  services = %w[stash bitbucket github]
+  services = %w[stash bitbucket github gitlab tfs]
   let(:result) { subject.call(payload) }
   services.each do |service|
     context "when payload is from #{service}" do
@@ -18,7 +18,7 @@ describe Sinatra::Parsers::WebhookJsonParser do
           end
           it 'doesn\'t populate repo_user' do
             # The stash payload doesn't contain anything we could use for repo_user
-            expect(result).not_to include(:repo_user) unless service == 'github'
+            expect(result).not_to include(:repo_user) unless service =~ %r{github|gitlab}
           end
         end
         context 'payload is for a delete' do
