@@ -2,7 +2,7 @@
 Gem::Specification.new do |spec|
   spec.name = 'puppet_webhook'
   spec.summary = 'Sinatra Webhook Server for Puppet/R10K'
-  spec.version = '0.0.1'
+  spec.version = '0.1.0'
   spec.platform = Gem::Platform::RUBY
   spec.required_ruby_version = '>= 2.1.9'
   spec.authors = ['Vox Pupuli']
