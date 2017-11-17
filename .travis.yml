@@ -29,3 +29,12 @@ notifications:
     on_failure: always
     channels:
       - "chat.freenode.org#voxpupuli-notifications"
+deploy:
+  provider: rubygems
+  api_key:
+    secure: bNK4n8H8JeAUqyjVeBdpCfda/2dkjH5ROFT1jDh26DR42DNNOr7eMuzkb4mljBHmcSmPn53rvL1c4cEpa45hhLMAdIcq7X5jrLOXQ6ZcNI5TQjhee+uXtKCpf0H92bR/WGCJTkJTOx/FS7wUfj3hBWBt0t6jWbQ2V2XECM3TMFFyc9kNM6kZP8eHb1f3bzcJ06UZFa2VWIot3WF5SkeuDyVbwksAkPAlA37yiRQy2rNkXyT9NtCLPo2DYWSPVOOgz0SUIH5NWe8Lk7sAMrGtoT+E24y0e9DI43VntXYEnPonxMxoBvl7rO5mXX6+SiQJ0WKNGLQHnOW85sboHrn/JEe5BtTI4pzYAbH84TvuXMkf0oEAPQhMlZjwUuphDviW7fm/5M4NqgS1u9eJ4JXA7K/VVCP4/zp2CNDYzJvOVQwsNAuj2wnrkFV/mT0mP6uUEmc1AUcIBc2wG1dQIxN0ZNq+5YVX+VZ3QWO1WgD6ZG7gvRN/IcVa2BXUz02RzAeA/RQD67uYcOIdp/jdlxDc4vvGfMug94er0KnusZCexGJ3h4SK2dd/RCCSb/3/20PYMTpUm4zqzBQjmv3uU4nPQym/eyDGVQVF8h20Dk22Rldjyra8ZiZz4Tt70W23QGOK/+XhcGqeeIfLVCErx6U6Vk887R50fpmQlUVaLMTlgPc=
+  gem: puppet_webhook
+  on:
+    tags: true
+    repo: voxpupuli/puppet_webhook
+
