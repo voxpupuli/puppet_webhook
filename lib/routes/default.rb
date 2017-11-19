@@ -2,6 +2,7 @@ require 'sinatra'
 
 module Sinatra
   module PuppetWebhookRoutes
+    # Registers the default GET routes for PuppetWebhook
     module Default
       def self.registered(puppet_webhook)
         puppet_webhook.get '/' do

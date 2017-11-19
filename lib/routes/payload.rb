@@ -2,6 +2,7 @@ require 'sinatra'
 
 module Sinatra
   module PuppetWebhookRoutes
+    # Registers a POST route for the Payload endpoint on PuppetWebhook
     module Payload
       def self.registered(puppet_webhook)
         puppet_webhook.post '/payload' do # rubocop:disable Metrics/BlockLength
@@ -26,14 +27,14 @@ module Sinatra
 
           # If prefix is enabled in our config file, determine what the prefix should be
           prefix = case settings.prefix
-                     when :repo
-                       params['repo_name']
-                     when :user
-                       params['repo_user']
-                     when :command, TrueClass
-                       run_prefix_command(data.to_json)
-                     when String
-                       settings.prefix
+                   when :repo
+                     params['repo_name']
+                   when :user
+                     params['repo_user']
+                   when :command, TrueClass
+                     run_prefix_command(data.to_json)
+                   when String
+                     settings.prefix
                    end
 
           # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.

@@ -2,6 +2,7 @@ require 'sinatra'
 
 module Sinatra
   module PuppetWebhookRoutes
+    # Registers a POST endpoint for the PuppetWebhook App
     module Module
       def self.registered(puppet_webhook)
         puppet_webhook.post '/module' do
