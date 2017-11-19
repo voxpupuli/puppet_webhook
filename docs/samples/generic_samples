@@ -1,0 +1,44 @@
+# MODULE SAMPLES
+# Simulate a github post:
+# curl -X POST \
+#      -H "Content-Type: application/json" \
+#      -d '{ \
+#            "repository": { \
+#              "id": 12345, \
+#              "name": "puppetlabs-stdlib", \
+#              "html_url": "http://github.com", \
+#              "owner": {\
+#                "login": "foo"
+#              } \
+#            } \
+#          }' \
+#      'https://puppet:puppet@localhost:8088/module' -k -q
+#
+# Simulate a BitBucket post:
+# curl -X POST \
+#      -H "Content-Type: application/json" \
+#      -d '{ \
+#            "repository": { \
+#              "full_name": "puppetlabs/puppetlabs-stdlib", \
+#              "name": "PuppetLabs : StdLib"
+#        } }' \
+#      'https://puppet:puppet@localhost:8088/module' -k -q
+#
+# This example shows that, unlike github, BitBucket allows special characters
+# in repository names but translates it to generate a full_name which
+# is used in the repository URL and is most useful for this webhook handler.
+
+# PAYLOAD SAMPLES
+# Simulate a github post:
+# curl -d '{ "ref": "refs/heads/production" }' -H "Accept: application/json" 'https://puppet:puppet@localhost:8088/payload' -k -q
+#
+# If using stash look at the stash_mco.rb script included here.
+# It will filter the stash post and make it look like a github post.
+#
+# Simulate a Gitorious post:
+# curl -X POST -d '%7b%22ref%22%3a%22master%22%7d' 'http://puppet:puppet@localhost:8088/payload' -q
+# Yes, Gitorious does not support https...
+#
+# Simulate a BitBucket post:
+# curl -X POST -d '{ "push": { "changes": [ { "new": { "name": "production" } } ] } }' \
+#      'https://puppet:puppet@localhost:8088/payload' -k -q
