@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -d '{ "repository": { "id": 12345, "name": "puppetlabs-stdlib", "html_url": "http://github.com", "owner": { "login": "foo" } } }' 'https://puppet:puppet@localhost:8088/module' -k -q
