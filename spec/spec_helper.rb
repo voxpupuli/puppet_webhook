@@ -8,10 +8,11 @@ SimpleCov.formatters = [
   SimpleCov::Formatter::Console
 ]
 SimpleCov.start do
-  track_files 'lib/**/*.rb'
-  add_filter '/spec'
-  add_filter '/vendor'
-  add_filter '/.vendor'
+  add_filter '.gems'
+  add_filter 'spec'
+  add_filter 'pkg'
+  add_filter 'vendor'
+  add_filter '.vendor'
 end
 
 ENV['RACK_ENV'] = 'test'
