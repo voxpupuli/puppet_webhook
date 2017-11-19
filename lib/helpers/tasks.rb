@@ -138,8 +138,8 @@ module Tasks # rubocop:disable Style/Documentation
   end
 
   def types?
-    return false if settings.generate_tasks.nil?
-    settings.generate_tasks
+    return false if settings.generate_types.nil?
+    settings.generate_types
   end
 
   def authorized?
