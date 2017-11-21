@@ -15,4 +15,8 @@ module DataParsers # rubocop:disable Style/Documentation
     signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), settings.github_secret, payload_body)
     throw(:halt, [500, "Signatures didn't match!\n"]) unless Rack::Utils.secure_compare(signature, request.env['HTTP_X_HUB_SIGNATURE'])
   end
+
+  def payload
+    env['parsed_body']
+  end
 end

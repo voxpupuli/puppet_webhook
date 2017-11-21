@@ -6,7 +6,7 @@ module Sinatra
     module Payload
       def self.registered(puppet_webhook)
         puppet_webhook.post '/payload' do # rubocop:disable Metrics/BlockLength
-          LOGGER.info "params = #{params}"
+          LOGGER.info "parsed payload contained: #{payload}"
           protected! if settings.protected
           request.body.rewind # in case someone already read it
 
@@ -23,14 +23,14 @@ module Sinatra
           data = JSON.parse(decoded, quirks_mode: true)
 
           # Iterate the data structure to determine what's should be deployed
-          branch = params['branch']
+          branch = payload['branch']
 
           # If prefix is enabled in our config file, determine what the prefix should be
           prefix = case settings.prefix
                    when :repo
-                     params['repo_name']
+                     payload['repo_name']
                    when :user
-                     params['repo_user']
+                     payload['repo_user']
                    when :command, TrueClass
                      run_prefix_command(data.to_json)
                    when String
@@ -39,7 +39,7 @@ module Sinatra
 
           # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
           # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
-          deleted = params['deleted']
+          deleted = payload['deleted']
 
           branch = if deleted
                      settings.default_branch
