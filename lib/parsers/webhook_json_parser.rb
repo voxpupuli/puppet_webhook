@@ -1,9 +1,11 @@
-require 'rack/parser'
+require 'rack/bodyparser'
 require 'json'
 
 module Sinatra
   module Parsers
     class WebhookJsonParser # rubocop:disable Style/Documentation
+      attr_accessor :env, :data
+
       def call(body)
         @data = JSON.parse(body, quirks_mode: true)
         @vcs  = detect_vcs
@@ -27,35 +29,23 @@ module Sinatra
 
       def github_webhook?
         # https://developer.github.com/v3/activity/events/types/#pushevent
-        # X-GitHub-Event header is set, but not accessible here.
-        return false unless @data.key? 'repository'
-        return false unless @data['repository'].key? 'id'
-        return false unless @data['repository'].key? 'html_url'
-        return false unless @data['repository']['html_url'] =~ %r{github\.com}
-        true
+        env.key?('HTTP_X_GITHUB_EVENT')
       end
 
       def gitlab_webhook?
         # https://docs.gitlab.com/ce/user/project/integrations/webhooks.html
-        # X-Gitlab-Event is set, but not accessible here.
-        return false unless @data.key? 'object_kind'
-        return false unless @data.key? 'ref'
-        true
+        env.key?('HTTP_X_GITLAB_EVENT')
       end
 
       # stash/bitbucket server
       def stash_webhook?
         # https://confluence.atlassian.com/bitbucketserver/post-service-webhook-for-bitbucket-server-776640367.html
-        return false unless @data.key? 'refChanges'
-        true
+        env.key?('HTTP_X_ATLASSIAN_TOKEN')
       end
 
       def bitbucket_webhook?
         # https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html
-        return false unless @data.key? 'actor'
-        return false unless @data.key? 'repository'
-        return false unless @data.key? 'push'
-        true
+        env.key?('HTTP_X_EVENT_KEY')
       end
 
       def tfs_webhook?
@@ -97,8 +87,6 @@ module Sinatra
           @data['push']['changes'][0]['closed']
         when 'tfs'
           @data['resource']['refUpdates'][0]['newObjectId'] == '0000000000000000000000000000000000000000'
-        else
-          false
         end
       end
 

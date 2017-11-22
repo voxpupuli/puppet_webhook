@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w[lib config]
   spec.add_runtime_dependency 'json'
   spec.add_runtime_dependency 'mcollective-client'
-  spec.add_runtime_dependency 'rack-parser'
+  spec.add_runtime_dependency 'rack-bodyparser'
   spec.add_runtime_dependency 'sinatra'
   spec.add_runtime_dependency 'sinatra-contrib'
   spec.add_runtime_dependency 'slack-notifier'

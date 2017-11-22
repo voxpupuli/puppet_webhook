@@ -11,7 +11,7 @@ require_relative 'routes/payload'
 
 class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   set :root, File.dirname(__FILE__)
-  use Rack::Parser,
+  use Rack::BodyParser,
       parsers: { 'application/json' => Sinatra::Parsers::WebhookJsonParser.new },
       handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
   register Sinatra::ConfigFile
