@@ -87,8 +87,6 @@ module Sinatra
           @data['push']['changes'][0]['closed']
         when 'tfs'
           @data['resource']['refUpdates'][0]['newObjectId'] == '0000000000000000000000000000000000000000'
-        else
-          false
         end
       end
 
