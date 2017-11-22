@@ -23,6 +23,7 @@ describe Sinatra::Parsers::WebhookJsonParser do
             expect(result).not_to include(:repo_user)
           end
         end
+
         context 'payload is for a delete' do
           let(:payload) { read_fixture("#{service}/delete.json") }
           it 'returns params hash with :deleted => true' do
@@ -30,6 +31,24 @@ describe Sinatra::Parsers::WebhookJsonParser do
             expect(result).to include(deleted: true)
           end
         end
+      end
+
+      describe '#detect_vcs' do
+        it 'detects the correct VCS' do
+          subject.env = read_json_fixture("#{service}/update-headers.json")
+          subject.data = read_json_fixture("#{service}/update.json")
+          expect(subject.detect_vcs).to eq(service)
+        end
+      end
+    end
+  end
+
+  describe '#detect_vcs' do
+    context 'unrecognised payload' do
+      it 'raises an error' do
+        subject.env = {}
+        subject.data = {}
+        expect { subject.detect_vcs }.to raise_error(StandardError, 'payload not recognised')
       end
     end
   end

@@ -25,6 +25,10 @@ module Webhook
       def read_fixture(name)
         File.read(File.join(File.expand_path('..', __FILE__), 'fixtures', name))
       end
+
+      def read_json_fixture(name)
+        JSON.parse(read_fixture(name))
+      end
     end
   end
 end
