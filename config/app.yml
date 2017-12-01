@@ -7,7 +7,6 @@ client_timeout: "120"
 use_mco_ruby: false
 use_mcollective: false
 slack_webhook: false
-generate_types: false
 slack_channel: '#default'
 slack_username: 'r10k'
 slack_proxy_url: ~

@@ -138,6 +138,7 @@ module Tasks # rubocop:disable Style/Documentation
   end
 
   def types?
+    return false unless settings.respond_to?(:generate_types=)
     return false if settings.generate_types.nil?
     settings.generate_types
   end
