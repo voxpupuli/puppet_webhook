@@ -23,14 +23,14 @@ module Sinatra
           data = JSON.parse(decoded, quirks_mode: true)
 
           # Iterate the data structure to determine what's should be deployed
-          branch = payload['branch']
+          branch = payload[:branch]
 
           # If prefix is enabled in our config file, determine what the prefix should be
           prefix = case settings.prefix
                    when :repo
-                     payload['repo_name']
+                     payload[:repo_name]
                    when :user
-                     payload['repo_user']
+                     payload[:repo_user]
                    when :command, TrueClass
                      run_prefix_command(data.to_json)
                    when String
@@ -39,7 +39,7 @@ module Sinatra
 
           # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
           # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
-          deleted = payload['deleted']
+          deleted = payload[:deleted]
 
           branch = if deleted
                      settings.default_branch
