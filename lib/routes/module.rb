@@ -16,7 +16,7 @@ module Sinatra
           decoded = request.body.read
           verify_signature(decoded) if verify_signature?
 
-          module_name = payload['module_name']
+          module_name = payload[:module_name]
 
           module_name = sanitize_input(module_name)
           LOGGER.info("Deploying module #{module_name}")
