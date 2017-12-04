@@ -11,12 +11,12 @@ options = {
   port: '8088',
   logfile: $stderr,
   loglevel: WEBrick::Log::WARN,
-  server_type: WEBrick::SimpleServer,
+  server_type: WEBrick::SimpleServer
 }
 
 ssl_opts = { ssl_verify: false }
 
-optparse = OptionParser.new do |opts|
+optparse = OptionParser.new do |opts| # rubocop:disable Metrics/BlockLength
   opts.banner = 'Usage: puppet_webhook [-p <port>] [-l <logfile>] [-d]
        -- Starts the Puppet Webhook API service.
 
@@ -26,7 +26,8 @@ optparse = OptionParser.new do |opts|
     options[:loglevel] = WEBrick::Log::DEBUG
   end
 
-  opts.on('-l [LOGFILE]', '--logfile [LOGFILE]', 'Path to logfile. Defaults to no logging, or /var/log/puppet_webhook if no filename is passed.') do |arg|
+  opts.on('-l [LOGFILE]', '--logfile [LOGFILE]',
+          'Path to logfile. Defaults to no logging, or /var/log/puppet_webhook if no filename is passed.') do |arg|
     options[:logfile] = arg || '/var/log/puppet_webhook'
   end
 
@@ -77,6 +78,7 @@ LOGGER = WEBrick::Log.new(options[:logfile], options[:loglevel])
 webrick_opts = {
   Host: options[:host],
   Port: options[:port],
+  DocumentRoot: approot,
   ServerType: options[:server_type],
   ServerSoftware: PuppetWebhook,
   StartCallBack: proc { File.open(options[:pidfile], 'w') { |f| f.write Process.pid } }
@@ -89,7 +91,6 @@ if ssl_opts[:enable_ssl]
   webrick_opts[:SSLPrivateKey] = ssl_opts[:ssl_key]
   webrick_opts[:SSLCertName] = [['CN', WEBrick::Utils.getservername]]
 end
-
 
 Rack::Handler::WEBrick.run(PuppetWebhook, webrick_opts) do |server|
   %i[INT TERM].each { |sig| trap(sig) { server.stop } }
