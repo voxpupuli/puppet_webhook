@@ -18,6 +18,12 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
 
   config_file(File.join(__dir__, '..', 'config', 'app.yml'), '/etc/puppet_webhook/app.yml')
 
+  COMMAND_PREFIX = if settings.respond_to?(:command_prefix=)
+                     settings.command_prefix
+                   else
+                     'umask 0022;'
+                   end
+
   set :static, false
   set :lock, true if settings.enable_mutex_lock
 
