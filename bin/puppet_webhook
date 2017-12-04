@@ -1,43 +1,96 @@
 #!/usr/bin/env ruby
 require 'openssl'
-require 'sinatra'
-require 'sinatra/config_file'
+require 'optparse'
 require 'webrick'
 require 'webrick/https'
 require 'puppet_webhook'
 
-config_file(File.join(__dir__, '..', 'config', 'server.yml'), '/etc/puppet_webhook/server.yml')
-
-PIDFILE = settings.pidfile
-LOCKFILE = settings.lockfile
-APP_ROOT = settings.approot
-COMMAND_PREFIX = settings.command_prefix
-LOGGER = WEBrick::Log.new(settings.logfile, WEBrick::Log::DEBUG)
-
-case settings.server_type
-when 'simple'
-  server_type = WEBrick::SimpleServer
-when 'daemon'
-  server_type = WEBrick::Daemon
-end
-
-opts = {
-  Host: settings.bind_address,
-  Port: settings.port,
-  Logger: LOGGER,
-  ServerType: server_type,
-  ServerSoftware: settings.server_software,
-  SSLEnable: settings.enable_ssl,
-  StartCallBack: proc { File.open(PIDFILE, 'w') { |f| f.write Process.pid } }
+approot = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+options = {
+  host: '0.0.0.0',
+  port: '8088',
+  logfile: $stderr,
+  loglevel: WEBrick::Log::WARN,
+  server_type: WEBrick::SimpleServer,
 }
 
-if settings.enable_ssl
-  opts[:SSLVerifyClient] = settings.verify_ssl
-  opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(File.open(settings.public_key_path).read)
-  opts[:SSLPrivateKey] = OpenSSL::PKey::RSA.new(File.open(settings.private_key_path).read)
-  opts[:SSLCertName] = [['CN', WEBrick::Utils.getservername]]
+ssl_opts = { ssl_verify: false }
+
+optparse = OptionParser.new do |opts|
+  opts.banner = 'Usage: puppet_webhook [-p <port>] [-l <logfile>] [-d]
+       -- Starts the Puppet Webhook API service.
+
+'
+
+  opts.on('-d', '--debug', 'Display or log messages.') do
+    options[:loglevel] = WEBrick::Log::DEBUG
+  end
+
+  opts.on('-l [LOGFILE]', '--logfile [LOGFILE]', 'Path to logfile. Defaults to no logging, or /var/log/puppet_webhook if no filename is passed.') do |arg|
+    options[:logfile] = arg || '/var/log/puppet_webhook'
+  end
+
+  opts.on('-p PORT', '--port PORT', 'Port to listen on. Defaults to 8088.') do |arg|
+    options[:port] = arg
+  end
+
+  opts.on('-D', '--daemon', 'Run the server in daemon mode. Defaults to simple if not passed') do
+    options[:server_type] = WEBrick::Daemon
+  end
+
+  opts.on('--pidfile FILE', 'Specify the PID file to use.') do |arg|
+    options[:pidfile] = arg || '/var/run/puppet_webhook/webhook.pid'
+  end
+
+  opts.on('--ssl', 'Enable SSL Support.') do
+    ssl_opts[:enable_ssl] = true
+  end
+
+  opts.on('--ssl-cert FILE', 'Specify the SSL cert to use. Pair with --ssl-key.') do |arg|
+    ssl_opts[:ssl_cert] = OpenSSL::X509::Certificate.new(File.open(arg).read)
+  end
+
+  opts.on('--ssl-key FILE', 'Specify the SSL key to use. Pair with --ssl-cert.') do |arg|
+    ssl_opts[:ssl_key] = OpenSSL::PKey::RSA.new(File.open(arg))
+  end
+
+  opts.on('-c FILE', '--configfile FILE', 'Specifies a configuration file to use. Not functional yet.') do |arg|
+    options[:config_file] = arg
+  end
+
+  opts.separator('')
+
+  opts.on('-h', '--help') do
+    puts
+    puts opts
+    puts
+    exit
+  end
 end
 
-Rack::Handler::WEBrick.run(PuppetWebhook, opts) do |server|
+optparse.parse!
+
+# config_file(File.join(__dir__, '..', 'config', 'server.yml'), '/etc/puppet_webhook/server.yml', options[:config_file])
+
+LOGGER = WEBrick::Log.new(options[:logfile], options[:loglevel])
+
+webrick_opts = {
+  Host: options[:host],
+  Port: options[:port],
+  ServerType: options[:server_type],
+  ServerSoftware: PuppetWebhook,
+  StartCallBack: proc { File.open(options[:pidfile], 'w') { |f| f.write Process.pid } }
+}
+
+if ssl_opts[:enable_ssl]
+  webrick_opts[:SSLEnable] = ssl_opts[:enable_ssl]
+  webrick_opts[:SSLVerifyClient] = ssl_opts[:ssl_verify]
+  webrick_opts[:SSLCertificate] = ssl_opts[:ssl_cert]
+  webrick_opts[:SSLPrivateKey] = ssl_opts[:ssl_key]
+  webrick_opts[:SSLCertName] = [['CN', WEBrick::Utils.getservername]]
+end
+
+
+Rack::Handler::WEBrick.run(PuppetWebhook, webrick_opts) do |server|
   %i[INT TERM].each { |sig| trap(sig) { server.stop } }
 end
