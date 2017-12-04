@@ -47,7 +47,12 @@ module Tasks # rubocop:disable Style/Documentation
 
   def run_command(command)
     message = ''
-    File.open(LOCKFILE, 'w+') do |file|
+    lockfile = if settings.respond_to?(:lockfile=)
+                 settings.lockfile
+               else
+                 '/var/run/puppet_webhook/webhook.lock'
+               end
+    File.open(lockfile, 'w+') do |file|
       # r10k has a small race condition which can cause failed deploys if two happen
       # more or less simultaneously. To mitigate, we just lock on a file and wait for
       # the other one to complete.
