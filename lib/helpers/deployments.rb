@@ -7,10 +7,10 @@ module Deployments # rubocop:disable Style/Documentation
       message = result.results[:statusmsg]
     else
       command = if settings.use_mcollective
-                  "#{COMMAND_PREFIX} mco r10k deploy #{branch} #{settings.mco_arguments}"
+                  "#{settings.command_prefix} mco r10k deploy #{branch} #{settings.mco_arguments}"
                 else
                   # If you don't use mcollective then this hook needs to be running as r10k's user i.e. root
-                  "#{COMMAND_PREFIX} r10k deploy environment #{branch} #{settings.r10k_deploy_arguments}"
+                  "#{settings.command_prefix} r10k deploy environment #{branch} #{settings.r10k_deploy_arguments}"
                 end
       message = run_command(command)
     end
@@ -31,9 +31,9 @@ module Deployments # rubocop:disable Style/Documentation
 
   def deploy_module(module_name)
     command = if settings.use_mcollective
-                "#{COMMAND_PREFIX} mco r10k deploy_module #{module_name} #{settings.mco_arguments}"
+                "#{settings.command_prefix} mco r10k deploy_module #{module_name} #{settings.mco_arguments}"
               else
-                "#{COMMAND_PREFIX} r10k deploy module #{module_name}"
+                "#{settings.command_prefix} r10k deploy module #{module_name}"
               end
     message = run_command(command)
     LOGGER.info("message: #{message} module_name: #{module_name}")

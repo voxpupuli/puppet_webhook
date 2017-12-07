@@ -46,28 +46,20 @@ module Tasks # rubocop:disable Style/Documentation
   end
 
   def run_command(command)
-    message = ''
-    File.open(LOCKFILE, 'w+') do |file|
-      # r10k has a small race condition which can cause failed deploys if two happen
-      # more or less simultaneously. To mitigate, we just lock on a file and wait for
-      # the other one to complete.
-      file.flock(File::LOCK_EX)
-
-      if Open3.respond_to?('capture3')
-        stdout, stderr, exit_status = Open3.capture3(command)
-        message = "triggered: #{command}\n#{stdout}\n#{stderr}"
-      else
-        message = "forked: #{command}"
-        Process.detach(fork { exec "#{command} &" })
-        exit_status = 0
-      end
-      raise "#{stdout}\n#{stderr}" if exit_status != 0
+    if Open3.respond_to?('capture3')
+      stdout, stderr, exit_status = Open3.capture3(command)
+      message = "triggered: #{command}\n#{stdout}\n#{stderr}"
+    else
+      message = "forked: #{command}"
+      Process.detach(fork { exec "#{command} &" })
+      exit_status = 0
     end
+    raise "#{stdout}\n#{stderr}" if exit_status != 0
     message
   end
 
   def generate_types(environment)
-    command = "#{COMMAND_PREFIX} /opt/puppetlabs/puppet/bin generate types --environment #{environment}"
+    command = "#{settings.command_prefix} /opt/puppetlabs/puppet/bin generate types --environment #{environment}"
 
     message = run_command(command)
     LOGGER.info("message: #{message} environment: #{environment}")
@@ -82,9 +74,6 @@ module Tasks # rubocop:disable Style/Documentation
   def notify_slack(status_message)
     return unless settings.slack_webhook
 
-    slack_channel = settings.slack_channel  || '#default'
-    slack_user    = settings.slack_username || 'r10k'
-
     if settings.slack_proxy_url
       uri = URI(settings.slack_proxy_url)
       http_options = {
@@ -97,8 +86,8 @@ module Tasks # rubocop:disable Style/Documentation
     end
 
     notifier = Slack::Notifier.new settings.slack_webhook do
-      defaults channel: slack_channel,
-               username: slack_user,
+      defaults channel: '#general',
+               username: 'puppet_webhook',
                icon_emoji: ':ocean:',
                http_options: http_options
     end

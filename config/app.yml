@@ -1,21 +1,22 @@
-enable_mutex_lock: false
+# Authentication
+protected: true
 user: puppet
 pass: puppet
-protected: true
+
+# Mcollective
 client_cfg: "/var/lib/peadmin/.mcollective"
 client_timeout: "120"
 use_mco_ruby: false
 use_mcollective: false
-slack_webhook: false
-slack_channel: '#default'
-slack_username: 'r10k'
-slack_proxy_url: ~
-default_branch: production
 discovery_timeout: '10'
+
+# Slack Notifications
+slack_webhook: false
+
+# R10k
+default_branch: production
 ignore_environments: []
-prefix: ~
 prefix_command: ''
 r10k_deploy_arguments: "-pv"
 allow_uppercase: true
-github_secret: ~
-repository_events: ~
+command_prefix: 'umask 0022;'
