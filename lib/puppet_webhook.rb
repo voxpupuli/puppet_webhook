@@ -18,14 +18,28 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
 
   config_file(File.join(__dir__, '..', 'config', 'app.yml'), '/etc/puppet_webhook/app.yml')
 
-  COMMAND_PREFIX = if settings.respond_to?(:command_prefix=)
-                     settings.command_prefix
-                   else
-                     'umask 0022;'
-                   end
-
+  # Sinatra settings
   set :static, false
-  set :lock, true if settings.enable_mutex_lock
+  set :lock, true
+
+  # Custom Settings
+  set :protected, false unless settings.respond_to? :protected=
+  set :client_cfg, '/var/lib/peadmin/.mcollective' unless settings.respond_to? :client_cfg=
+  set :client_timeout, '120' unless settings.respond_to? :client_timeout=
+  set :use_mco_ruby, false unless settings.respond_to? :use_mco_ruby=
+  set :use_mcollective, false unless settings.respond_to? :use_mcollective=
+  set :discovery_timeout, false unless settings.respond_to? :discovery_timeout=
+  set :slack_webhook, false unless settings.respond_to? :slack_webhook=
+  set :slack_proxy_url, nil unless settings.respond_to? :slack_proxy_url=
+  set :default_branch, 'production' unless settings.respond_to? :default_branch=
+  set :ignore_environments, [] unless settings.respond_to? :ignore_environments=
+  set :prefix, nil unless settings.respond_to? :prefix=
+  set :prefix_command, '' unless settings.respond_to? :prefix_command=
+  set :r10k_deploy_arguments, '-pv' unless settings.respond_to? :r10k_deploy_arguments=
+  set :allow_uppercase, true unless settings.respond_to? :allow_uppercase=
+  set :command_prefix, 'umask 0022;' unless settings.respond_to? :command_prefix=
+  set :github_secret, nil unless settings.respond_to? :github_secret=
+  set :repository_events, nil unless settings.respond_to? :respository_events=
 
   require 'helpers/init'
 
