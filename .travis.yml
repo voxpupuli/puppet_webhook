@@ -6,8 +6,7 @@ dist: trusty
 before_install:
   - bundle -v
   - rm Gemfile.lock || true
-  - gem update --system
-  - gem update bundler
+  - gem install bundler -v 1.16.0
   - bundle -v
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
