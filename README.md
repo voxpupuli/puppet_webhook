@@ -77,9 +77,13 @@ Any configuration option is placed in `/etc/puppet_webhook/server.yml` or `/etc/
 
 
 #### Server Configuration File
-The Server configuration file is a YAML formatted file with file extension `.yml` and
+The Server configuration file is a YAML formatted file with file extension `.yml` and defined with the `-c` or `--configfile`
+command line option. These settings are exclusively for setting server configs and currently will override any command line settings
+passed.
 
-#### server.yml
+When using the default systemd unit file or SysVInit service file, the server configuration file will default to `/etc/puppet_webhook/server.yml` (Not implemented yet).
+
+##### Options
 
 #####`server_type`
 Determines if the Webrick server should run in Simple or Daemon mode.     
@@ -88,25 +92,15 @@ Determines if the Webrick server should run in Simple or Daemon mode.
 
 ##### `logfile`
 Location to write the log file to.
-* Default: `/var/log/puppet_webhook/access.log`
+* Default: `/var/log/puppet_webhook`
+
+##### `loglevel`
+Define the logging level.
+* Default: `WARN`
 
 ##### `pidfile`
 Location of the application's PID file
 * Default: `/var/run/puppet_webhook/webhook.pid`
-
-##### `lockfile`
-Location of the application's Lockfile
-* Default: `/var/run/puppet_webhook/webhook.lock`
-
-##### `approot`
-Location of the Root of the application's directory
-* Default: `./`
-NOTE: Currently unused
-
-##### `bind_address`
-IPv4 Address to bind to.
-* MUST BE VALID IPv4 ADDRESS.
-* Default: `0.0.0.0`
 
 ##### `port`
 Port number to bind to.
@@ -118,42 +112,36 @@ Whether or not to enable SSL communication.
 * Valid options: [ `true`, `false` ]
 * Default: `false`
 
-##### `verify_ssl`
+##### `ssl_verify`
 Whether or not to verify the SSL CA/Peer on the certifcate. Set to false if using a self-signed certificate and the CA is not installed locally.
 * Valid options: [ `true`, `false` ]
 * Default: `false`
 
-##### `public_key_path`
+##### `ssl_cert`
 Path to the public SSL certificate for puppet_webhook. REQUIRED IF `ssl_enable` IS SET TO `true`
-* Default: ''
 
-##### `private_key_path`
+##### `ssl_key`
 Path to the SSL Private Key for puppet_webhook. REQUIRED IF `ssl_enable` IS SET TO `true`
-* Default: ''
 
-##### `command_prefix`
-Command to prefix the r10k and puppet commands with when executed.
-* Default: 'umask 0022;'
+#### Application Configuration File
+This file stores the configuration for the Application itself. A default configuration file is included in the `APP_ROOT/config/app.yml`.
 
-#### app.yml
+The SystemD unit and SysVInit service files will use `/etc/puppet_webhook/app.yml` by default (Not implemented yet).
 
-##### `enable_mutex_lock`
-Force all requests to syncronize on a mutex lock, ensuring that only a single request is processed at a time.
-* Valid options: [ `true`, `false` ]
-* Default: `false`
+Currently, the above two locations are the only valid locations for the app.yml file. Like the Server Config, it must be a .yml file in YAML format.
 
-##### `user`
-User for which the sending application must authenticate with.
-* Default: `puppet`
-
-##### `pass`
-Password for which the sending application must authenticate with.
-* Default: `puppet`
+##### Options
 
 ##### `protected`
 Whether or not to require authentication when sending to puppet_webhook.
 * Valid options: [ `true`, `false` ]
-* Default: `true`
+* Default: `false`
+
+##### `user`
+User for which the sending application must authenticate with. Required if `protected` is true.
+
+##### `pass`
+Password for which the sending application must authenticate with. Require if `protected` is true.
 
 ##### client_cfg
 Mcollective client configuration file.
@@ -169,27 +157,19 @@ Whether or not to execute MCollective via Ruby Client Library or not. REQUIRES M
 * Valid options: [ `true`, `false` ]
 * Default: `false`
 
-##### discovery_timeout
-MCollective Ruby discovery timeout. REQUIRES `use_mco_ruby` TO BE `true`.
-* Default: `'10'`
-
 ##### use_mcollective
 Whether or not to use MCollective CLI command. REQUIRES MCOLLECTIVE AND MCOLLECTIVE R10K.
 * Valid options: [ `true`, `false` ]
 * Default: `false`
 
+##### discovery_timeout
+MCollective Ruby discovery timeout. REQUIRES `use_mco_ruby` TO BE `true`.
+* Default: `'10'`
+
 ##### slack_webhook
 Whether or not to use Slack Notifications.
 * Valid options: [ `true`, `false` ]
 * Default: `false`
-
-##### slack_channel
-Slack channel to notify.
-* Default: `'#default'`
-
-##### slack_user
-Slack user to notify as.
-* Default: `'r10k'`
 
 ##### slack_proxy_url
 The proxy URL for Slack if used.
@@ -207,7 +187,7 @@ An Array of environments for r10k to ignore during deployment.
 ##### prefix
 r10k Environment Prefix to use. When set to `repo`, `user`, or `command`, the prefix will be generated from the repo_name, repo_user, or `prefix_command`. Otherwise it will set the prefix to the passed string. `false` disables prefix.
 * Valid Options: [ `repo`, `user`, `command`, `<String_value>`, `false` ]
-* Default: `false`
+* Default: `nil`
 
 ##### prefix_command
 Command to execute that will generate an r10k environment prefix.
@@ -230,3 +210,17 @@ Used to verify the signature on a repo. Currently only supported for Github repo
 ##### repository_events
 Array of webhook events to ignore.
 * Default: `nil`
+
+## Getting Help
+
+* IRC: VoxPupuli has a dedicated channel, `#voxpupuli`, on Freenode where `puppet_webhook` questions can be directed.
+* Mailing Lists: [voxpupuli](https://groups.io/g/voxpupuli)
+* Slack: VoxPupuli has a dedicated Slack Channel, `#voxpupuli`, on  the [Puppet Community](https://slack.puppet.com/) Slack.
+
+## Contributors
+
+A big thank you to all our [Contributor](https://github.com/voxpupuli/puppet_webhook/graphs/contributors)
+
+## License
+
+See LICENSE
