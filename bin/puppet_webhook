@@ -56,7 +56,7 @@ optparse = OptionParser.new do |opts| # rubocop:disable Metrics/BlockLength
   end
 
   opts.on('-c FILE', '--configfile FILE', 'Specifies a configuration file to use. Not functional yet.') do |arg|
-    options[:config_file] = arg
+    @server_config = arg
   end
 
   opts.separator('')
@@ -71,7 +71,21 @@ end
 
 optparse.parse!
 
-# config_file(File.join(__dir__, '..', 'config', 'server.yml'), '/etc/puppet_webhook/server.yml', options[:config_file])
+if @server_config
+  config_file(@server_config)
+  if settings.respond_to? :server_type=
+    options[:server_type] = WEBrick::Daemon if settings.server_type == 'daemon'
+  end
+  options[:host] = settings.host if settings.respond_to? :host=
+  options[:port] = settings.port if settings.respond_to? :port=
+  options[:pidfile] = settings.pidfile if settings.respond_to? :pidfile=
+  options[:logfile] = settings.logfile if settings.respond_to? :logfile=
+  options[:loglevel] = settings.loglevel if settings.respond_to? :loglevel=
+  ssl_opts[:enable_ssl] = settings.enable_ssl if settings.respond_to? :enable_ssl=
+  ssl_opts[:ssl_verify] = settings.ssl_verify if settings.respond_to? :ssl_verify=
+  ssl_opts[:ssl_cert] = settings.ssl_cert if settings.respond_to? :ssl_cert=
+  ssl_opts[:ssl_key] = settings.enable_ssl if settings.respond_to? :ssl_key=
+end
 
 LOGGER = WEBrick::Log.new(options[:logfile], options[:loglevel])
 

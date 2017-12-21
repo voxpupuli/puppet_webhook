@@ -15,11 +15,6 @@
 puppet_webhook is a Sinatra-based application receiving REST-based calls to trigger Puppet and r10k-related tasks such as:
 
 * Webhooks from Source Code systems to trigger r10k environment and module deploys
-* REST calls from systems to trigger Puppet Decommissions such as:
-    * `puppet node clean`
-    * `puppet cert clean`
-    * `puppet cert revoke`
-    * etc.
 * Send notifications via Slack
 
 ## Prerequisites
@@ -42,12 +37,6 @@ NOTE: RPM, DEB, and Arch packages are planned for future releases.
 
 ### Running puppet_webhook
 
-Once installed, you can run the application by simply executing the `puppet_webhook` binary.
-
-This binary will default to using the bundled configuration files and run in a non-daemon mode. This mode is useful for debugging purposes, but it probably not ideal for production use.
-You can also set the `server_type` option in `/etc/puppet_webhook/server.yml` to `daemon` to run the application in the background. By default the application will log to `/var/log/puppet_webhook/access.log`.
-
-NOTE: During the Prerelease stage, the `/etc/puppet_webhook` and `/var/log/puppet_webhook` directories need to be manually created. This will be fixed in for General Availability.
 
 ### Configuring puppet_webhook
 
