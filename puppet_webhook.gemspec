@@ -1,5 +1,4 @@
-# rubocop:disable Metrics/BlockLength
-Gem::Specification.new do |spec|
+Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.name = 'puppet_webhook'
   spec.summary = 'Sinatra Webhook Server for Puppet/R10K'
   spec.version = '0.1.0'

@@ -1,9 +1,10 @@
 require 'open3'
 require 'slack-notifier'
 require 'mcollective'
-include MCollective::RPC
 
 module Tasks # rubocop:disable Style/Documentation
+  include MCollective::RPC
+
   def ignore_env?(env)
     list = settings.ignore_environments
     return false if list.nil? || list.empty?
