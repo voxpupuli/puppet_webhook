@@ -37,6 +37,20 @@ NOTE: RPM, DEB, and Arch packages are planned for future releases.
 
 ### Running puppet_webhook
 
+#### Quick Start
+Simply run `# puppet_webhook` after installation to start puppet_webhook in non-daemon mode on your system. This is great for testing the server out.
+
+#### CLI Tool
+The `puppet_webhook` CLI command has several options you can pass it as well.
+
+To see these options run `# puppet_webook -h` in your terminal to see all the options.
+
+#### Start using Rack-based server software
+A `config.ru` file is also packaged with the application to provide users with the ability to start the app using their own rack-based server such as
+unicorn or puma. It will use the defaults passed to it by said server.
+
+#### Service Start
+Once the native packages are built, they will include default systemd and/or sysvinit service files that you can use to start puppet_webhook as well.
 
 ### Configuring puppet_webhook
 
@@ -47,6 +61,23 @@ There are default configuration files included in the application's config direc
 Any configuration option is placed in `/etc/puppet_webhook/server.yml` or `/etc/puppet_webhook/app.yml` will override the default config defined in `APPDIR/config/server.yml` and `APPDIR/config/app.yml`.
 
 #### Configuration options
+
+#### Command-Line Options
+
+* `-h, --help`: Display the default help output.
+* `-d, --debug`: Set logging to debug mode.
+* `-l [LOGFILE], --logfile [LOGFILE]`: Define a logfile to log to.
+* `-p PORT, --port PORT`: Define port to listen on. Default: `8088`
+* `-D, --daemon`: Run WEBrick in Daemon mode.
+* `--pidfile FILE`: Define the PID File for the application's process. Default: `/var/run/puppet_webhook/webhook.pid`
+* `--ssl`: Enable SSL Support.
+* `--ssl-cert FILE`: Specify the SSL cert to use. Pair with `--ssl-key`. Requires `--ssl` option or `ssl_enable: true` in config file.
+* `--ssl-key FILE`: Specify the SSL Private key to use. Pair with `--ssl-cert`. Requires `--ssl` or `ssl_enable: true` in config file.
+* `-c FILE, --configfile FILE`: Specifies a config file to use. Must be a `.yml` file in YAML format.
+
+
+#### Server Configuration File
+The Server configuration file is a YAML formatted file with file extension `.yml` and
 
 #### server.yml
 

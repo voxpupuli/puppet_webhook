@@ -55,7 +55,7 @@ optparse = OptionParser.new do |opts| # rubocop:disable Metrics/BlockLength
     ssl_opts[:ssl_key] = OpenSSL::PKey::RSA.new(File.open(arg))
   end
 
-  opts.on('-c FILE', '--configfile FILE', 'Specifies a configuration file to use. Not functional yet.') do |arg|
+  opts.on('-c FILE', '--configfile FILE', 'Specifies a configuration file to use.') do |arg|
     @server_config = arg
   end
 
