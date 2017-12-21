@@ -16,3 +16,18 @@ task test_and_report_coverage: [:test] do
   result = ::SimpleCov::ResultMerger.merged_result
   Codacy::Formatter.new.format result
 end
+
+begin
+  require 'github_changelog_generator/task'
+  GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+    version = Gem::Specification.load('puppet_webhook.gemspec').version
+    puts version
+    config.future_release = "v#{version}" if version =~ /^\d+\.\d+.\d+$/
+    config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\nEach new release typically also includes the latest modulesync defaults.\nThese should not affect the functionality of the module."
+    config.exclude_labels = %w{duplicate question invalid wontfix wont-fix modulesync skip-changelog}
+    config.user = 'voxpupuli'
+    config.project = (Gem::Specification.load('puppet_webhook.gemspec')).name
+  end
+rescue LoadError
+end
+# vim: syntax=ruby
