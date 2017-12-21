@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v1.0.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.0.0) (2017-12-21)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v0.1.0...v1.0.0)
+
+**Implemented enhancements:**
+
+- \(\#puppethack\) Add cli binary [\#40](https://github.com/voxpupuli/puppet_webhook/pull/40) ([dhollinger](https://github.com/dhollinger))
+
+**Closed issues:**
+
+- Move all routes into a routes/ directory [\#26](https://github.com/voxpupuli/puppet_webhook/issues/26)
+
+**Merged pull requests:**
+
+- Update config options and docs [\#41](https://github.com/voxpupuli/puppet_webhook/pull/41) ([dhollinger](https://github.com/dhollinger))
+- Fix payload gentypes [\#39](https://github.com/voxpupuli/puppet_webhook/pull/39) ([dhollinger](https://github.com/dhollinger))
+- Add simple config.ru file [\#38](https://github.com/voxpupuli/puppet_webhook/pull/38) ([dhollinger](https://github.com/dhollinger))
+- Switch to using rack-bodyparser [\#36](https://github.com/voxpupuli/puppet_webhook/pull/36) ([alexjfisher](https://github.com/alexjfisher))
+- Move routes into a routes directory [\#35](https://github.com/voxpupuli/puppet_webhook/pull/35) ([dhollinger](https://github.com/dhollinger))
+- Fix generate\_types typo [\#34](https://github.com/voxpupuli/puppet_webhook/pull/34) ([alexjfisher](https://github.com/alexjfisher))
+- Fix Code Climate badges [\#33](https://github.com/voxpupuli/puppet_webhook/pull/33) ([alexjfisher](https://github.com/alexjfisher))
+- Add reporting to CodeClimate and associated badges [\#32](https://github.com/voxpupuli/puppet_webhook/pull/32) ([alexjfisher](https://github.com/alexjfisher))
+- Report coverage to Codacy and add badge [\#31](https://github.com/voxpupuli/puppet_webhook/pull/31) ([alexjfisher](https://github.com/alexjfisher))
+
 ## [v0.1.0](https://github.com/voxpupuli/puppet_webhook/tree/v0.1.0) (2017-11-17)
 **Implemented enhancements:**
 
