@@ -1,7 +1,10 @@
-# Change Log
+# Changelog
 
-## [Unreleased](https://github.com/voxpupuli/puppet_webhook/tree/HEAD)
+All notable changes to this project will be documented in this file.
+Each new release typically also includes the latest modulesync defaults.
+These should not affect the functionality of the module.
 
+## [v0.1.0](https://github.com/voxpupuli/puppet_webhook/tree/v0.1.0) (2017-11-17)
 **Implemented enhancements:**
 
 - Cleanup config loader [\#2](https://github.com/voxpupuli/puppet_webhook/issues/2)
@@ -13,6 +16,7 @@
 
 **Merged pull requests:**
 
+- Development release 0.1.0 [\#24](https://github.com/voxpupuli/puppet_webhook/pull/24) ([dhollinger](https://github.com/dhollinger))
 - Add rubygems deploy to travis [\#23](https://github.com/voxpupuli/puppet_webhook/pull/23) ([dhollinger](https://github.com/dhollinger))
 - Fix TFS checks and add more fixtures/tests [\#22](https://github.com/voxpupuli/puppet_webhook/pull/22) ([dhollinger](https://github.com/dhollinger))
 - Fix README badges after project rename [\#21](https://github.com/voxpupuli/puppet_webhook/pull/21) ([dhollinger](https://github.com/dhollinger))
