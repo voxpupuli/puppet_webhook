@@ -20,12 +20,12 @@ end
 begin
   require 'github_changelog_generator/task'
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
-    version = Gem::Specification.load('puppet_webhook.gemspec').version
+    version = Gem::Specification.load('puppet_webhook.gemspec').version.to_s
     config.future_release = "v#{version}" if version =~ /^\d+\.\d+.\d+$/
     config.header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\nEach new release typically also includes the latest modulesync defaults.\nThese should not affect the functionality of the module."
     config.exclude_labels = %w{duplicate question invalid wontfix wont-fix modulesync skip-changelog}
     config.user = 'voxpupuli'
-    config.project = (Gem::Specification.load('puppet_webhook.gemspec')).name
+    config.project = (Gem::Specification.load('puppet_webhook.gemspec')).name.to_s
   end
 rescue LoadError
 end
