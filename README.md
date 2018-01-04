@@ -90,7 +90,7 @@ When using the default SystemD unit file or SysVInit service file, the server co
 
 ##### Options
 
-#####`server_type`
+##### `server_type`
 
 Determines if the Webrick server should run in Simple or Daemon mode.     
 * Valid options: [ `simple`, `daemon` ].      
