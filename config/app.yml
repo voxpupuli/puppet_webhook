@@ -4,7 +4,7 @@ user: puppet
 pass: puppet
 
 # Mcollective
-client_cfg: "/var/lib/peadmin/.mcollective"
+client_cfg: "/etc/puppetlabs/mcollective/server.cfg"
 client_timeout: "120"
 use_mco_ruby: false
 use_mcollective: false
