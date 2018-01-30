@@ -21,6 +21,5 @@ class PuppetWebhook
       client.timeout = timeouts[:timeout] || '120'
       client.send(@command, @args)
     end
-
   end
 end
