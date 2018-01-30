@@ -153,13 +153,4 @@ module Tasks # rubocop:disable Style/Documentation
       throw(:halt, [401, "Not authorized\n"])
     end
   end
-
-  def mco(branch)
-    options = MCollective::Util.default_options
-    options[:config] = settings.client_cfg
-    client = rpcclient('r10k', exit_on_failure: false, options: options)
-    client.discovery_timeout = settings.discovery_timeout
-    client.timeout           = settings.client_timeout
-    client.send('deploy', environment: branch)
-  end
 end
