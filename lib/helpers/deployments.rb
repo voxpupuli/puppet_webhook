@@ -2,6 +2,8 @@ require 'plugins/mcollective'
 
 module Deployments # rubocop:disable Style/Documentation
   def deploy(branch, deleted)
+    # Currently requires puppet_webhook to be run as a non-root
+    # user with access to running the MCollective client.
     if settings.use_mcollective
       result = PuppetWebhook::Mcollective.new('r10k',
                                               'deploy',
@@ -34,12 +36,24 @@ module Deployments # rubocop:disable Style/Documentation
   end
 
   def deploy_module(module_name)
-    command = if settings.use_mcollective
-                "#{settings.command_prefix} mco r10k deploy_module #{module_name} #{settings.mco_arguments}"
-              else
-                "#{settings.command_prefix} r10k deploy module #{module_name}"
-              end
-    message = run_command(command)
+    # Currently requires puppet_webhook to be run as a non-root
+    # user with access to running the MCollective client.
+    if settings.use_mcollective
+      result = PuppetWebhook::Mcollective.new('r10k',
+                                              'deploy',
+                                              {
+                                                  dtimeoute: settings.discovery_timeout,
+                                                  timeout: settings.client_timeout
+                                              },
+                                              settings.client_cfg,
+                                              module: module_name).run.first
+      raise result.results[:statusmsg] unless result.results[:statuscode].zero?
+
+      message = result.results[:statusmsg]
+    else
+      command = "#{settings.command_prefix} r10k deploy module #{module_name}"
+      message = run_command(command)
+    end
     LOGGER.info("message: #{message} module_name: #{module_name}")
     status_message = { status: :success, message: message.to_s, module_name: module_name, status_code: 200 }
     notify_slack(status_message) if slack?
