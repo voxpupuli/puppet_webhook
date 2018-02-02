@@ -2,26 +2,38 @@ require 'mcollective'
 
 class PuppetWebhook
   class Mcollective
+    attr_writer :agent, :command
     include MCollective::RPC
 
-    def initialize(agent, command, timeouts = {}, options = {}, **args)
+    def initialize(agent, command, timeouts = nil, options = nil, nodes = [], **args)
       @agent = agent
       @command = command
       @timeout = timeouts[:timeout] || '120'
       @dtimeout = timeouts[:dtimeout] || '10'
-      @options = MCollective::Util.default_options
-      @options[:config] = options if options
+      @options = options
+      @nodes = nodes
       @args = args
     end
 
-    # TODO: Fork process as MCO user or add docs to add webhook user to MCollective.
     def run
-      LOGGER.info(@args)
-      create.send(@command, @args)
+      LOGGER.info("Starting request for #{@agent}##{@command}")
+
+      begin
+        client.send(@command, @args) do |result|
+          result
+        end
+      rescue => e
+        LOGGER.error("Error: #{e}")
+      end
     end
 
-    def create
-      rpcclient(@agent, exit_on_failure: false, timeout: @timeout, discovery_timeout: @dtimeout, options: @options)
+    def client
+      client = RPC::Client.new(@agent, config_file: Util.config_file_for_user, options: Util.default_options)
+      client.config = @options if @options
+      client.timeout = @timeout if @timeout
+      client.discovery_timeout = @dtimeout if @dtimeout
+      client.progress = false
+      client
     end
   end
 end

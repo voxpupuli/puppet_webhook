@@ -1,18 +1,20 @@
-# require 'spec_helper'
-#
-# describe PuppetWebhook::Mcollective do
-#   describe '#run' do
-#     let(:create) { }
-#     let(:mco) do
-#       PuppetWebhook::Mcollective.new do |opts|
-#         opts.agent = 'r10k',
-#         opts.command = 'deploy',
-#         opts.args = { environment: 'production' },
-#       end
-#     end
-#   end
-#
-#   it 'returns an mcollective run' do
-#     allow(run).to receive(:rpc) { }
-#   end
-# end
+require 'spec_helper'
+require 'mcollective'
+
+describe PuppetWebhook::Mcollective do
+  describe '#run' do
+    it 'should run correctly' do
+      result_data = {
+        :agent => 'puppet',
+        :action => 'disable',
+        :sender => 'example.net',
+        :statuscode => 0,
+        :statusmsg => 'OK',
+        :data => {
+            :status => "Succesfully locked the Puppet agent: Disabled via MCollective by choria=vp.mcollective at 2017-12-25 07:59",
+            :enabled => false
+        }
+      }
+    end
+  end
+end
