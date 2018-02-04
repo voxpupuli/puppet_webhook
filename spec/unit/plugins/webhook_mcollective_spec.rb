@@ -8,14 +8,14 @@ describe PuppetWebhook::Mcollective do
     end
     it 'should run correctly' do
       result_data = {
-        :agent => 'puppet',
-        :action => 'disable',
-        :sender => 'example.net',
-        :statuscode => 0,
-        :statusmsg => 'OK',
-        :data => {
-            :status => "Succesfully locked the Puppet agent: Disabled via MCollective by choria=vp.mcollective at 2017-12-25 07:59",
-            :enabled => false
+        agent: 'puppet',
+        action: 'disable',
+        sender: 'example.net',
+        statuscode: 0,
+        statusmsg: 'OK',
+        data: {
+          status: 'Succesfully locked the Puppet agent: Disabled via MCollective by choria=vp.mcollective at 2017-12-25 07:59',
+          enabled: false
         }
       }
 
