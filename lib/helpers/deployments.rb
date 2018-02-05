@@ -6,13 +6,13 @@ module Deployments # rubocop:disable Style/Documentation
     # user with access to running the MCollective client.
     if settings.use_mcollective
       results = PuppetWebhook::Mcollective.new('r10k',
-                                     'deploy',
-                                     {
-                                         dtimeout: settings.discovery_timeout,
-                                         timeout: settings.client_timeout
-                                     },
-                                     settings.client_cfg,
-                                     environment: branch).run
+                                               'deploy',
+                                               {
+                                                 dtimeout: settings.discovery_timeout,
+                                                 timeout: settings.client_timeout
+                                               },
+                                               settings.client_cfg,
+                                               environment: branch).run
       results.each do |result|
         raise result.results[:statusmsg] unless result.results[:statuscode].zero?
       end
@@ -43,13 +43,13 @@ module Deployments # rubocop:disable Style/Documentation
     # user with access to running the MCollective client.
     if settings.use_mcollective
       results = PuppetWebhook::Mcollective.new('r10k',
-                                              'deploy',
-                                              {
-                                                dtimeout: settings.discovery_timeout,
-                                                timeout: settings.client_timeout
-                                              },
-                                              settings.client_cfg,
-                                              module: module_name).run
+                                               'deploy',
+                                               {
+                                                 dtimeout: settings.discovery_timeout,
+                                                 timeout: settings.client_timeout
+                                               },
+                                               settings.client_cfg,
+                                               module: module_name).run
       results.each do |result|
         raise result.results[:statusmsg] unless result.results[:statuscode].zero?
       end

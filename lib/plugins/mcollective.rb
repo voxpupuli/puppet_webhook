@@ -29,7 +29,7 @@ class PuppetWebhook
     end
 
     def client
-      client = MCollective::RPC::Client.new(@agent, config_file: MCollective::Util.config_file_for_user, options: MCollective::Util.default_options)
+      client = MCollective::RPC::Client.new(@agent, config_file: MCollective::Util.config_file_for_user, options: MCollective::Util.default_options) # rubocop:disable Metrics/LineLength
       client.config = @options if @options
       client.timeout = @timeout if @timeout
       client.discovery_timeout = @dtimeout if @dtimeout
