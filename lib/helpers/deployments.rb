@@ -14,6 +14,7 @@ module Deployments # rubocop:disable Style/Documentation
                                               settings.client_cfg,
                                               environment: branch).run.first
       raise result.results[:statusmsg] unless result.results[:statuscode].zero?
+      raise result.stats[:noresponsefrom] unless result.stats[:noresponsefrom].length.zero?
 
       message = result.results[:statusmsg]
     else

@@ -3,7 +3,7 @@ require 'mcollective'
 class PuppetWebhook
   # Creates an Mcollective Agent object for running MCO agents
   class Mcollective
-    attr_writer :agent, :command
+    attr_reader :results, :stats
     include MCollective::RPC
 
     def initialize(agent, command, timeouts = nil, options = nil, nodes = [], **args) # rubocop:disable Metrics/ParameterLists
@@ -21,11 +21,13 @@ class PuppetWebhook
 
       begin
         client.send(@command, @args) do |result|
-          result
+          @results = result
         end
       rescue StandardError => e
         LOGGER.error("Error: #{e}")
       end
+
+      @stats = client.stats
     end
 
     def client
