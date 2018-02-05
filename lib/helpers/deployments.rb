@@ -8,7 +8,7 @@ module Deployments # rubocop:disable Style/Documentation
       result = PuppetWebhook::Mcollective.new('r10k',
                                               'deploy',
                                               {
-                                                dtimeoute: settings.discovery_timeout,
+                                                dtimeout: settings.discovery_timeout,
                                                 timeout: settings.client_timeout
                                               },
                                               settings.client_cfg,
@@ -42,7 +42,7 @@ module Deployments # rubocop:disable Style/Documentation
       result = PuppetWebhook::Mcollective.new('r10k',
                                               'deploy',
                                               {
-                                                dtimeoute: settings.discovery_timeout,
+                                                dtimeout: settings.discovery_timeout,
                                                 timeout: settings.client_timeout
                                               },
                                               settings.client_cfg,
