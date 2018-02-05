@@ -5,16 +5,18 @@ module Deployments # rubocop:disable Style/Documentation
     # Currently requires puppet_webhook to be run as a non-root
     # user with access to running the MCollective client.
     if settings.use_mcollective
-      result = PuppetWebhook::Mcollective.new('r10k',
-                                              'deploy',
-                                              {
-                                                dtimeout: settings.discovery_timeout,
-                                                timeout: settings.client_timeout
-                                              },
-                                              settings.client_cfg,
-                                              environment: branch).run.first
-      raise result.results[:statusmsg] unless result.results[:statuscode].zero?
-      raise result.stats[:noresponsefrom] unless result.stats[:noresponsefrom].length.zero?
+      results = PuppetWebhook::Mcollective.new('r10k',
+                                     'deploy',
+                                     {
+                                         dtimeout: settings.discovery_timeout,
+                                         timeout: settings.client_timeout
+                                     },
+                                     settings.client_cfg,
+                                     environment: branch).run
+      results.each do |result|
+        raise result.results[:statusmsg] unless result.results[:statuscode].zero?
+      end
+      raise results.stats[:noresponsefrom] unless result.stats[:noresponsefrom].length.zero?
 
       message = result.results[:statusmsg]
     else
@@ -40,15 +42,18 @@ module Deployments # rubocop:disable Style/Documentation
     # Currently requires puppet_webhook to be run as a non-root
     # user with access to running the MCollective client.
     if settings.use_mcollective
-      result = PuppetWebhook::Mcollective.new('r10k',
+      results = PuppetWebhook::Mcollective.new('r10k',
                                               'deploy',
                                               {
                                                 dtimeout: settings.discovery_timeout,
                                                 timeout: settings.client_timeout
                                               },
                                               settings.client_cfg,
-                                              module: module_name).run.first
-      raise result.results[:statusmsg] unless result.results[:statuscode].zero?
+                                              module: module_name).run
+      results.each do |result|
+        raise result.results[:statusmsg] unless result.results[:statuscode].zero?
+      end
+      raise results.stats[:noresponsefrom] unless results.stats[:noresponsefrom].length.zero?
 
       message = result.results[:statusmsg]
     else

@@ -20,9 +20,7 @@ class PuppetWebhook
       LOGGER.info("Starting request for #{@agent}##{@command}")
 
       begin
-        client.send(@command, @args) do |result|
-          @results = result
-        end
+        @results = client.send(@command, @args)
       rescue StandardError => e
         LOGGER.error("Error: #{e}")
       end
@@ -31,7 +29,7 @@ class PuppetWebhook
     end
 
     def client
-      client = RPC::Client.new(@agent, config_file: Util.config_file_for_user, options: Util.default_options)
+      client = MCollective::RPC::Client.new(@agent, config_file: MCollective::Util.config_file_for_user, options: MCollective::Util.default_options)
       client.config = @options if @options
       client.timeout = @timeout if @timeout
       client.discovery_timeout = @dtimeout if @dtimeout
