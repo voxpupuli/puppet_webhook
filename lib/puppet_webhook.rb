@@ -24,7 +24,7 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
 
   # Custom Settings
   set :protected, false unless settings.respond_to? :protected=
-  set :client_cfg, '/var/lib/peadmin/.mcollective' unless settings.respond_to? :client_cfg=
+  set :client_cfg, '/etc/puppetlabs/mcollective/client.cfg' unless settings.respond_to? :client_cfg=
   set :client_timeout, '120' unless settings.respond_to? :client_timeout=
   set :use_mco_ruby, false unless settings.respond_to? :use_mco_ruby=
   set :use_mcollective, false unless settings.respond_to? :use_mcollective=
