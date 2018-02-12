@@ -15,7 +15,7 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   use Rack::BodyParser,
       parsers: {
         'application/json' => Sinatra::Parsers::WebhookJsonParser.new,
-        'application/x-www-form-urlencoded' => Sinatra::Parsers::WebhookWWWFormURLEncodedParser.new,
+        'application/x-www-form-urlencoded' => Sinatra::Parsers::WebhookWWWFormURLEncodedParser.new
       },
       handlers:  {
         'application/json' => proc { |e, type|

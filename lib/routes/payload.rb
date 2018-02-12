@@ -6,7 +6,6 @@ module Sinatra
     module Payload
       def self.registered(puppet_webhook)
         puppet_webhook.post '/payload' do # rubocop:disable Metrics/BlockLength
-
           LOGGER.info "parsed payload contained: #{payload}"
           protected! if settings.protected
           request.body.rewind # in case someone already read it

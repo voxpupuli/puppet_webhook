@@ -5,7 +5,7 @@ require_relative 'webhook_parser'
 
 module Sinatra
   module Parsers
-    class WebhookWWWFormURLEncodedParser
+    class WebhookWWWFormURLEncodedParser # rubocop:disable Style/Documentation
       include Sinatra::Parsers::WebhookParser
 
       def parse_data(body)
