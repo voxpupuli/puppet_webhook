@@ -3,8 +3,6 @@ require 'json'
 
 require_relative 'webhook_parser'
 
-require 'byebug'
-
 module Sinatra
   module Parsers
     class WebhookWWWFormURLEncodedParser

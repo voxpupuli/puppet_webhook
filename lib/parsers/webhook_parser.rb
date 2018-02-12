@@ -1,8 +1,6 @@
 require 'rack/bodyparser'
 require 'json'
 
-require 'byebug'
-
 module Sinatra
   module Parsers
     module WebhookParser # rubocop:disable Style/Documentation
