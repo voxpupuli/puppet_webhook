@@ -29,7 +29,7 @@ module Deployments # rubocop:disable Style/Documentation
       generate_types(branch) if types?
     end
     notify_slack(status_message) if slack?
-    status_message.to_json
+    [status_message[:status_code], status_message.to_json]
   rescue StandardError => e
     status_message = { status: :fail, message: e.message, trace: e.backtrace, branch: branch, status_code: 500 }
     LOGGER.error("message: #{e.message} trace: #{e.backtrace}")

@@ -3,6 +3,7 @@ require 'sinatra/config_file'
 require 'json'
 require 'cgi'
 require 'parsers/webhook_json_parser'
+require 'parsers/webhook_www_form_url_encoded_parser'
 
 # Routes
 require_relative 'routes/default'
@@ -12,8 +13,15 @@ require_relative 'routes/payload'
 class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   set :root, File.dirname(__FILE__)
   use Rack::BodyParser,
-      parsers: { 'application/json' => Sinatra::Parsers::WebhookJsonParser.new },
-      handlers: { 'application/json' => proc { |e, type| [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]] } }
+      parsers: {
+        'application/json' => Sinatra::Parsers::WebhookJsonParser.new,
+        'application/x-www-form-urlencoded' => Sinatra::Parsers::WebhookWWWFormURLEncodedParser.new
+      },
+      handlers:  {
+        'application/json' => proc { |e, type|
+          [400, { 'Content-Type' => type }, [{ error: e.to_s }.to_json]]
+        }
+      }
   register Sinatra::ConfigFile
 
   config_file(File.join(__dir__, '..', 'config', 'app.yml'), '/etc/puppet_webhook/app.yml')

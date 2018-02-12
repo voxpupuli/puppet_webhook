@@ -94,7 +94,6 @@ webrick_opts = {
   Port: options[:port],
   DocumentRoot: approot,
   ServerType: options[:server_type],
-  ServerSoftware: PuppetWebhook,
   StartCallBack: proc { File.open(options[:pidfile], 'w') { |f| f.write Process.pid } }
 }
 
