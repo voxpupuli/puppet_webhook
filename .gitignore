@@ -5,3 +5,4 @@ logs/*.log
 .idea/
 coverage
 Gemfile.lock
+.byebug_history
