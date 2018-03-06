@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v1.1.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.1.0) (2018-03-05)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.0.0...v1.1.0)
+
+**Implemented enhancements:**
+
+- Allow github to send form-urlencoded payloads and bug fix in webrick\_opts [\#45](https://github.com/voxpupuli/puppet_webhook/pull/45) ([williamberman](https://github.com/williamberman))
+
+**Closed issues:**
+
+- Refactor binary to pass configuration values from file or CLI [\#27](https://github.com/voxpupuli/puppet_webhook/issues/27)
+
+**Merged pull requests:**
+
+- Replace all MCollective agent calls with the agent lib. [\#44](https://github.com/voxpupuli/puppet_webhook/pull/44) ([dhollinger](https://github.com/dhollinger))
+
 ## [v1.0.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.0.0) (2017-12-21)
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v0.1.0...v1.0.0)
 
@@ -17,6 +32,7 @@ These should not affect the functionality of the module.
 
 **Merged pull requests:**
 
+- Release 1.0.0 [\#42](https://github.com/voxpupuli/puppet_webhook/pull/42) ([dhollinger](https://github.com/dhollinger))
 - Update config options and docs [\#41](https://github.com/voxpupuli/puppet_webhook/pull/41) ([dhollinger](https://github.com/dhollinger))
 - Fix payload gentypes [\#39](https://github.com/voxpupuli/puppet_webhook/pull/39) ([dhollinger](https://github.com/dhollinger))
 - Add simple config.ru file [\#38](https://github.com/voxpupuli/puppet_webhook/pull/38) ([dhollinger](https://github.com/dhollinger))

@@ -17,13 +17,13 @@ end
 
 ENV['RACK_ENV'] = 'test'
 
-require File.expand_path '../../lib/puppet_webhook.rb', __FILE__
+require File.expand_path '../lib/puppet_webhook.rb', __dir__
 
 module Webhook
   module Test
     module Methods
       def read_fixture(name)
-        File.read(File.join(File.expand_path('..', __FILE__), 'fixtures', name))
+        File.read(File.join(File.expand_path(__dir__), 'fixtures', name))
       end
 
       def read_json_fixture(name)
