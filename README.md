@@ -192,9 +192,24 @@ MCollective Ruby discovery timeout. REQUIRES `use_mco_ruby` TO BE `true`.
 
 ##### slack_webhook
 
-Whether or not to use Slack Notifications.
-* Valid options: [ `true`, `false` ]
+URL of your Slack Webhook receiver, if you wish not to use a Slack Webhook, then simply leave the option on `false`, otherwise use the full Wwebhook URL for your community as per https://api.slack.com/incoming-webhooks.
+* Valid options: [ `https://hooks.slack.com/services/<generated_hash>`, `false` ]
 * Default: `false`
+
+##### slack_channel
+
+Name of the Slack channel to post to. Ignored if `slack_webhook` is disabled.
+Default: `#general`
+
+##### slack_user
+
+Name of the Slack user to post as. Ignored if `slack_webhook` is disabled.
+Default: `puppet_webhook`
+
+##### slack_emoji
+
+Icon emoji for the Webhook to use when posting. Ignored if `slack_webhook` is disabled.
+Default: `:ocean:`
 
 ##### slack_proxy_url
 
