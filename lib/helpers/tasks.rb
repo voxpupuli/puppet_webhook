@@ -48,9 +48,7 @@ module Tasks # rubocop:disable Style/Documentation
 
   def run_command(command)
     message = "forked: #{command}"
-    Process.detach(fork { exec "#{command} &" })
-    exit_status = 0
-    raise "#{stdout}\n#{stderr}" if exit_status != 0
+    exec "#{command} &"
     message
   end
 
