@@ -87,9 +87,9 @@ module Tasks # rubocop:disable Style/Documentation
     end
 
     notifier = Slack::Notifier.new settings.slack_webhook do
-      defaults channel: '#general',
-               username: 'puppet_webhook',
-               icon_emoji: ':ocean:',
+      defaults channel: settings.slack_channel,
+               username: settings.slack_user,
+               icon_emoji: settings.slack_emoji,
                http_options: http_options
     end
 

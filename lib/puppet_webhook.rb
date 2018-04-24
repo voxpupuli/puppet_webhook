@@ -38,6 +38,9 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   set :use_mcollective, false unless settings.respond_to? :use_mcollective=
   set :discovery_timeout, false unless settings.respond_to? :discovery_timeout=
   set :slack_webhook, false unless settings.respond_to? :slack_webhook=
+  set :slack_channel, '#general' unless settings.respond_to? :slack_channel=
+  set :slack_user, 'puppet_webhook' unless settings.respond_to? :slack_user=
+  set :slack_emoji, ':ocean:' unless settings.respond_to? :slack_emoji=
   set :slack_proxy_url, nil unless settings.respond_to? :slack_proxy_url=
   set :default_branch, 'production' unless settings.respond_to? :default_branch=
   set :ignore_environments, [] unless settings.respond_to? :ignore_environments=
