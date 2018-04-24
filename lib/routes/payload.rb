@@ -61,7 +61,7 @@ module Sinatra
             return 200
           else
             LOGGER.info("Deploying environment #{env}")
-            deploy(env, deleted)
+            Process.detach(fork { deploy(env, deleted) })
           end
         end
       end

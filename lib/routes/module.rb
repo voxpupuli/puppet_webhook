@@ -20,7 +20,7 @@ module Sinatra
 
           module_name = sanitize_input(module_name)
           LOGGER.info("Deploying module #{module_name}")
-          deploy_module(module_name)
+          Process.detach(fork { deploy_module(module_name) })
         end
       end
     end
