@@ -47,14 +47,9 @@ module Tasks # rubocop:disable Style/Documentation
   end
 
   def run_command(command)
-    if Open3.respond_to?('capture3')
-      stdout, stderr, exit_status = Open3.capture3(command)
-      message = "triggered: #{command}\n#{stdout}\n#{stderr}"
-    else
-      message = "forked: #{command}"
-      Process.detach(fork { exec "#{command} &" })
-      exit_status = 0
-    end
+    message = "forked: #{command}"
+    Process.detach(fork { exec "#{command} &" })
+    exit_status = 0
     raise "#{stdout}\n#{stderr}" if exit_status != 0
     message
   end
