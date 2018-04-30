@@ -1,20 +1,26 @@
-require 'chatops/slack'
+require 'plugins/chatops/slack'
 
 class PuppetWebhook
+  # Chatops object for sending webhook notifications to chatops tools
   class Chatops
-    def initialize(message, service, url, channel, user, **args)
-      @message = message
+    def initialize(service, url, channel, user, options = {})
       @service = service
       @url = url
       @channel = channel
       @user = user
-      @args = args
+      @args = options
     end
 
-    def notify
+    def notify(message)
       case @service
       when 'slack'
-        Chatops::Slack.new(@channel, @url, @user, @args[:icon_emoji], @args[:http_options]).notify
+        LOGGER.info("Sending Slack webhook message to #{@url}")
+        Chatops::Slack.new(@channel,
+                           @url,
+                           @user,
+                           message,
+                           http_options: @args[:http_options] || {},
+                           icon_emoji: @args[:icon_emoji]).notify
       else
         LOGGER.error("Service #{@service} is not currently supported")
       end

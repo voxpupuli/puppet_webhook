@@ -48,7 +48,7 @@ module Tasks # rubocop:disable Style/Documentation
 
   def run_command(command)
     message = "forked: #{command}"
-    exec "#{command} &"
+    system "#{command} &"
     message
   end
 

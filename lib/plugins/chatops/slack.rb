@@ -2,18 +2,18 @@ require 'slack-notifier'
 
 class PuppetWebhook
   class Chatops
+    # Sets up Slack object that will send notifications to Slack via a webhook.
     class Slack
-      def initialize(channel, url, user, icon_emoji, message, options = {})
+      def initialize(channel, url, user, message, options = {})
         @channel = channel
         @url = url
         @user = user
-        @icon_emoji = icon_emoji
         @message = message
         @options = options
       end
 
       def notify
-        notifier = Slack::Notifier.new @url, http_options: @options
+        notifier = ::Slack::Notifier.new @url, http_options: @options[:http_options]
 
         target = if @message[:branch]
                    @message[:branch]
@@ -26,29 +26,30 @@ class PuppetWebhook
         notifier.post text: msg[:fallback],
                       channel: @channel,
                       username: @user,
-                      icon_emoji: @icon_emoji,
+                      icon_emoji: @options[:icon_emoji],
                       attachments: [msg]
       end
 
       private
+
       def format_message(target)
         message = {
-            author: 'r10k for Puppet',
-            title: "r10k deployment of Puppet environment #{target}"
+          author: 'r10k for Puppet',
+          title: "r10k deployment of Puppet environment #{target}"
         }
 
-        case status_message[:status_code]
-        when 200
+        case @message[:status_code]
+        when 202
           message.merge!(
-              color: 'good',
-              text: "Successfully deployed #{target}",
-              fallback: "Successfully deployed #{target}"
+            color: 'good',
+            text: "Successfully deployed #{target}",
+            fallback: "Successfully deployed #{target}"
           )
         when 500
           message.merge!(
-              color: 'bad',
-              text: "Failed to deploy #{target}",
-              fallback: "Failed to deploy #{target}"
+            color: 'bad',
+            text: "Failed to deploy #{target}",
+            fallback: "Failed to deploy #{target}"
           )
         end
 
