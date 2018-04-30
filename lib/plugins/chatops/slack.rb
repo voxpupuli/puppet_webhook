@@ -1,0 +1,59 @@
+require 'slack-notifier'
+
+class PuppetWebhook
+  class Chatops
+    class Slack
+      def initialize(channel, url, user, icon_emoji, message, options = {})
+        @channel = channel
+        @url = url
+        @user = user
+        @icon_emoji = icon_emoji
+        @message = message
+        @options = options
+      end
+
+      def notify
+        notifier = Slack::Notifier.new @url, http_options: @options
+
+        target = if @message[:branch]
+                   @message[:branch]
+                 elsif @message[:module]
+                   @message[:module]
+                 end
+
+        msg = format_message(target)
+
+        notifier.post text: msg[:fallback],
+                      channel: @channel,
+                      username: @user,
+                      icon_emoji: @icon_emoji,
+                      attachments: [msg]
+      end
+
+      private
+      def format_message(target)
+        message = {
+            author: 'r10k for Puppet',
+            title: "r10k deployment of Puppet environment #{target}"
+        }
+
+        case status_message[:status_code]
+        when 200
+          message.merge!(
+              color: 'good',
+              text: "Successfully deployed #{target}",
+              fallback: "Successfully deployed #{target}"
+          )
+        when 500
+          message.merge!(
+              color: 'bad',
+              text: "Failed to deploy #{target}",
+              fallback: "Failed to deploy #{target}"
+          )
+        end
+
+        message
+      end
+    end
+  end
+end
