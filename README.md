@@ -91,7 +91,9 @@ chatops: true
 
 ##### Slack Configuration
 
-You can enable Slack notifications for the webhook. You will need a Slack webhook URL and the slack-notifier gem installed.
+You can enable Slack notifications for the webhook. You will need a Slack webhook URL and the `slack-notifier` gem installed.
+
+The `slack-notifier` gem is installed as a dependency to `puppet_webhook`
 
 To get the Slack webhook URL you need to:
 
@@ -104,7 +106,8 @@ Then configure the webhook to add your Slack Webhook URL:
 ``` yaml
 chatops: true
 chatops_service: 'slack' # Required so the app knows that you're sending to Slack.
-chatops_channel: '#channel' # deftaults to #general
+chatops_url: 'http://hooks.slack.com/services/path/to/your/webhook' # mandatory for usage
+chatops_channel: '#channel' # defaults to #general
 chatops_user: 'r10k' # defaults to puppet_webhook
 chatops_options:
   icon_emoji: ':ocean:'
@@ -115,6 +118,37 @@ chatops_options:
 ```
 
 **NOTE: The legacy `slack_webhook`, `slack_user`, `slack_channel`, `slack_emoji`, and `slack_proxy_url` still work, but will be removed in 3.0.0**
+
+##### Rocket.Chat Configuration
+
+You can enable Rocket.Chat notifications for the webhook. You will need a
+Rocket.Chat incoming webhook URL and the `rocket-chat-notifier` gem installed.
+
+The `rocket-chat-notifier` gem is installed as a dependency to `puppet_webhook`
+
+To get the Rocket.Chat incoming webhook URL you need to:
+
+1. Go to your Rocket.Chat and then select `Administration-Integrations`.
+2. Choose `New integration`.
+3. Choose `Incoming WebHook`. In the webhook form configure:
+  * `Enabled`: `True`.
+  * `Name`: A name for your webhook.
+  * `Post to Channel`: The channel to post to by default.
+4. Save changes with `Save Changes` bottom.
+
+Then configure the webhook to add your Rocket.Chat Webhook URL:
+
+``` yaml
+chatops: true
+chatops_service: 'rocketchat' # Required so the app knows that you're sending to Rocket.Chat
+chatops_url: <your incoming webhook URL>  # mandatory for usage
+chatops_channel: '#channel' # defaults to #general
+chatops_user: 'r10k' # defaults to puppet_webhook
+chatops_options:
+  icon_emoji: ':ocean:'
+  http_options: 
+    open_timeout: 10
+```
 
 ### Reference
 
