@@ -66,29 +66,28 @@ module Tasks # rubocop:disable Style/Documentation
   end
 
   def notification(message)
-    if settings.chatops || settings.slack_webhook
-      slack_settings if settings.chatops == false && settings.slack_webhook != false
-      PuppetWebhook::Chatops.new(settings.chatops_service,
-                                 settings.chatops_url,
-                                 settings.chatops_channel,
-                                 settings.chatops_user,
-                                 settings.chatops_options).notify(message)
-    end
+    return unless settings.chatops || settings.slack_webhook
+    slack_settings if settings.chatops == false && settings.slack_webhook != false
+    PuppetWebhook::Chatops.new(settings.chatops_service,
+                               settings.chatops_url,
+                               settings.chatops_channel,
+                               settings.chatops_user,
+                               settings.chatops_options).notify(message)
   end
 
   # Deprecated
   # TODO: Remove in release 3.0.0
   def slack_settings
     settings.chatops_service = 'slack'
-    LOGGER.warn("settings.slack_webhook is deprecated and will be removed in puppet_webhook 3.0.0")
+    LOGGER.warn('settings.slack_webhook is deprecated and will be removed in puppet_webhook 3.0.0')
     settings.chatops_url = settings.slack_webhook
-    LOGGER.warn("settings.slack_user is deprecated and will be removed in puppet_webhook 3.0.0")
+    LOGGER.warn('settings.slack_user is deprecated and will be removed in puppet_webhook 3.0.0')
     settings.chatops_user = settings.slack_user
-    LOGGER.warn("settings.slack_channel is deprecated and will be removed in puppet_webhook 3.0.0")
+    LOGGER.warn('settings.slack_channel is deprecated and will be removed in puppet_webhook 3.0.0')
     settings.chatops_channel = settings.slack_channel
-    LOGGER.warn("settings.slack_emoji is deprecated and will be removed in puppet_webhook 3.0.0")
+    LOGGER.warn('settings.slack_emoji is deprecated and will be removed in puppet_webhook 3.0.0')
     settings.chatops_options[:icon_emoji] = settings.slack_emoji
-    LOGGER.warn("settings.slack_proxy_url is deprecated and will be removed in puppet_webhook 3.0.0")
+    LOGGER.warn('settings.slack_proxy_url is deprecated and will be removed in puppet_webhook 3.0.0')
     settings.chatops_options[:http_options] = if settings.slack_proxy_url
                                                 slack_proxy
                                               else
@@ -101,9 +100,9 @@ module Tasks # rubocop:disable Style/Documentation
   def slack_proxy
     uri = URI(settings.slack_proxy_url)
     http_options = {
-        proxy_address:  uri.hostname,
-        proxy_port:     uri.port,
-        proxy_from_env: false
+      proxy_address:  uri.hostname,
+      proxy_port:     uri.port,
+      proxy_from_env: false
     }
     http_options
   end
