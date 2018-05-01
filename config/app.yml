@@ -10,8 +10,13 @@ use_mco_ruby: false
 use_mcollective: false
 discovery_timeout: '10'
 
-# Slack Notifications
-slack_webhook: false
+# Chatops Notification
+chatops: false
+# Slack Example
+# chatops_service: 'slack'
+# chatops_channel: '#general'
+# chatops_user: 'r10k'
+# chatops_url: 'https://hooks.slack.com/services/<hash>/<hash>/<hash>'
 
 # R10k
 default_branch: production
