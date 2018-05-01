@@ -42,8 +42,8 @@ class PuppetWebhook
         when 202
           message.merge!(
             color: 'good',
-            text: "Successfully deployed #{target}",
-            fallback: "Successfully deployed #{target}"
+            text: "Successfully started deployment of #{target}",
+            fallback: "Successfully started deployment of #{target}"
           )
         when 500
           message.merge!(
