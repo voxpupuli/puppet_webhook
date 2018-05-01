@@ -2,6 +2,7 @@ require 'rocket-chat-notifier'
 
 class PuppetWebhook
   class Chatops
+    # Sets up Rocketchat object that will send notifications to Slack via a webhook.
     class Rocketchat
       def initialize(channel, url, user, message, options = {})
         @channel = channel
@@ -33,8 +34,8 @@ class PuppetWebhook
 
       def format_attachment(target)
         attachment = {
-            author: 'r10k for Puppet',
-            title: "r10k deployment of Puppet environment #{target}",
+          author: 'r10k for Puppet',
+          title: "r10k deployment of Puppet environment #{target}"
         }
 
         case @message[:status_code]
@@ -43,13 +44,13 @@ class PuppetWebhook
             color: 'good',
             text: "Successfully started deployment of #{target}",
             fallback: "Successfully started deployment of #{target}"
-            )
+          )
         when 500
           attachment.merge!(
             color: 'bad',
             text: "Failed to deploy #{target}",
             fallback: "Failed to deploy #{target}"
-            )
+          )
         end
 
         attachment
