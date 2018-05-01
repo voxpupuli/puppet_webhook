@@ -29,25 +29,13 @@ module Deployments # rubocop:disable Style/Documentation
     unless deleted
       generate_types(branch) if types?
     end
-    if settings.chatops?
-      PuppetWebhook::Chatops.new(settings.chatops_service,
-                                 settings.chatops_url,
-                                 settings.chatops_channel,
-                                 settings.chatops_user,
-                                 settings.chatops_options).notify(status_message)
-    end
+    notification(status_message)
     [status_message[:status_code], status_message.to_json]
   rescue StandardError => e
     status_message = { status: :fail, message: e.message, trace: e.backtrace, branch: branch, status_code: 500 }
     LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
     status 500
-    if settings.chatops?
-      PuppetWebhook::Chatops.new(settings.chatops_service,
-                                 settings.chatops_url,
-                                 settings.chatops_channel,
-                                 settings.chatops_user,
-                                 settings.chatops_options).notify(status_message)
-    end
+    notification(status_message)
     status_message.to_json
   end
 
@@ -75,25 +63,13 @@ module Deployments # rubocop:disable Style/Documentation
     end
     LOGGER.info("message: #{message} module_name: #{module_name}")
     status_message = { status: :success, message: message.to_s, module_name: module_name, status_code: 202 }
-    if settings.chatops?
-      PuppetWebhook::Chatops.new(settings.chatops_service,
-                                 settings.chatops_url,
-                                 settings.chatops_channel,
-                                 settings.chatops_user,
-                                 settings.chatops_options).notify(status_message)
-    end
+    notification(status_message)
     status_message.to_json
   rescue StandardError => e
     status_message = { status: :fail, message: e.message, trace: e.backtrace, branch: branch, status_code: 500 }
     LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
     status 500
-    if settings.chatops?
-      PuppetWebhook::Chatops.new(settings.chatops_service,
-                                 settings.chatops_url,
-                                 settings.chatops_channel,
-                                 settings.chatops_user,
-                                 settings.chatops_options).notify(status_message)
-    end
+    notification(status_message)
     status_message.to_json
   end
 end

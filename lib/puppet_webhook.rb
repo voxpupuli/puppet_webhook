@@ -53,6 +53,13 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   set :github_secret, nil unless settings.respond_to? :github_secret=
   set :repository_events, nil unless settings.respond_to? :respository_events=
 
+  # Deprecated Settings
+  set :slack_webhook, false unless settings.respond_to? :slack_webhook=
+  set :slack_channel, '#general' unless settings.respond_to? :slack_channel=
+  set :slack_user, 'puppet_webhook' unless settings.respond_to? :slack_user=
+  set :slack_emoji, ':ocean:' unless settings.respond_to? :slack_emoji=
+  set :slack_proxy_url, nil unless settings.respond_to? :slack_proxy_url=
+
   require 'helpers/init'
 
   register Sinatra::PuppetWebhookRoutes::Default
