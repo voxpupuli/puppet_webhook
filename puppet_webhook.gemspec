@@ -20,6 +20,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.require_paths = %w[lib config]
   spec.add_runtime_dependency 'json'
   spec.add_runtime_dependency 'rack-bodyparser'
+  spec.add_runtime_dependency 'rocket-chat-notifier'
   spec.add_runtime_dependency 'sinatra'
   spec.add_runtime_dependency 'sinatra-contrib'
   spec.add_runtime_dependency 'slack-notifier'
