@@ -1,4 +1,5 @@
 require 'plugins/mcollective'
+require 'plugins/chatops'
 
 module Deployments # rubocop:disable Style/Documentation
   def deploy(branch, deleted)
@@ -23,18 +24,18 @@ module Deployments # rubocop:disable Style/Documentation
       command = "#{settings.command_prefix} r10k deploy environment #{branch} #{settings.r10k_deploy_arguments}"
       message = run_command(command)
     end
-    status_message = { status: :success, message: message.to_s, branch: branch, status_code: 200 }
+    status_message = { status: :success, message: message.to_s, branch: branch, status_code: 202 }
     LOGGER.info("message: #{message} branch: #{branch}")
     unless deleted
       generate_types(branch) if types?
     end
-    notify_slack(status_message) if slack?
+    notification(status_message)
     [status_message[:status_code], status_message.to_json]
   rescue StandardError => e
     status_message = { status: :fail, message: e.message, trace: e.backtrace, branch: branch, status_code: 500 }
     LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
     status 500
-    notify_slack(status_message) if slack?
+    notification(status_message)
     status_message.to_json
   end
 
@@ -61,14 +62,14 @@ module Deployments # rubocop:disable Style/Documentation
       message = run_command(command)
     end
     LOGGER.info("message: #{message} module_name: #{module_name}")
-    status_message = { status: :success, message: message.to_s, module_name: module_name, status_code: 200 }
-    notify_slack(status_message) if slack?
+    status_message = { status: :success, message: message.to_s, module_name: module_name, status_code: 202 }
+    notification(status_message)
     status_message.to_json
   rescue StandardError => e
+    status_message = { status: :fail, message: e.message, trace: e.backtrace, branch: branch, status_code: 500 }
     LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
     status 500
-    status_message = { status: :fail, message: e.message, trace: e.backtrace, module_name: module_name, status_code: 500 }
-    notify_slack(status_message) if slack?
+    notification(status_message)
     status_message.to_json
   end
 end

@@ -48,7 +48,7 @@ module Tasks # rubocop:disable Style/Documentation
 
   def run_command(command)
     message = "forked: #{command}"
-    exec "#{command} &"
+    system "#{command} &"
     message
   end
 
@@ -58,66 +58,53 @@ module Tasks # rubocop:disable Style/Documentation
     message = run_command(command)
     LOGGER.info("message: #{message} environment: #{environment}")
     status_message = { status: :success, message: message.to_s, environment: environment, status_code: 200 }
-    notify_slack(status_message) if slack?
+    notification(status_message)
   rescue StandardError => e
     LOGGER.error("message: #{e.message} trace: #{e.backtrace}")
     status_message = { status: :fail, message: e.message, trace: e.backtrace, environment: environment, status_code: 500 }
-    notify_slack(status_message) if slack?
+    notification(status_message)
   end
 
-  def notify_slack(status_message)
-    return unless settings.slack_webhook
+  def notification(message)
+    return unless settings.chatops || settings.slack_webhook
+    slack_settings if settings.chatops == false && settings.slack_webhook != false
+    PuppetWebhook::Chatops.new(settings.chatops_service,
+                               settings.chatops_url,
+                               settings.chatops_channel,
+                               settings.chatops_user,
+                               settings.chatops_options).notify(message)
+  end
 
-    if settings.slack_proxy_url
-      uri = URI(settings.slack_proxy_url)
-      http_options = {
-        proxy_address:  uri.hostname,
-        proxy_port:     uri.port,
-        proxy_from_env: false
-      }
-    else
-      http_options = {}
-    end
+  # Deprecated
+  # TODO: Remove in release 3.0.0
+  def slack_settings
+    settings.chatops_service = 'slack'
+    LOGGER.warn('settings.slack_webhook is deprecated and will be removed in puppet_webhook 3.0.0')
+    settings.chatops_url = settings.slack_webhook
+    LOGGER.warn('settings.slack_user is deprecated and will be removed in puppet_webhook 3.0.0')
+    settings.chatops_user = settings.slack_user
+    LOGGER.warn('settings.slack_channel is deprecated and will be removed in puppet_webhook 3.0.0')
+    settings.chatops_channel = settings.slack_channel
+    LOGGER.warn('settings.slack_emoji is deprecated and will be removed in puppet_webhook 3.0.0')
+    settings.chatops_options[:icon_emoji] = settings.slack_emoji
+    LOGGER.warn('settings.slack_proxy_url is deprecated and will be removed in puppet_webhook 3.0.0')
+    settings.chatops_options[:http_options] = if settings.slack_proxy_url
+                                                slack_proxy
+                                              else
+                                                {}
+                                              end
+  end
 
-    notifier = Slack::Notifier.new settings.slack_webhook do
-      defaults channel: settings.slack_channel,
-               username: settings.slack_user,
-               icon_emoji: settings.slack_emoji,
-               http_options: http_options
-    end
-
-    if status_message[:branch]
-      target = status_message[:branch]
-    elsif status_message[:module]
-      target = status_message[:module]
-    end
-
-    message = {
-      author: 'r10k for Puppet',
-      title: "r10k deployment of Puppet environment #{target}"
+  # Deprecated
+  # TODO: Remove in release 3.0.0
+  def slack_proxy
+    uri = URI(settings.slack_proxy_url)
+    http_options = {
+      proxy_address:  uri.hostname,
+      proxy_port:     uri.port,
+      proxy_from_env: false
     }
-
-    case status_message[:status_code]
-    when 200
-      message.merge!(
-        color: 'good',
-        text: "Successfully deployed #{target}",
-        fallback: "Successfully deployed #{target}"
-      )
-    when 500
-      message.merge!(
-        color: 'bad',
-        text: "Failed to deploy #{target}",
-        fallback: "Failed to deploy #{target}"
-      )
-    end
-
-    notifier.post text: message[:fallback], attachments: [message]
-  end
-
-  def slack?
-    return false if settings.slack_webhook.nil?
-    settings.slack_webhook
+    http_options
   end
 
   def types?

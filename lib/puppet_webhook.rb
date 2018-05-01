@@ -37,11 +37,12 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   set :use_mco_ruby, false unless settings.respond_to? :use_mco_ruby=
   set :use_mcollective, false unless settings.respond_to? :use_mcollective=
   set :discovery_timeout, false unless settings.respond_to? :discovery_timeout=
-  set :slack_webhook, false unless settings.respond_to? :slack_webhook=
-  set :slack_channel, '#general' unless settings.respond_to? :slack_channel=
-  set :slack_user, 'puppet_webhook' unless settings.respond_to? :slack_user=
-  set :slack_emoji, ':ocean:' unless settings.respond_to? :slack_emoji=
-  set :slack_proxy_url, nil unless settings.respond_to? :slack_proxy_url=
+  set :chatops, false unless settings.respond_to? :chatops=
+  set :chatops_service, 'slack' unless settings.respond_to? :chatops_service=
+  set :chatops_url, '' unless settings.respond_to? :chatops_url=
+  set :chatops_channel, '#general' unless settings.respond_to? :chatops_channel=
+  set :chatops_user, 'puppet_webhook' unless settings.respond_to? :chatops_user=
+  set :chatops_options, {} unless settings.respond_to? :chatops_options=
   set :default_branch, 'production' unless settings.respond_to? :default_branch=
   set :ignore_environments, [] unless settings.respond_to? :ignore_environments=
   set :prefix, nil unless settings.respond_to? :prefix=
@@ -51,6 +52,13 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   set :command_prefix, 'umask 0022;' unless settings.respond_to? :command_prefix=
   set :github_secret, nil unless settings.respond_to? :github_secret=
   set :repository_events, nil unless settings.respond_to? :respository_events=
+
+  # Deprecated Settings
+  set :slack_webhook, false unless settings.respond_to? :slack_webhook=
+  set :slack_channel, '#general' unless settings.respond_to? :slack_channel=
+  set :slack_user, 'puppet_webhook' unless settings.respond_to? :slack_user=
+  set :slack_emoji, ':ocean:' unless settings.respond_to? :slack_emoji=
+  set :slack_proxy_url, nil unless settings.respond_to? :slack_proxy_url=
 
   require 'helpers/init'
 

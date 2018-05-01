@@ -80,6 +80,43 @@ Any configuration option is placed in `/etc/puppet_webhook/server.yml` or `/etc/
 * `--ssl-key FILE`: Specify the SSL Private key to use. Pair with `--ssl-cert`. Requires `--ssl` or `ssl_enable: true` in config file.
 * `-c FILE, --configfile FILE`: Specifies a config file to use. Must be a `.yml` file in YAML format.
 
+#### Chatops Configuration
+
+Puppet_webhook can post to chatops tools via various APIs and Clients. At this time, only `Slack` is supported.
+
+To enable ChatOps support simply add the following to your `/etc/puppet_webhook/app.yml` file:
+``` yaml
+chatops: true
+```
+
+##### Slack Configuration
+
+You can enable Slack notifications for the webhook. You will need a Slack webhook URL and the slack-notifier gem installed.
+
+To get the Slack webhook URL you need to:
+
+Go to https://slack.com/apps/A0F7XDUAZ-incoming-webhooks.
+Choose your team, press Configure.
+In configurations press Add configuration.
+Choose channel, press Add Incoming WebHooks integration.
+Then configure the webhook to add your Slack Webhook URL:
+
+``` yaml
+chatops: true
+chatops_service: 'slack' # Required so the app knows that you're sending to Slack.
+chatops_channel: '#channel' # deftaults to #general
+chatops_user: 'r10k' # defaults to puppet_webhook
+chatops_options:
+  icon_emoji: ':ocean:'
+  http_options: 
+    proxy_address: 'http://proxy.example.com'
+    proxy_port: '3128'
+    proxy_from_env: false
+```
+
+**NOTE: The legacy `slack_webhook`, `slack_user`, `slack_channel`, `slack_emoji`, and `slack_proxy_url` still work, but will be removed in 3.0.0**
+
+### Reference
 
 #### Server Configuration File
 
@@ -190,28 +227,81 @@ Whether or not to use MCollective CLI command. REQUIRES MCOLLECTIVE AND MCOLLECT
 MCollective Ruby discovery timeout. REQUIRES `use_mco_ruby` TO BE `true`.
 * Default: `'10'`
 
+##### chatops
+
+Enable the use of notifications to Slack or other ChatOps tool.
+* Valid options: [ `true`, `false` ]
+* Default: `false`
+
+##### chatops_service
+
+Name of ChatOps tool to send notifications to.
+* Valid options: [ `slack` ]
+* Default: `slack`
+
+##### chatops_url
+*Replaces `slack_webhook`*
+
+URL of the API or Webhook to send notifications to. See Documentation of your tool for details.
+* Default: `''`
+
+##### chatops_user
+*Replaces `slack_user`*
+
+User to post notification as.
+* Default: `puppet_webhook`
+
+##### chatops_channel
+*Replaces `slack_channel`*
+
+Channel/Team/Area to post to.
+* Default: `#general`
+
+##### chatops_options
+
+Hash of options to pass to the Chatops plugin. Each set of options are unique to each tool, so please see your tool's documentation for more information.
+* Default: `{}`
+
 ##### slack_webhook
+***DEPRECATED* - Please use `chatops_url` instead** 
 
 URL of your Slack Webhook receiver, if you wish not to use a Slack Webhook, then simply leave the option on `false`, otherwise use the full Wwebhook URL for your community as per https://api.slack.com/incoming-webhooks.
 * Valid options: [ `https://hooks.slack.com/services/<generated_hash>`, `false` ]
 * Default: `false`
 
 ##### slack_channel
+***DEPRECATED* - Please use `chatops_channel` instead** 
 
 Name of the Slack channel to post to. Ignored if `slack_webhook` is disabled.
 Default: `#general`
 
 ##### slack_user
+***DEPRECATED* - Please use `chatops_user` instead** 
 
 Name of the Slack user to post as. Ignored if `slack_webhook` is disabled.
 Default: `puppet_webhook`
 
 ##### slack_emoji
+***DEPRECATED* - Please use `chatops_options` instead.**
+**Example for new config ONLY:**
+``` yaml
+chatops_options:
+  icon_emoji: ':ocean:'
+``` 
 
 Icon emoji for the Webhook to use when posting. Ignored if `slack_webhook` is disabled.
 Default: `:ocean:`
 
 ##### slack_proxy_url
+***DEPRECATED* - Please use `chatops_options` instead.**
+**Example for new config ONLY:**
+``` yaml
+chatops_options:
+ http_options: 
+    proxy_address: 'http://proxy.example.com'
+    proxy_port: '3128'
+    proxy_from_env: false
+``` 
 
 The proxy URL for Slack if used.
 * MUST BE A VALID URL.
