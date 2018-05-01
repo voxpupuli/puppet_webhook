@@ -21,6 +21,14 @@ class PuppetWebhook
                            message,
                            http_options: @args[:http_options] || {},
                            icon_emoji: @args[:icon_emoji]).notify
+      when 'rocketchat'
+        LOGGER.info("Sending Rocket.Chat webhook message to #{@url}")
+        Chatops::Rocketchat.new(@channel,
+                                @url,
+                                @user,
+                                message,
+                                http_options: @args[:http_options] || {},
+                                icon_emoji: @args[:icon_emoji]).notify
       else
         LOGGER.error("Service #{@service} is not currently supported")
       end
