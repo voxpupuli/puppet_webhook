@@ -29,6 +29,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'github_changelog_generator'
   spec.add_development_dependency 'mcollective-client'
+  spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rack-test'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'

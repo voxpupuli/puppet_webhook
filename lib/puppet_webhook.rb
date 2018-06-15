@@ -52,6 +52,8 @@ class PuppetWebhook < Sinatra::Base # rubocop:disable Style/Documentation
   set :command_prefix, 'umask 0022;' unless settings.respond_to? :command_prefix=
   set :github_secret, nil unless settings.respond_to? :github_secret=
   set :repository_events, nil unless settings.respond_to? :respository_events=
+  set :user, 'puppet' unless settings.respond_to? :user=
+  set :pass, 'puppet' unless settings.respond_to? :pass=
 
   # Deprecated Settings
   set :slack_webhook, false unless settings.respond_to? :slack_webhook=
