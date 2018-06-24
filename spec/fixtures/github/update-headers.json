@@ -1,3 +1,4 @@
 {
-  "HTTP_X_GITHUB_EVENT": "push"
+  "HTTP_X_GITHUB_EVENT": "push",
+  "Content-Type": "application/json"
 }
