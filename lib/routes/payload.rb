@@ -19,18 +19,18 @@ module Sinatra
                     else
                       request.body.read
                     end
-          verify_signature(decoded) if verify_signature?
+          verify_signature(settings.github_secret, decoded) if verify_signature?
           data = JSON.parse(decoded, quirks_mode: true)
 
           # Iterate the data structure to determine what's should be deployed
-          branch = payload[:branch]
+          branch = env['parsed_body'][:branch]
 
           # If prefix is enabled in our config file, determine what the prefix should be
           prefix = case settings.prefix
                    when :repo
-                     payload[:repo_name]
+                     env['parsed_body'][:repo_name]
                    when :user
-                     payload[:repo_user]
+                     env['parsed_body'][:repo_user]
                    when :command, TrueClass
                      run_prefix_command(data.to_json)
                    when String
@@ -39,7 +39,7 @@ module Sinatra
 
           # When a branch is being deleted, a deploy against it will result in a failure, as it no longer exists.
           # Instead, deploy the default branch, which will purge deleted branches per the user's configuration
-          deleted = payload[:deleted]
+          deleted = env['parsed_body'][:deleted]
 
           branch = if deleted
                      settings.default_branch
@@ -51,9 +51,9 @@ module Sinatra
           # The best we can do is just deploy all environments by passing nil to
           # deploy() if we don't know the correct branch.
           env = if prefix.nil? || prefix.empty? || branch.nil? || branch.empty?
-                  normalize(branch)
+                  normalize(settings.allow_uppercase, branch)
                 else
-                  normalize("#{prefix}_#{branch}")
+                  normalize(settings.allow_uppercase, "#{prefix}_#{branch}")
                 end
 
           if ignore_env?(env)
