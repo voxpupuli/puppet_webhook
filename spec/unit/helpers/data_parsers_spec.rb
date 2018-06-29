@@ -3,9 +3,9 @@ require 'logger'
 
 describe DataParsers do
   subject do
-    Class.new {
+    Class.new do
       include DataParsers
-    }
+    end
   end
 
   describe '#sanitize_input' do

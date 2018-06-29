@@ -15,7 +15,7 @@ describe PuppetWebhook::Mcollective do
       expect(mcollective_object.instance_variable_get('@command')).to eq('deploy')
       expect(mcollective_object.instance_variable_get('@timeout')).to eq(120)
       expect(mcollective_object.instance_variable_get('@dtimeout')).to eq(10)
-      expect(mcollective_object.instance_variable_get('@args')).to eq({ environment: 'production' })
+      expect(mcollective_object.instance_variable_get('@args')).to eq(environment: 'production')
     end
   end
 
@@ -51,10 +51,10 @@ describe PuppetWebhook::Mcollective do
 
       it 'is expected to return a client to send commands to' do
         client_data = {
-            agent: 'r10k',
-            timeout: 120,
-            discovery_timeout: 10,
-            progress: false
+          agent: 'r10k',
+          timeout: 120,
+          discovery_timeout: 10,
+          progress: false
         }
 
         allow(PuppetWebhook::Mcollective).to receive(:client).and_return(client_data)
