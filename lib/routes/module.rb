@@ -14,9 +14,9 @@ module Sinatra
 
           # TODO: Move these two lines of code into the parser
           decoded = request.body.read
-          verify_signature(decoded) if verify_signature?
+          verify_signature(settings.github_secret, decoded) if verify_signature?
 
-          module_name = payload[:module_name]
+          module_name = env['parsed_body'][:module_name]
 
           module_name = sanitize_input(module_name)
           LOGGER.info("Deploying module #{module_name}")

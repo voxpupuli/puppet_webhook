@@ -19,6 +19,14 @@ ENV['RACK_ENV'] = 'test'
 
 require File.expand_path '../lib/puppet_webhook.rb', __dir__
 
+def app
+  PuppetWebhook
+end
+
+def call(env)
+  app.call(env)
+end
+
 module Webhook
   module Test
     module Methods
@@ -33,13 +41,8 @@ module Webhook
   end
 end
 
-module RSpecMixin
-  include Rack::Test::Methods
-  include Webhook::Test::Methods
-  def app
-    described_class
-  end
-end
 RSpec.configure do |conf|
-  conf.include RSpecMixin
+  conf.include Rack::Test::Methods
+  conf.include Webhook::Test::Methods
+  conf.include DataParsers
 end
