@@ -19,11 +19,12 @@ module Sinatra
       end
 
       def detect_vcs
-        return 'github'    if github_webhook?
-        return 'gitlab'    if gitlab_webhook?
-        return 'stash'     if stash_webhook?
-        return 'bitbucket' if bitbucket_webhook?
-        return 'tfs'       if tfs_webhook?
+        return 'github'          if github_webhook?
+        return 'gitlab'          if gitlab_webhook?
+        return 'stash'           if stash_webhook?
+        return 'bitbucket'       if bitbucket_webhook?
+        return 'bitbucketserver' if bitbucketserver_webhook?
+        return 'tfs'             if tfs_webhook?
         raise StandardError, 'payload not recognised'
       end
 
@@ -48,6 +49,11 @@ module Sinatra
         env.key?('HTTP_X_EVENT_KEY') and env.key?('HTTP_X_HOOK_UUID')
       end
 
+      def bitbucketserver_webhook?
+        # https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html
+        env.key?('HTTP_X_EVENT_KEY') and env.key?('HTTP_X_REQUEST_ID')
+      end
+
       def tfs_webhook?
         # https://docs.microsoft.com/en-us/vsts/service-hooks/services/webhooks
         return false unless @data.key? 'resource'
@@ -70,6 +76,8 @@ module Sinatra
         when 'bitbucket'
           return @data['push']['changes'][0]['new']['name'] unless deleted?
           @data['push']['changes'][0]['old']['name']
+        when 'bitbucketserver'
+          @data['changes'][0]['refId'].sub('refs/heads/', '')
         when 'tfs'
           @data['resource']['refUpdates'][0]['name'].sub('refs/heads/', '')
         end
@@ -85,6 +93,8 @@ module Sinatra
           @data['refChanges'][0]['type'] == 'DELETE'
         when 'bitbucket'
           @data['push']['changes'][0]['closed']
+        when 'bitbucketserver'
+          @data['changes'][0]['type'] == 'DELETE'
         when 'tfs'
           @data['resource']['refUpdates'][0]['newObjectId'] == '0000000000000000000000000000000000000000'
         end
