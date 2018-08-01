@@ -45,7 +45,7 @@ module Sinatra
 
       def bitbucket_webhook?
         # https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html
-        env.key?('HTTP_X_EVENT_KEY')
+        env.key?('HTTP_X_EVENT_KEY') and env.key?('HTTP_X_HOOK_UUID')
       end
 
       def tfs_webhook?
