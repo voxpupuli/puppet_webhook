@@ -3,7 +3,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.summary = 'Sinatra Webhook Server for Puppet/R10K'
   spec.version = '1.4.0'
   spec.platform = Gem::Platform::RUBY
-  spec.required_ruby_version = '>= 2.1.9'
+  spec.required_ruby_version = '>= 2.2'
   spec.authors = ['Vox Pupuli']
   spec.email = 'voxpupuli@groups.io'
   spec.files = Dir[

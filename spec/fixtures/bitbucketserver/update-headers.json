@@ -1,4 +1,4 @@
 {
   "HTTP_X_EVENT_KEY": "repo:push",
-  "HTTP_X_HOOK_UUID": "test-uuid"
+  "HTTP_X_REQUEST_ID": "1"
 }

@@ -19,7 +19,7 @@ puppet_webhook is a Sinatra-based application receiving REST-based calls to trig
 
 ## Prerequisites
 
-* Ruby 2.1.9 or greater
+* Ruby 2.2 or greater
 * Puppet 4.7.1 or greater
 * r10k gem
 * *Optional*: MCollective and MCollective-r10k (Provides one form of multi-master syncronization)
