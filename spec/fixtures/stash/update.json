@@ -1,1 +1,44 @@
-{"repository":{"slug":"puppet-r10k","id":72,"name":"puppet-r10k","scmId":"git","state":"AVAILABLE","statusMessage":"Available","forkable":true,"project":{"key":"PUP","id":81,"name":"Puppet","public":false,"type":"NORMAL"},"public":false},"refChanges":[{"refId":"refs/heads/feature_branch","fromHash":"6b1c3cca52bc27b3073084656186048b6d2f6a67","toHash":"08ea6861a4ab73facb1ca42309f295d5ceb77127","type":"UPDATE"}],"changesets":{"size":1,"limit":100,"isLastPage":true,"values":[{"fromCommit":{"id":"6b1c3cca52bc27b3073084656186048b6d2f6a67","displayId":"6b1c3cca52b"},"toCommit":{"id":"08ea6861a4ab73facb1ca42309f295d5ceb77127","displayId":"08ea6861a4a","author":{"name":"Alexander Fisher","emailAddress":"alex@linfratech.co.uk"},"authorTimestamp":1509707506000,"message":"a test commit","parents":[{"id":"6b1c3cca52bc27b3073084656186048b6d2f6a67","displayId":"6b1c3cca52b"}]},"changes":{"size":1,"limit":100,"isLastPage":true,"values":[{"contentId":"84fe9e3cfe2673ad3e2f024d7b7a192ba4f1b7d7","fromContentId":"056e13b19e2abd6d3cec860ec32207041e431b25","path":{"components":["README.md"],"parent":"","name":"README.md","extension":"md","toString":"README.md"},"executable":false,"percentUnchanged":-1,"type":"MODIFY","nodeType":"FILE","srcExecutable":false,"links":{"self":[{"href":"https://bitbucket.example.com/projects/PUP/repos/puppet-r10k/commits/08ea6861a4ab73facb1ca42309f295d5ceb77127#README.md"}]}}],"start":0},"links":{"self":[{"href":"https://bitbucket.example.com/projects/PUP/repos/puppet-r10k/commits/08ea6861a4ab73facb1ca42309f295d5ceb77127#README.md"}]}}],"start":0}}
+{
+   "eventKey":"repo:refs_changed",
+   "date":"2018-08-01T16:19:56-0400",
+   "actor":{
+      "name":"chet",
+      "emailAddress":"ChetRHosey@Eaton.com",
+      "id":3153,
+      "displayName":"Chet Hosey",
+      "active":true,
+      "slug":"chet",
+      "type":"NORMAL"
+   },
+   "repository":{
+      "slug":"r10k",
+      "id":1186,
+      "name":"puppet-r10k",
+      "scmId":"git",
+      "state":"AVAILABLE",
+      "statusMessage":"Available",
+      "forkable":true,
+      "project":{
+         "key":"r10k",
+         "id":814,
+         "name":"puppet-r10k",
+         "description":"Test project for Puppet",
+         "public":true,
+         "type":"NORMAL"
+      },
+      "public":false
+   },
+   "changes":[
+      {
+         "ref":{
+            "id":"refs/heads/feature_branch",
+            "displayId":"feature_branch",
+            "type":"BRANCH"
+         },
+         "refId":"refs/heads/feature_branch",
+         "fromHash":"1fc7624b85c67d1709664e476a27982d55fd020b",
+         "toHash":"4d2a460c01548e39d6f838a68ca1b98f25f1a650",
+         "type":"UPDATE"
+      }
+   ]
+}

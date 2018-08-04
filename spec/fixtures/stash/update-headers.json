@@ -1,3 +1,4 @@
 {
-  "HTTP_X_ATLASSIAN_TOKEN": "no-check"
+  "HTTP_X_REQUEST_ID": "b072fe2e-ff88-4e03-881d-2f9a4d6688a0",
+  "HTTP_X_EVENT_KEY": "repo:refs_changed"
 }

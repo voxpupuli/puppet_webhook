@@ -39,13 +39,13 @@ module Sinatra
 
       # stash/bitbucket server
       def stash_webhook?
-        # https://confluence.atlassian.com/bitbucketserver/post-service-webhook-for-bitbucket-server-776640367.html
-        env.key?('HTTP_X_ATLASSIAN_TOKEN')
+        # https://confluence.atlassian.com/bitbucketserver/event-payload-938025882.html
+        env.key?('HTTP_X_EVENT_KEY') && env.key?('HTTP_X_REQUEST_ID')
       end
 
       def bitbucket_webhook?
         # https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html
-        env.key?('HTTP_X_EVENT_KEY')
+        env.key?('HTTP_X_EVENT_KEY') && env.key?('HTTP_X_HOOK_UUID')
       end
 
       def tfs_webhook?
@@ -66,7 +66,7 @@ module Sinatra
         when 'gitlab'
           @data['ref'].sub('refs/heads/', '')
         when 'stash'
-          @data['refChanges'][0]['refId'].sub('refs/heads/', '')
+          @data['changes'][0]['refId'].sub('refs/heads/', '')
         when 'bitbucket'
           return @data['push']['changes'][0]['new']['name'] unless deleted?
           @data['push']['changes'][0]['old']['name']
@@ -82,7 +82,7 @@ module Sinatra
         when 'gitlab'
           @data['after'] == '0000000000000000000000000000000000000000'
         when 'stash'
-          @data['refChanges'][0]['type'] == 'DELETE'
+          @data['changes'][0]['type'] == 'DELETE'
         when 'bitbucket'
           @data['push']['changes'][0]['closed']
         when 'tfs'
