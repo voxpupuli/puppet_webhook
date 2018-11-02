@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'plugins/chatops'
 
 describe PuppetWebhook::Chatops do
   describe '#notify' do
