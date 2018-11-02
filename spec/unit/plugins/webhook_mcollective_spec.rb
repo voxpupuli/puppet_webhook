@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'mcollective'
+require 'plugins/mcollective'
 
 describe PuppetWebhook::Mcollective do
   describe '#initialize' do

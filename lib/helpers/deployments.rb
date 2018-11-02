@@ -1,11 +1,9 @@
-require 'plugins/mcollective'
-require 'plugins/chatops'
-
 module Deployments # rubocop:disable Style/Documentation
   def deploy(branch, deleted)
     # Currently requires puppet_webhook to be run as a non-root
     # user with access to running the MCollective client.
     if settings.use_mcollective
+      require 'plugins/mcollective'
       results = PuppetWebhook::Mcollective.new('r10k',
                                                'deploy',
                                                {
@@ -43,6 +41,7 @@ module Deployments # rubocop:disable Style/Documentation
     # Currently requires puppet_webhook to be run as a non-root
     # user with access to running the MCollective client.
     if settings.use_mcollective
+      require 'plugins/mcollective'
       results = PuppetWebhook::Mcollective.new('r10k',
                                                'deploy',
                                                {

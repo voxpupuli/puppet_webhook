@@ -64,6 +64,8 @@ module Tasks # rubocop:disable Style/Documentation
   def notification(message)
     return unless settings.chatops || settings.slack_webhook
 
+    require 'plugins/chatops'
+
     slack_settings if settings.chatops == false && settings.slack_webhook != false
     PuppetWebhook::Chatops.new(settings.chatops_service,
                                settings.chatops_url,
