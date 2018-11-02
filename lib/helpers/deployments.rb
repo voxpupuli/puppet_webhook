@@ -1,5 +1,5 @@
-require 'plugins/mcollective'
-require 'plugins/chatops'
+require 'plugins/mcollective' if settings.use_mcollective
+require 'plugins/chatops' if settings.chatops
 
 module Deployments # rubocop:disable Style/Documentation
   def deploy(branch, deleted)
