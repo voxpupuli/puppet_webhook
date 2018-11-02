@@ -67,6 +67,7 @@ module Tasks # rubocop:disable Style/Documentation
 
   def notification(message)
     return unless settings.chatops || settings.slack_webhook
+
     slack_settings if settings.chatops == false && settings.slack_webhook != false
     PuppetWebhook::Chatops.new(settings.chatops_service,
                                settings.chatops_url,
@@ -100,8 +101,8 @@ module Tasks # rubocop:disable Style/Documentation
   def slack_proxy
     uri = URI(settings.slack_proxy_url)
     http_options = {
-      proxy_address:  uri.hostname,
-      proxy_port:     uri.port,
+      proxy_address: uri.hostname,
+      proxy_port: uri.port,
       proxy_from_env: false
     }
     http_options
@@ -110,6 +111,7 @@ module Tasks # rubocop:disable Style/Documentation
   def types?
     return false unless settings.respond_to?(:generate_types=)
     return false if settings.generate_types.nil?
+
     settings.generate_types
   end
 

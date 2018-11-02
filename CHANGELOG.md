@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v1.5.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.0) (2018-11-01)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.4.0...v1.5.0)
+
+**Implemented enhancements:**
+
+- Add tests to validate posts to the module route  [\#37](https://github.com/voxpupuli/puppet_webhook/pull/37) ([dhollinger](https://github.com/dhollinger))
+
+**Fixed bugs:**
+
+- puppet\_webhook is not compatible with Ruby \< 2.2.2 [\#56](https://github.com/voxpupuli/puppet_webhook/issues/56)
+
+**Merged pull requests:**
+
+- Bitbucket Server \(stash\) detection / JSON updates [\#61](https://github.com/voxpupuli/puppet_webhook/pull/61) ([ChetHosey](https://github.com/ChetHosey))
+- Stray payload reference [\#60](https://github.com/voxpupuli/puppet_webhook/pull/60) ([ChetHosey](https://github.com/ChetHosey))
+- Changed minimum versions to Puppet 5/Ruby 2.2 [\#58](https://github.com/voxpupuli/puppet_webhook/pull/58) ([ChetHosey](https://github.com/ChetHosey))
+- Add tests for the DataParsers helper module [\#55](https://github.com/voxpupuli/puppet_webhook/pull/55) ([dhollinger](https://github.com/dhollinger))
+
 ## [v1.4.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.4.0) (2018-05-02)
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.3.0...v1.4.0)
 

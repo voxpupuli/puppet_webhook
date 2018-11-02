@@ -10,8 +10,8 @@ module Sinatra
         @data = parse_data(body)
         @vcs = detect_vcs
         {
-          branch:    branch,
-          deleted:   deleted?,
+          branch: branch,
+          deleted: deleted?,
           module_name: repo_name.sub(%r{^.*-}, ''),
           repo_name: repo_name,
           repo_user: repo_user
@@ -24,6 +24,7 @@ module Sinatra
         return 'stash'     if stash_webhook?
         return 'bitbucket' if bitbucket_webhook?
         return 'tfs'       if tfs_webhook?
+
         raise StandardError, 'payload not recognised'
       end
 
@@ -52,6 +53,7 @@ module Sinatra
         # https://docs.microsoft.com/en-us/vsts/service-hooks/services/webhooks
         return false unless @data.key? 'resource'
         return false unless @data.key? 'eventType'
+
         true
       end
 
@@ -69,6 +71,7 @@ module Sinatra
           @data['changes'][0]['refId'].sub('refs/heads/', '')
         when 'bitbucket'
           return @data['push']['changes'][0]['new']['name'] unless deleted?
+
           @data['push']['changes'][0]['old']['name']
         when 'tfs'
           @data['resource']['refUpdates'][0]['name'].sub('refs/heads/', '')
