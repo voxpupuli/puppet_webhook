@@ -4,7 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v1.5.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.0) (2018-11-01)
+## [v1.5.1](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.1) (2018-11-02)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.0...v1.5.1)
+
+**Merged pull requests:**
+
+- Remove global mcollective requirement as it has been moved into a plugin [\#63](https://github.com/voxpupuli/puppet_webhook/pull/63) ([dhollinger](https://github.com/dhollinger))
+
+## [v1.5.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.0) (2018-11-02)
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.4.0...v1.5.0)
 
 **Implemented enhancements:**
