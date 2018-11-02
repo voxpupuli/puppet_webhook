@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v1.5.2](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.2) (2018-11-02)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.1...v1.5.2)
+
+**Merged pull requests:**
+
+- Only load mco and chatops plugins if enabled [\#66](https://github.com/voxpupuli/puppet_webhook/pull/66) ([dhollinger](https://github.com/dhollinger))
+
 ## [v1.5.1](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.1) (2018-11-02)
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.0...v1.5.1)
 
