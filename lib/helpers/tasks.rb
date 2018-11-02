@@ -1,5 +1,4 @@
 require 'open3'
-require 'slack-notifier'
 
 module Tasks # rubocop:disable Style/Documentation
   def ignore_env?(env)
