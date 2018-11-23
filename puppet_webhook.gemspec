@@ -21,6 +21,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_runtime_dependency 'json'
   spec.add_runtime_dependency 'rack-bodyparser'
   spec.add_runtime_dependency 'rocket-chat-notifier'
+  spec.add_runtime_dependency 'sidekiq'
   spec.add_runtime_dependency 'sinatra'
   spec.add_runtime_dependency 'sinatra-contrib'
   spec.add_runtime_dependency 'slack-notifier'
@@ -33,6 +34,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'rack-test'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rspec-sidekiq'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'simplecov-console'
 end

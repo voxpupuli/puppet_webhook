@@ -6,3 +6,6 @@ logs/*.log
 coverage
 Gemfile.lock
 .byebug_history
+vendor/
+.bundle/
+.vscode/
