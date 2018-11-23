@@ -34,7 +34,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'rack-test'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rspec-sidekiq'
+  spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'simplecov-console'
 end
