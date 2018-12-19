@@ -87,7 +87,7 @@ if @server_config
   ssl_opts[:ssl_key] = settings.enable_ssl if settings.respond_to? :ssl_key=
 end
 
-LOGGER = WEBrick::Log.new(options[:logfile], options[:loglevel])
+LOGGER = WEBrick::Log.new(options[:logfile], Object.const_get("WEBrick::Log::#{options[:loglevel]}"))
 
 webrick_opts = {
   Host: options[:host],
