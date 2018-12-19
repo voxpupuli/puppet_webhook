@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v1.6.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.6.0) (2018-12-19)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.2...v1.6.0)
+
+**Implemented enhancements:**
+
+- Add Sidekiq support [\#75](https://github.com/voxpupuli/puppet_webhook/issues/75)
+- Add Tests for the application [\#8](https://github.com/voxpupuli/puppet_webhook/issues/8)
+
+**Fixed bugs:**
+
+- Logging settings don't work properly [\#77](https://github.com/voxpupuli/puppet_webhook/issues/77)
+
+**Closed issues:**
+
+- Build RPM/DEB/Arch Packages [\#25](https://github.com/voxpupuli/puppet_webhook/issues/25)
+- Documentation [\#9](https://github.com/voxpupuli/puppet_webhook/issues/9)
+
+**Merged pull requests:**
+
+- Ensure that loglevel is using the const value [\#78](https://github.com/voxpupuli/puppet_webhook/pull/78) ([dhollinger](https://github.com/dhollinger))
+- Add Sidekiq support [\#76](https://github.com/voxpupuli/puppet_webhook/pull/76) ([dhollinger](https://github.com/dhollinger))
+
 ## [v1.5.2](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.2) (2018-11-02)
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.1...v1.5.2)
 
