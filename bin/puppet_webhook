@@ -48,11 +48,11 @@ optparse = OptionParser.new do |opts| # rubocop:disable Metrics/BlockLength
   end
 
   opts.on('--ssl-cert FILE', 'Specify the SSL cert to use. Pair with --ssl-key.') do |arg|
-    ssl_opts[:ssl_cert] = OpenSSL::X509::Certificate.new(File.open(arg).read)
+    ssl_opts[:ssl_cert] = arg
   end
 
   opts.on('--ssl-key FILE', 'Specify the SSL key to use. Pair with --ssl-cert.') do |arg|
-    ssl_opts[:ssl_key] = OpenSSL::PKey::RSA.new(File.open(arg))
+    ssl_opts[:ssl_key] = arg
   end
 
   opts.on('-c FILE', '--configfile FILE', 'Specifies a configuration file to use.') do |arg|
@@ -84,7 +84,13 @@ if @server_config
   ssl_opts[:enable_ssl] = settings.enable_ssl if settings.respond_to? :enable_ssl=
   ssl_opts[:ssl_verify] = settings.ssl_verify if settings.respond_to? :ssl_verify=
   ssl_opts[:ssl_cert] = settings.ssl_cert if settings.respond_to? :ssl_cert=
-  ssl_opts[:ssl_key] = settings.enable_ssl if settings.respond_to? :ssl_key=
+  ssl_opts[:ssl_key] = settings.ssl_key if settings.respond_to? :ssl_key=
+end
+
+def ssl_verify(ssl_opts)
+  return OpenSSL::SSL::VERIFY_NONE unless ssl_opts[:ssl_verify]
+
+  OpenSSL::SSL::VERIFY_PEER
 end
 
 LOGGER = WEBrick::Log.new(options[:logfile], Object.const_get("WEBrick::Log::#{options[:loglevel]}"))
@@ -99,9 +105,9 @@ webrick_opts = {
 
 if ssl_opts[:enable_ssl]
   webrick_opts[:SSLEnable] = ssl_opts[:enable_ssl]
-  webrick_opts[:SSLVerifyClient] = ssl_opts[:ssl_verify]
-  webrick_opts[:SSLCertificate] = ssl_opts[:ssl_cert]
-  webrick_opts[:SSLPrivateKey] = ssl_opts[:ssl_key]
+  webrick_opts[:SSLVerifyClient] = ssl_verify(ssl_opts)
+  webrick_opts[:SSLCertificate] = OpenSSL::X509::Certificate.new(File.read(ssl_opts[:ssl_cert]))
+  webrick_opts[:SSLPrivateKey] = OpenSSL::PKey::RSA.new(File.read(ssl_opts[:ssl_key]))
   webrick_opts[:SSLCertName] = [['CN', WEBrick::Utils.getservername]]
 end
 
