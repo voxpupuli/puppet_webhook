@@ -1,6 +1,3 @@
-require 'rspec'
-require 'rack/test'
-
 require 'simplecov'
 require 'simplecov-console'
 SimpleCov.formatters = [
@@ -15,34 +12,38 @@ SimpleCov.start do
   add_filter '.vendor'
 end
 
-ENV['RACK_ENV'] = 'test'
+ENV['SINATRA_ENV'] = 'test'
 
-require File.expand_path '../lib/puppet_webhook.rb', __dir__
+require_relative '../config/environment'
+require 'rack/test'
+require 'capybara/rspec'
+require 'capybara/dsl'
+require 'webmock/rspec'
+
+raise 'Migrations are pending. Run `rake db:migrate SINATRA_ENV=test` to resolve the issue.' if ActiveRecord::Migrator.needs_migration?
+
+ActiveRecord::Base.logger = nil
+
+RSpec.configure do |config|
+  config.run_all_when_everything_filtered = true
+  config.filter_run :focus
+  config.include Rack::Test::Methods
+  config.include Capybara::DSL
+  DatabaseCleaner.strategy = :truncation
+
+  config.before do
+    DatabaseCleaner.clean
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
+
+  config.order = 'default'
+end
 
 def app
-  PuppetWebhook
+  Rack::Builder.parse_file('config.ru').first
 end
 
-def call(env)
-  app.call(env)
-end
-
-module Webhook
-  module Test
-    module Methods
-      def read_fixture(name)
-        File.read(File.join(File.expand_path(__dir__), 'fixtures', name))
-      end
-
-      def read_json_fixture(name)
-        JSON.parse(read_fixture(name))
-      end
-    end
-  end
-end
-
-RSpec.configure do |conf|
-  conf.include Rack::Test::Methods
-  conf.include Webhook::Test::Methods
-  conf.include DataParsers
-end
+Capybara.app = app

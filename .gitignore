@@ -4,8 +4,10 @@ webhook.lock
 logs/*.log
 .idea/
 coverage
-Gemfile.lock
 .byebug_history
 vendor/
 .bundle/
 .vscode/
+.yardoc/
+doc/
+public/

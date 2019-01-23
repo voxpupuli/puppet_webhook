@@ -1,20 +1,7 @@
-require 'fileutils'
-require 'logger'
-require 'puppet_webhook'
-require 'sidekiq/web'
+require './config/environment'
 
-LOGGER = Logger.new('/var/log/puppet_webhook').freeze
-LOCKFILE = '/var/run/puppet_webhook/puppet_webhook.lock'.freeze
+raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.' if ActiveRecord::Migrator.needs_migration?
 
-FileUtils.makedirs('/var/run/puppet_webhook')
-FileUtils.touch(LOCKFILE) unless File.exist?(LOCKFILE)
-
-PuppetWebhook.set :root, File.dirname(__FILE__)
-PuppetWebhook.set :logger, LOGGER
-PuppetWebhook.set :command_prefix, 'umask 0022;'
-
-map '/sidekiq' do
-  run Sidekiq::Web
-end
-
-run PuppetWebhook
+run ApplicationController
+use Api::V1::R10K::EnvironmentController
+use Api::V1::R10K::ModuleController

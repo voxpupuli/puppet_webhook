@@ -5,8 +5,7 @@ cache: bundler
 dist: trusty
 before_install:
   - bundle -v
-  - rm Gemfile.lock || true
-  - gem install bundler -v 1.16.0
+  - gem install bundler -v 1.17.1
   - bundle -v
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -19,7 +18,11 @@ after_script:
 matrix:
   fast_finish: true
   include:
-    - rvm: 2.2.0
+    - rvm: 2.4.5
+      env: CHECK=test
+    - rvm: 2.5.3
+      env: CHECK=test
+    - rvm: 2.6.0
       env: CHECK=test
     - rvm: 2.4.2
       env: CHECK=test_and_report_coverage
@@ -42,4 +45,3 @@ deploy:
   on:
     tags: true
     repo: voxpupuli/puppet_webhook
-
