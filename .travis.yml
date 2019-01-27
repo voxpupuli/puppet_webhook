@@ -8,6 +8,7 @@ before_install:
   - gem install bundler -v 1.17.1
   - bundle -v
 before_script:
+  - cp ./config/config.yml.example ./config/config.yml
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
