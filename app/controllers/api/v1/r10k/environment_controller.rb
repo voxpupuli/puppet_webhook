@@ -6,7 +6,7 @@ class Api
         # POST: /payloads
         post %r{\/(payload|api\/v1\/r10k\/environment)} do
           protected! if APP_CONFIG.protected
-          data = PuppetWebhook::Parsers.new(headers, body).params
+          data = PuppetWebhook::Parsers.new(headers, req_body).params
           prefix = get_prefix(data)
           branch = get_branch(data)
           env = get_env(branch, prefix)
@@ -36,7 +36,7 @@ class Api
           headers
         end
 
-        def body
+        def req_body
           request.body.rewind
           request.body.read
         end
