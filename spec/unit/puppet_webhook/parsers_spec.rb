@@ -53,6 +53,21 @@ describe PuppetWebhook::Parsers do
     end
   end
 
+  context 'stash/bitbucket server using Post-Receive WebHooks plugin' do
+    before do
+      headers.merge!('HTTP_X_ATLASSIAN_TOKEN' => 'no-check')
+    end
+    let(:body) { File.read('spec/fixtures/stash/create.json') }
+
+    subject { described_class.new(headers, body) }
+
+    it 'returns webhook plugin data' do
+      result[:branch] = 'feature_branch'
+      result.delete(:repo_user)
+      expect(subject.params).to eq(OpenStruct.new(result))
+    end
+  end
+
   context 'visual studio team services' do
     let(:body) { File.read('spec/fixtures/tfs/update.json') }
 
