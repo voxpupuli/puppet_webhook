@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Sinatra::Parsers::WebhookJsonParser do
-  services = %w[stash bitbucket github gitlab tfs]
+  services = %w[bitbucket-server bitbucket stash github gitlab tfs]
   let(:result) { subject.call(payload) }
   services.each do |service|
     context "when payload is from #{service}" do

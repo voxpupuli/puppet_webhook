@@ -19,11 +19,12 @@ module Sinatra
       end
 
       def detect_vcs
-        return 'github'    if github_webhook?
-        return 'gitlab'    if gitlab_webhook?
-        return 'stash'     if stash_webhook?
-        return 'bitbucket' if bitbucket_webhook?
-        return 'tfs'       if tfs_webhook?
+        return 'github'           if github_webhook?
+        return 'gitlab'           if gitlab_webhook?
+        return 'bitbucket-server' if bitbucket_server_webhook?
+        return 'bitbucket'        if bitbucket_webhook?
+        return 'stash'            if stash_webhook?
+        return 'tfs'              if tfs_webhook?
 
         raise StandardError, 'payload not recognised'
       end
@@ -38,8 +39,8 @@ module Sinatra
         env.key?('HTTP_X_GITLAB_EVENT')
       end
 
-      # stash/bitbucket server
-      def stash_webhook?
+      # bitbucket server
+      def bitbucket_server_webhook?
         # https://confluence.atlassian.com/bitbucketserver/event-payload-938025882.html
         env.key?('HTTP_X_EVENT_KEY') && env.key?('HTTP_X_REQUEST_ID')
       end
@@ -47,6 +48,11 @@ module Sinatra
       def bitbucket_webhook?
         # https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html
         env.key?('HTTP_X_EVENT_KEY') && env.key?('HTTP_X_HOOK_UUID')
+      end
+
+      def stash_webhook?
+        # https://confluence.atlassian.com/bitbucketserver/post-service-webhook-for-bitbucket-server-776640367.html
+        env.key?('HTTP_X_ATLASSIAN_TOKEN')
       end
 
       def tfs_webhook?
@@ -67,12 +73,14 @@ module Sinatra
           end
         when 'gitlab'
           @data['ref'].sub('refs/heads/', '')
-        when 'stash'
+        when 'bitbucket-server'
           @data['changes'][0]['refId'].sub('refs/heads/', '')
         when 'bitbucket'
           return @data['push']['changes'][0]['new']['name'] unless deleted?
 
           @data['push']['changes'][0]['old']['name']
+        when 'stash'
+          @data['refChanges'][0]['refId'].sub('refs/heads/', '')
         when 'tfs'
           @data['resource']['refUpdates'][0]['name'].sub('refs/heads/', '')
         end
@@ -84,10 +92,12 @@ module Sinatra
           @data['deleted']
         when 'gitlab'
           @data['after'] == '0000000000000000000000000000000000000000'
-        when 'stash'
+        when 'bitbucket-server'
           @data['changes'][0]['type'] == 'DELETE'
         when 'bitbucket'
           @data['push']['changes'][0]['closed']
+        when 'stash'
+          @data['refChanges'][0]['type'] == 'DELETE'
         when 'tfs'
           @data['resource']['refUpdates'][0]['newObjectId'] == '0000000000000000000000000000000000000000'
         end
