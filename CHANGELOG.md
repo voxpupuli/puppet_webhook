@@ -1,11 +1,16 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Each new release typically also includes the latest modulesync defaults.
-These should not affect the functionality of the module.
 
-## [v1.6.1](https://github.com/voxpupuli/puppet_webhook/tree/v1.6.1) (2019-01-15)
-[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.6.1...v1.6.1)
+## [v1.7.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.7.0) (2019-02-18)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.6.2...v1.7.0)
+
+**Merged pull requests:**
+
+- Re-enable `stash` \(post receive hook plugin\) support [\#90](https://github.com/voxpupuli/puppet_webhook/pull/90) ([alexjfisher](https://github.com/alexjfisher))
+
+## [v1.6.2](https://github.com/voxpupuli/puppet_webhook/tree/v1.6.2) (2019-01-15)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.6.1...v1.6.2)
 
 **Fixed bugs:**
 
