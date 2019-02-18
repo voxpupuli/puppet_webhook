@@ -1,14 +1,22 @@
-*.gem
-webhook.lock
-.ruby_version
-logs/*.log
-.idea/
-coverage
-.byebug_history
-vendor/
+# Ruby files
 .bundle/
+.byebug_history
+*.gem
+coverage
+webhook.lock
+vendor/
+
+# App Ignores
+logs/*.log
+config/config.yml
+
+# Editor Tools
+.ruby_version
+.tool-versions
+.idea/
 .vscode/
+
+# YARDoc Files
 .yardoc/
 doc/
 public/
-config/config.yml
