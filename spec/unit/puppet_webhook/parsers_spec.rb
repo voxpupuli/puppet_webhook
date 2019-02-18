@@ -40,7 +40,7 @@ describe PuppetWebhook::Parsers do
     before do
       headers.merge!('HTTP_X_EVENT_KEY' => 'Push', 'HTTP_X_REQUEST_ID' => '12345')
     end
-    let(:body) { File.read('spec/fixtures/stash/create.json') }
+    let(:body) { File.read('spec/fixtures/bitbucket-server/create.json') }
 
     subject { described_class.new(headers, body) }
 

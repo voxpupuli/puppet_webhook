@@ -40,11 +40,11 @@ module PuppetWebhook
       #
       # @return [String]
       def detect_vcs
-        return 'github'    if github_webhook?
-        return 'gitlab'    if gitlab_webhook?
-        return 'stash'     if stash_webhook?
-        return 'bitbucket' if bitbucket_webhook?
-        return 'tfs'       if tfs_webhook?
+        return 'github'           if github_webhook?
+        return 'gitlab'           if gitlab_webhook?
+        return 'bitbucket-server' if bitbucket_server_webhook?
+        return 'bitbucket'        if bitbucket_webhook?
+        return 'tfs'              if tfs_webhook?
 
         raise StandardError, 'payload not recognised'
       end
@@ -65,10 +65,10 @@ module PuppetWebhook
         @headers.key?('HTTP_X_GITLAB_EVENT')
       end
 
-      # Private: Checks for the BitBucket/Stash Event and Request ID http headers.
+      # Private: Checks for the BitBucket Server Event and Request ID http headers.
       #
       # @return [Boolean]
-      def stash_webhook?
+      def bitbucket_server_webhook?
         # https://confluence.atlassian.com/bitbucketserver/event-payload-938025882.html
         @headers.key?('HTTP_X_EVENT_KEY') && @headers.key?('HTTP_X_REQUEST_ID')
       end
@@ -105,7 +105,7 @@ module PuppetWebhook
           end
         when 'gitlab'
           @data['ref'].sub('refs/heads/', '')
-        when 'stash'
+        when 'bitbucket-server'
           @data['changes'][0]['refId'].sub('refs/heads/', '')
         when 'bitbucket'
           return @data['push']['changes'][0]['new']['name'] unless deleted?
@@ -125,7 +125,7 @@ module PuppetWebhook
           @data['deleted']
         when 'gitlab'
           @data['after'] == '0000000000000000000000000000000000000000'
-        when 'stash'
+        when 'bitbucket-server'
           @data['changes'][0]['type'] == 'DELETE'
         when 'bitbucket'
           @data['push']['changes'][0]['closed']
