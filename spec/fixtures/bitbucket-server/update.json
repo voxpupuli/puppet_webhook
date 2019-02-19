@@ -1,0 +1,44 @@
+{
+   "eventKey":"repo:refs_changed",
+   "date":"2018-08-01T16:19:56-0400",
+   "actor":{
+      "name":"chet",
+      "emailAddress":"ChetRHosey@Eaton.com",
+      "id":3153,
+      "displayName":"Chet Hosey",
+      "active":true,
+      "slug":"chet",
+      "type":"NORMAL"
+   },
+   "repository":{
+      "slug":"r10k",
+      "id":1186,
+      "name":"puppet-r10k",
+      "scmId":"git",
+      "state":"AVAILABLE",
+      "statusMessage":"Available",
+      "forkable":true,
+      "project":{
+         "key":"r10k",
+         "id":814,
+         "name":"puppet-r10k",
+         "description":"Test project for Puppet",
+         "public":true,
+         "type":"NORMAL"
+      },
+      "public":false
+   },
+   "changes":[
+      {
+         "ref":{
+            "id":"refs/heads/feature_branch",
+            "displayId":"feature_branch",
+            "type":"BRANCH"
+         },
+         "refId":"refs/heads/feature_branch",
+         "fromHash":"1fc7624b85c67d1709664e476a27982d55fd020b",
+         "toHash":"4d2a460c01548e39d6f838a68ca1b98f25f1a650",
+         "type":"UPDATE"
+      }
+   ]
+}

@@ -40,11 +40,12 @@ module PuppetWebhook
       #
       # @return [String]
       def detect_vcs
-        return 'github'    if github_webhook?
-        return 'gitlab'    if gitlab_webhook?
-        return 'stash'     if stash_webhook?
-        return 'bitbucket' if bitbucket_webhook?
-        return 'tfs'       if tfs_webhook?
+        return 'github'           if github_webhook?
+        return 'gitlab'           if gitlab_webhook?
+        return 'bitbucket-server' if bitbucket_server_webhook?
+        return 'bitbucket'        if bitbucket_webhook?
+        return 'stash'            if stash_webhook?
+        return 'tfs'              if tfs_webhook?
 
         raise StandardError, 'payload not recognised'
       end
@@ -65,10 +66,10 @@ module PuppetWebhook
         @headers.key?('HTTP_X_GITLAB_EVENT')
       end
 
-      # Private: Checks for the BitBucket/Stash Event and Request ID http headers.
+      # Private: Checks for the BitBucket Server Event and Request ID http headers.
       #
       # @return [Boolean]
-      def stash_webhook?
+      def bitbucket_server_webhook?
         # https://confluence.atlassian.com/bitbucketserver/event-payload-938025882.html
         @headers.key?('HTTP_X_EVENT_KEY') && @headers.key?('HTTP_X_REQUEST_ID')
       end
@@ -79,6 +80,16 @@ module PuppetWebhook
       def bitbucket_webhook?
         # https://confluence.atlassian.com/bitbucket/event-payloads-740262817.html
         @headers.key?('HTTP_X_EVENT_KEY') && @headers.key?('HTTP_X_HOOK_UUID')
+      end
+
+      # Private: Checks for the stash/bitbucket-server post receive hook plugin headers.
+      #
+      # @return [Boolean]
+      def stash_webhook?
+        # This payload is the `Web Post Hooks for Bitbucket Server` hook plugin.
+        # https://marketplace.atlassian.com/apps/1211539/web-post-hooks-for-bitbucket-server?hosting=server&tab=overview
+        # https://confluence.atlassian.com/bitbucketserver/post-service-webhook-for-bitbucket-server-776640367.html
+        @headers.key?('HTTP_X_ATLASSIAN_TOKEN')
       end
 
       # Private: Checks for the VSTS resource and eventType keys in the request body.
@@ -105,12 +116,14 @@ module PuppetWebhook
           end
         when 'gitlab'
           @data['ref'].sub('refs/heads/', '')
-        when 'stash'
+        when 'bitbucket-server'
           @data['changes'][0]['refId'].sub('refs/heads/', '')
         when 'bitbucket'
           return @data['push']['changes'][0]['new']['name'] unless deleted?
 
           @data['push']['changes'][0]['old']['name']
+        when 'stash'
+          @data['refChanges'][0]['refId'].sub('refs/heads/', '')
         when 'tfs'
           @data['resource']['refUpdates'][0]['name'].sub('refs/heads/', '')
         end
@@ -125,10 +138,12 @@ module PuppetWebhook
           @data['deleted']
         when 'gitlab'
           @data['after'] == '0000000000000000000000000000000000000000'
-        when 'stash'
+        when 'bitbucket-server'
           @data['changes'][0]['type'] == 'DELETE'
         when 'bitbucket'
           @data['push']['changes'][0]['closed']
+        when 'stash'
+          @data['refChanges'][0]['type'] == 'DELETE'
         when 'tfs'
           @data['resource']['refUpdates'][0]['newObjectId'] == '0000000000000000000000000000000000000000'
         end

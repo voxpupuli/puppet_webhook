@@ -1,0 +1,44 @@
+{
+   "eventKey":"repo:refs_changed",
+   "date":"2018-08-01T16:28:18-0400",
+   "actor":{
+      "name":"chet",
+      "emailAddress":"ChetRHosey@Eaton.com",
+      "id":3153,
+      "displayName":"Chet Hosey",
+      "active":true,
+      "slug":"chet",
+      "type":"NORMAL"
+   },
+   "repository":{
+      "slug":"puppet-control",
+      "id":1186,
+      "name":"Puppet-Control",
+      "scmId":"git",
+      "state":"AVAILABLE",
+      "statusMessage":"Available",
+      "forkable":true,
+      "project":{
+         "key":"r10k",
+         "id":814,
+         "name":"puppet-r10k",
+         "description":"Test project for Puppet",
+         "public":true,
+         "type":"NORMAL"
+      },
+      "public":false
+   },
+   "changes":[
+      {
+         "ref":{
+            "id":"refs/heads/test-branch",
+            "displayId":"test-branch",
+            "type":"BRANCH"
+         },
+         "refId":"refs/heads/test-branch",
+         "fromHash":"38010648e6a6b9a99633a6e2c4c1d8e3a8b99215",
+         "toHash":"0000000000000000000000000000000000000000",
+         "type":"DELETE"
+      }
+   ]
+}
