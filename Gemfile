@@ -19,6 +19,7 @@ gem 'slack-notifier'
 gem 'sqlite3'
 gem 'thin'
 gem 'tux'
+gem 'warden'
 
 group :development do
   gem 'debase'

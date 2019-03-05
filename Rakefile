@@ -1,7 +1,23 @@
 ENV['SINATRA_ENV'] ||= 'development'
 
+require 'sinatra/activerecord/rake'
+require 'securerandom'
+
+namespace :db do
+  task :load_config do
+    require './app/controllers/application_controller'
+  end
+
+  desc 'Generate auth token for the application'
+  task :generate_token do
+    token = SecureRandom.urlsafe_base64
+    AuthToken.delete_all
+    AuthToken.create(token: token).save!
+    puts token
+  end
+end
+
 require_relative './config/environment'
-# require 'sinatra/activerecord/rake'
 
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new
