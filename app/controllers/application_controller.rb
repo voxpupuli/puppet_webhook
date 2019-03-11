@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
   private
 
   def protected!
-    env['warden'].authenticate!(:access_token)
+    env['warden'].authenticate!(:access_token, :basic)
   end
 
   def authorized?
