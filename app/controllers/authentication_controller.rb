@@ -33,4 +33,24 @@ class AuthenticationController < ApplicationController
       fail!('No token created! Please create a token with `rake db:generate_token` or set protected to `false` in the config.')
     end
   end
+
+  Warden::Strategies.add(:basic) do
+    def valid?
+      APP_CONFIG.user.is_a?(String)
+      APP_CONFIG.pass.is_a?(String)
+    end
+
+    def authenticate!
+      hash = request.env['HTTP_AUTHORIZATION'].split(' ')[1]
+      decoded_auth = Base64.decode64(hash).split(':')
+      umatch = decoded_auth[0] == APP_CONFIG.user
+      pmatch = decoded_auth[1] == APP_CONFIG.pass
+
+      access_granted = umatch == pmatch
+
+      !access_granted ? fail!('Invalid Username or Password!') : success!(access_granted)
+    rescue NoMethodError
+      fail!('No authentication passed! Authentication required.')
+    end
+  end
 end
