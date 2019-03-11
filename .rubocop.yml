@@ -2,6 +2,8 @@ AllCops:
   TargetRubyVersion: 2.2
   Exclude:
     - 'vendor/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/**/*'
 
 Metrics/LineLength:
   Max: 140

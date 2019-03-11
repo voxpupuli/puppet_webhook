@@ -3,6 +3,8 @@ require './config/environment'
 # Main sinatra app class
 class ApplicationController < Sinatra::Base
   configure do
+    register Sinatra::ActiveRecordExtension
+    set :database, "sqlite3:db/#{ENV['SINATRA_ENV']}.sqlite3"
     set :public_folder, 'public'
     set :views, 'app/views'
     set :logger, Logger.new(STDOUT)
@@ -23,13 +25,7 @@ class ApplicationController < Sinatra::Base
   private
 
   def protected!
-    if authorized?
-      logger.info("Authenticated as user #{APP_CONFIG.user} from IP #{request.ip}")
-    else
-      response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
-      logger.error("Authentication failure from IP #{request.ip}")
-      throw(:halt, [401, "Not authorized\n"])
-    end
+    env['warden'].authenticate!(:access_token)
   end
 
   def authorized?

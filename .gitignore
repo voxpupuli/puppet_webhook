@@ -6,6 +6,10 @@ coverage
 webhook.lock
 vendor/
 
+# SQLite Databases
+**/*.sqlite
+**/*.sqlite3
+
 # App Ignores
 logs/*.log
 config/config.yml
