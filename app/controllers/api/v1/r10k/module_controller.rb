@@ -22,7 +22,7 @@ class Api
 
           module_name = sanitize_input(module_name)
           logger.info("Deploying module #{module_name}")
-          Process.detach(fork { deploy_module(module_name) })
+          Deploy::ModuleWorker.perform_async(module_name, config)
         end
 
         private
