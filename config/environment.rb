@@ -3,8 +3,8 @@ ENV['SINATRA_ENV'] ||= 'development'
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
-config = YAML.load_file('config/config.yml').freeze
-APP_CONFIG = OpenStruct.new(config[ENV['SINATRA_ENV']]).freeze
+config = YAML.load_file('config/config.yml')
+APP_CONFIG = OpenStruct.new(config[ENV['SINATRA_ENV']])
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',

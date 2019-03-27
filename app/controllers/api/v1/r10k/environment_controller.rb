@@ -10,6 +10,7 @@ class Api
           prefix = get_prefix(data)
           branch = get_branch(data)
           env = get_env(branch, prefix)
+          paths = APP_CONFIG.module_paths ||= []
 
           EnvironmentController.helpers R10kHelpers
 
@@ -22,7 +23,7 @@ class Api
           else
             logger.info("Deploying environment #{env}")
             # Replace this with Sidekiq
-            Process.detach(fork { deploy_environment(env, data.deleted) })
+            Deploy::EnvironmentWorker.perform_async(branch, config, paths, data.deleted)
           end
         end
 
