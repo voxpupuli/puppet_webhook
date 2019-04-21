@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-puppet_version = ENV['PUPPET_GEM_VERSION'] ||= '6.3.0'
-
 gem 'sinatra'
 gem 'sinatra-contrib'
 # gem 'sinatra-authentication'
@@ -11,7 +9,6 @@ gem 'github_changelog_generator'
 gem 'mcollective-client'
 gem 'pry'
 gem 'puma'
-gem 'puppet', puppet_version
 gem 'puppet_forge', '2.2.8'
 gem 'r10k'
 gem 'rake'
