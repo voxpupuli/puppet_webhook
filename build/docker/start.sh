@@ -1,3 +1,8 @@
-!#/bin/sh
+#!/bin/bash
 
-cd /app && bundle exec rake db:migrate && bundle exec puma config.ru
+cd /app
+
+bundle status || bundle install
+
+bundle exec rake db:migrate &&
+bundle exec puma config.ru
