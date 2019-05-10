@@ -1,0 +1,29 @@
+---
+version: '3.7'
+services:
+  app:
+    image: 'voxpupuli/puppet_webhook:nightly'
+    ports:
+      - "9292:9292"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - "/etc/puppetlabs/code:/puppetlabs/codedir"
+      - "/etc/puppetlabs/webhook/config.yml:/app/config/config.yml"
+      - "/etc/puppetlabs/r10k/r10k.yaml:/etc/r10k.yaml"
+  redis:
+    image: "redis:alpine"
+  sidekiq:
+    image: "voxpupuli/puppet_webhook:nightly"
+    entrypoint: ""
+    command: "bash -c 'cd app/ && bundle exec sidekiq -r /app/config/environment.rb'"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - "/etc/puppetlabs/etc/code:/puppetlabs/codedir"
+      - "/etc/puppetlabs/webhook/config.yml:/app/config/config.yml"
+      - "/etc/puppetlabs/r10k/r10k.yaml:/etc/r10k.yaml"
+      - "/root/.ssh/id_rsa:/root/.ssh/id_rsa"
+    depends_on:
+      - app
+      - redis
