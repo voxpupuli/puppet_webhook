@@ -36,4 +36,26 @@ describe 'Api::V1::R10K::EnvironmentController' do
       Net::HTTP.post URI('http://localhost/api/v1/r10k/environment'), body, headers
     end
   end
+
+  context 'ignoring environment' do
+    let(:body) { File.read('spec/fixtures/github/create.json') }
+    let(:headers) do
+      {
+        'CONTENT_TYPE' => 'application/json',
+        'HTTP_X_GITHUB_EVENT' => 'Push Event',
+        'ACCEPT' => '*/*',
+        'ACCEPT_ENCODING' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+        'USER_AGENT' => 'Ruby'
+      }
+    end
+
+    before do
+      APP_CONFIG['ignore_environments'] = 'master'
+    end
+
+    it 'returns 200 and skips deployment' do
+      stub_request(:post, 'localhost/api/v1/r10k/environment')
+        .with(body: body, headers: headers).to_return(status: 200)
+    end
+  end
 end

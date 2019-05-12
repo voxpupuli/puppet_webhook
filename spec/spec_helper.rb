@@ -1,5 +1,7 @@
 require 'simplecov'
 require 'simplecov-console'
+require 'sidekiq/testing'
+
 SimpleCov.formatters = [
   SimpleCov::Formatter::HTMLFormatter,
   SimpleCov::Formatter::Console
@@ -11,6 +13,8 @@ SimpleCov.start do
   add_filter 'vendor'
   add_filter '.vendor'
 end
+
+Sidekiq::Logging.logger = nil
 
 ENV['SINATRA_ENV'] = 'test'
 
