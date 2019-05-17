@@ -1,7 +1,9 @@
 ENV['SINATRA_ENV'] ||= 'development'
 
+require './lib/puppet_webhook'
 require 'sinatra/activerecord/rake'
 require 'securerandom'
+require 'github_changelog_generator/task'
 
 namespace :db do
   task :load_config do
@@ -33,5 +35,11 @@ desc 'Run all tests and report to coverage tools'
 task test_and_report_coverage: [:test] do
   Coveralls::RakeTask.new
   Rake::Task['coveralls:push'].invoke
+end
+
+GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+  config.user = 'voxpupuli'
+  config.project = 'puppet_webhook'
+  config.future_release = PuppetWebhook::VERSION
 end
 # vim: syntax=ruby
