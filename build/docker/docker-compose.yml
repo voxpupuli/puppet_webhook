@@ -1,8 +1,8 @@
 ---
-version: '3.7'
+version: '3'
 services:
   app:
-    image: 'voxpupuli/puppet_webhook:nightly'
+    image: 'voxpupuli/puppet_webhook:latest'
     ports:
       - "9292:9292"
     environment:
@@ -14,7 +14,7 @@ services:
   redis:
     image: "redis:alpine"
   sidekiq:
-    image: "voxpupuli/puppet_webhook:nightly"
+    image: "voxpupuli/puppet_webhook:latest"
     entrypoint: ""
     command: "bash -c 'cd app/ && bundle exec sidekiq -r /app/config/environment.rb'"
     environment:

@@ -4,18 +4,12 @@ development:
   user: puppet
   pass: puppet
 
-  # Mcollective
-  use_mcollective: false
-
   # Chatops Notification
   chatops: false
 
   # R10k
   default_branch: production
   ignore_environments: []
-  prefix_command: ''
-  r10k_deploy_arguments: "-pv"
   allow_uppercase: true
-  command_prefix: 'umask 0022;'
 
 test: &development

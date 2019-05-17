@@ -28,6 +28,7 @@ GEM
     bcrypt (3.1.12)
     bond (0.5.1)
     builder (3.2.3)
+    byebug (11.0.1)
     capybara (3.15.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -109,6 +110,9 @@ GEM
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    pry-byebug (3.7.0)
+      byebug (~> 11.0)
+      pry (~> 0.10)
     psych (3.1.0)
     public_suffix (3.0.3)
     puma (3.12.1)
@@ -126,6 +130,9 @@ GEM
       multi_json (~> 1.10)
       puppet_forge (~> 2.2.8)
     rack (2.0.6)
+    rack-console (1.3.1)
+      rack (>= 1.1)
+      rack-test
     rack-protection (2.0.5)
       rack
     rack-test (1.1.0)
@@ -251,9 +258,11 @@ DEPENDENCIES
   github_changelog_generator
   mcollective-client
   pry
+  pry-byebug
   puma
   puppet_forge (= 2.2.8)
   r10k
+  rack-console
   rack-test
   rake
   require_all
