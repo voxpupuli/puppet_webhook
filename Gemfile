@@ -29,7 +29,7 @@ group :development do
   gem 'rack-console'
   gem 'rubocop'
   gem 'ruby-debug-ide'
-  gem 'yard'
+  gem 'yard', '>= 0.9.20'
 end
 
 group :test do
