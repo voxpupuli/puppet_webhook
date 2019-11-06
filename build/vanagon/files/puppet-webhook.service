@@ -1,0 +1,10 @@
+[Unit]
+After=network.target
+
+[Service]
+Environment=SINATRA_ENV=production
+Environment=WEBHOOK_CONFDIR=/etc/voxpupuli/webhook.yml
+ExecStart=/opt/voxpupuli/webhook/bin/puma config.ru
+
+[Install]
+WantedBy=multi-user.target

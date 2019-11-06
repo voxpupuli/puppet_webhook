@@ -6,6 +6,11 @@ coverage
 webhook.lock
 vendor/
 
+# Vanagon/Build files
+vanagon_hosts.log
+ext/
+output/
+
 # SQLite Databases
 **/*.sqlite
 **/*.sqlite3

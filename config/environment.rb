@@ -3,7 +3,9 @@ ENV['SINATRA_ENV'] ||= 'development'
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
-config = YAML.load_file('config/config.yml')
+config_path = ENV['WEBHOOK_CONFDIR'] || 'config/config.yml'
+
+config = YAML.load_file(config_path)
 APP_CONFIG = OpenStruct.new(config[ENV['SINATRA_ENV']])
 
 ActiveRecord::Base.establish_connection(
