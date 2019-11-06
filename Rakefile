@@ -19,7 +19,7 @@ namespace :db do
   end
 end
 
-require_relative './config/environment'
+require './config/environment'
 
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new
