@@ -2,6 +2,7 @@ platform "ubuntu-18.04-amd64" do |plat|
   plat.defaultdir "/etc/default"
   plat.servicetype "systemd"
   plat.codename "bionic"
+  plat.servicedir "/etc/systemd/system"
 
   plat.docker_image "ubuntu_build:bionic"
   plat.docker_run_args "--privileged=true"
@@ -15,6 +16,8 @@ platform "ubuntu-18.04-amd64" do |plat|
     "make",
     "pkg-config",
     "zlib1g-dev",
+    "pl-cmake",
+    "pl-gcc",
     "systemtap-sdt-dev",
     "openjdk-8-jre-headless"
   ]
