@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'parsers/json'
 require_relative 'parsers/www_form_url_encoded'
 

@@ -1,12 +1,14 @@
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.6
   Exclude:
     - 'vendor/**/*'
     - 'db/schema.rb'
     - 'db/migrate/**/*'
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 140
+  Exclude:
+    - build/**/*.rb
 
 Metrics/AbcSize:
   Enabled: false
@@ -20,6 +22,7 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
+    - build/**/*.rb
 
 Metrics/PerceivedComplexity:
   Enabled: false
@@ -29,7 +32,23 @@ Metrics/ModuleLength:
 
 Style/RegexpLiteral:
   EnforcedStyle: percent_r
-  Enabled: True
+  Enabled: true
 
 Layout/EmptyLinesAroundArguments:
-  Enabled: False
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Exclude:
+    - build/**/*.rb
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false

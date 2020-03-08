@@ -1,4 +1,7 @@
-require './config/environment'
+# frozen_string_literal: true
+
+require 'sinatra'
+require 'sinatra/activerecord'
 
 # Main sinatra app class
 class ApplicationController < Sinatra::Base

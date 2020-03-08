@@ -1,0 +1,13 @@
+[Unit]
+After=network.target
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/puppet-webhook
+EnvironmentFile=-/etc/default/puppet-webhook
+WorkingDirectory=/opt/voxpupuli/webhook
+ExecStart=/opt/voxpupuli/webhook/bin/bundle exec puma config.ru
+ExecReload=/bin/kill -HUP $PID
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

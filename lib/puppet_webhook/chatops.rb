@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PuppetWebhook
   # Chatops object for sending webhook notifications to chatops tools
   #

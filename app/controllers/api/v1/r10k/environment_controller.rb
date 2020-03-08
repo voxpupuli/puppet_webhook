@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api
   class V1
     class R10K

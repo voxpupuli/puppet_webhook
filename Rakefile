@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['SINATRA_ENV'] ||= 'development'
 
 require './lib/puppet_webhook'
@@ -18,8 +20,6 @@ namespace :db do
     puts token
   end
 end
-
-require_relative './config/environment'
 
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new
