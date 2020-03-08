@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 component 'openssl' do |pkg, settings, platform|
   pkg.version '1.1.1d'
   pkg.md5sum '3be209000dbc7e1b95bcdf47980a3baa'
@@ -9,7 +11,7 @@ component 'openssl' do |pkg, settings, platform|
 
   target = cflags = ldflags = sslflags = ''
 
-  pkg.environment 'PATH', "/opt/pl-build-tools/bin:$$PATH"
+  pkg.environment 'PATH', '/opt/pl-build-tools/bin:$$PATH'
   pkg.environment 'CC', "/opt/pl-build-tools/bin/#{settings[:platform_triple]}-gcc"
 
   cflags = "#{settings[:cflags]} -fPIC"
@@ -19,10 +21,10 @@ component 'openssl' do |pkg, settings, platform|
 
   cflags = settings[:cflags]
   ldflags = "#{settings[:ldflags]} -Wl,-z,relro"
-  if platform.architecture =~ /86$/
+  if platform.architecture =~ %r{86$}
     target = 'linux-elf'
     sslflags = '386'
-  elsif platform.architecture =~ /64$/
+  elsif platform.architecture =~ %r{64$}
     target = 'linux-x86_64'
   end
 
@@ -36,9 +38,9 @@ component 'openssl' do |pkg, settings, platform|
   # CONFIGURE
   ###########
 
-#  if platform.is_cross_compiled?
-#    pkg.apply_patch 'resources/patches/openssl/openssl-1.1.1a-revert-7a061312.patch'
-#  end
+  #  if platform.is_cross_compiled?
+  #    pkg.apply_patch 'resources/patches/openssl/openssl-1.1.1a-revert-7a061312.patch'
+  #  end
 
   # OpenSSL Configure doesn't honor CFLAGS or LDFLAGS as environment variables.
   # Instead, those should be passed to Configure at the end of its options, as
@@ -76,7 +78,7 @@ component 'openssl' do |pkg, settings, platform|
   pkg.build do
     [
       "#{platform[:make]} depend",
-      "#{platform[:make]}"
+      (platform[:make]).to_s
     ]
   end
 
@@ -95,4 +97,3 @@ component 'openssl' do |pkg, settings, platform|
 
   pkg.install_file 'LICENSE', "#{settings[:prefix]}/share/doc/openssl-#{pkg.get_version}/LICENSE"
 end
-

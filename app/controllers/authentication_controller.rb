@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This class handles application authentication.
 class AuthenticationController < ApplicationController
   post '/unauthenticated' do

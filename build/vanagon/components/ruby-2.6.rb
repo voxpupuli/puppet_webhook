@@ -1,6 +1,8 @@
-component 'ruby-2.6' do |pkg, settings, platform|
-  pkg.version "2.6.5"
-  pkg.sha256sum "66976b716ecc1fd34f9b7c3c2b07bbd37631815377a2e3e85a5b194cfdcbed7d"
+# frozen_string_literal: true
+
+component 'ruby-2.6' do |pkg, settings, _platform|
+  pkg.version '2.6.5'
+  pkg.sha256sum '66976b716ecc1fd34f9b7c3c2b07bbd37631815377a2e3e85a5b194cfdcbed7d'
 
   ruby_dir = settings[:ruby_dir]
   ruby_bindir = settings[:ruby_bindir]

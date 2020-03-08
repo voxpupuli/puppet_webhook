@@ -13,7 +13,7 @@ before_script:
   - ./cc-test-reporter before-build
   - 'bundle exec rake db:migrate SINATRA_ENV=test'
 script:
-  - 'bundle exec rspec'
+  - 'bundle exec rake $CHECK'
 after_script:
   - if [ "$CHECK" == "test_and_report_coverage" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
 matrix:

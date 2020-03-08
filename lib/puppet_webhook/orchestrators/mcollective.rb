@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'mcollective'
 
 module PuppetWebhook
@@ -54,7 +56,7 @@ module PuppetWebhook
       #
       # returns [::MCollective::RPC::Client]
       def client
-        client = ::MCollective::RPC::Client.new(@agent, config_file: ::MCollective::Util.config_file_for_user, options: ::MCollective::Util.default_options) # rubocop:disable Metrics/LineLength
+        client = ::MCollective::RPC::Client.new(@agent, config_file: ::MCollective::Util.config_file_for_user, options: ::MCollective::Util.default_options) # rubocop:disable Layout/LineLength
         client.config = @options if @options
         client.timeout = @timeout if @timeout
         client.discovery_timeout = @dtimeout if @dtimeout

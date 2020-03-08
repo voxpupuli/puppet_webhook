@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 group :default do
@@ -10,9 +12,9 @@ group :default do
   gem 'mcollective-client'
   gem 'puma'
   gem 'puppet_forge', '2.2.8'
-  gem 'rb-readline'
   gem 'r10k'
   gem 'rake'
+  gem 'rb-readline'
   gem 'require_all'
   gem 'rocket-chat-notifier'
   gem 'shotgun'
@@ -40,8 +42,8 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'database_cleaner-active_record'
   gem 'coveralls'
+  gem 'database_cleaner-active_record'
   gem 'rack-test'
   gem 'rspec'
   gem 'simplecov'

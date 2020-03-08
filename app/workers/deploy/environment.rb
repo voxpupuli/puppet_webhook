@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'r10k/action/deploy/environment'
 
 module Deploy

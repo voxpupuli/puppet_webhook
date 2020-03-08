@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # R10k helper methods for the sinatra app
 module R10kHelpers
   def config

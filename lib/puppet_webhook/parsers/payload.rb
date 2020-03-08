@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PuppetWebhook
   class Parsers
     # Main parser class used by the json and www_form_url_encoded parsers. This will
