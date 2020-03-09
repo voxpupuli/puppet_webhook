@@ -36,7 +36,6 @@ component 'app' do |pkg, _settings, _platform|
       'cp Rakefile /opt/voxpupuli/webhook/',
       'cp ../postinst.sh /opt/voxpupuli/webhook/bin/',
       'cp ../generate_token /opt/voxpupuli/webhook/bin/',
-      'ln -s /opt/voxpupuli/webhook/bin/generate_token /usr/local/bin/generate_token',
       'cp /opt/voxpupuli/webhook/config/config.yml.example /etc/voxpupuli/webhook.yaml',
       "echo 'App installed'"
     ]
