@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+echo "This command will generate an API token for use with Puppet Webhook and will replace any existing token you currently have"
+
+read -p "are you sure? (y/N)" -n 1 -r
+
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    export SINATRA_EN=production
+    export RUBYLIB=/opt/voxpupuli/webhook/lib/ruby:/opt/voxpupuli/webhook:/opt/voxpupuli/webhook/app/models
+    export GEM_HOME=/opt/voxpupuli/webhook/lib/ruby/gems/2.6.0
+    export GEM_PATH=$GEM_HOME
+    export LD_PATH=/opt/voxpupuli/webhook/lib
+    export PATH=/opt/voxpupuli/webhook/bin:$PATH
+    cd /opt/voxpupuli/webhook && bin/bundle exec rake db:generate_token --trace
+    echo "Be sure to save this somewhere as you won't be able to retrieve it again without generating a new token!"
+fi

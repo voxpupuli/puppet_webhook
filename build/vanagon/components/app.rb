@@ -5,12 +5,13 @@ component 'app' do |pkg, _settings, _platform|
 
   if platform.is_deb?
     pkg.requires 'sqlite3'
+    pkg.requires 'redis-server'
   elsif platform.is_el?
     pkg.requires 'sqlite'
+    pkg.requires 'redis'
   else
     raise("Plaform #{platform.name} is not yet supported")
   end
-  pkg.requires 'redis'
 
   pkg.build_requires 'ruby-2.6'
   pkg.build_requires 'sqlite3'
