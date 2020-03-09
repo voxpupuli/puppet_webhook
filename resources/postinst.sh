@@ -6,4 +6,4 @@ export GEM_PATH=$GEM_HOME
 export LD_PATH=/opt/voxpupuli/webhook/lib
 export PATH=/opt/voxpupuli/webhook/bin:$PATH
 
-cd /opt/voxpupuli/webhook && bin/bundle exec rake db:migrate
+cd /opt/voxpupuli/webhook && bin/bundle install && bin/bundle exec rake db:migrate
