@@ -1,7 +1,43 @@
-# Change Log
+# Changelog
 
-## [2.0.0](https://github.com/voxpupuli/puppet_webhook/tree/2.0.0) (2019-05-17)
-[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.7.0...2.0.0)
+## [2.1.0](https://github.com/voxpupuli/puppet_webhook/tree/2.1.0) (2020-03-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.0.0...2.1.0)
+
+**Implemented enhancements:**
+
+- Add Warden and enforce token auth [\#82](https://github.com/voxpupuli/puppet_webhook/issues/82)
+- Update tests to use WebMock instead of Rack::Test [\#72](https://github.com/voxpupuli/puppet_webhook/issues/72)
+- Remove Puppet Server Requirement [\#70](https://github.com/voxpupuli/puppet_webhook/issues/70)
+
+**Closed issues:**
+
+- Breaks on Ruby 2.4 [\#104](https://github.com/voxpupuli/puppet_webhook/issues/104)
+
+**Merged pull requests:**
+
+- Improve the token generator [\#117](https://github.com/voxpupuli/puppet_webhook/pull/117) ([dhollinger](https://github.com/dhollinger))
+- Add/fix redis dependency [\#116](https://github.com/voxpupuli/puppet_webhook/pull/116) ([dhollinger](https://github.com/dhollinger))
+- Add new build tools and clean up some require statements [\#115](https://github.com/voxpupuli/puppet_webhook/pull/115) ([dhollinger](https://github.com/dhollinger))
+- correct ruby requirements in README.md [\#110](https://github.com/voxpupuli/puppet_webhook/pull/110) ([bastelfreak](https://github.com/bastelfreak))
+- Bump rack from 2.0.6 to 2.0.8 [\#109](https://github.com/voxpupuli/puppet_webhook/pull/109) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Bump puma from 3.12.1 to 3.12.2 [\#108](https://github.com/voxpupuli/puppet_webhook/pull/108) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Add build config and tools [\#107](https://github.com/voxpupuli/puppet_webhook/pull/107) ([dhollinger](https://github.com/dhollinger))
+- Bump nokogiri from 1.10.2 to 1.10.5 [\#105](https://github.com/voxpupuli/puppet_webhook/pull/105) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Update yard gem [\#103](https://github.com/voxpupuli/puppet_webhook/pull/103) ([dhollinger](https://github.com/dhollinger))
+
+## [v2.0.0](https://github.com/voxpupuli/puppet_webhook/tree/v2.0.0) (2019-05-17)
+
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.7.0...v2.0.0)
+
+**Breaking changes:**
+
+- Add sidekiq support with puppet and r10k libs [\#96](https://github.com/voxpupuli/puppet_webhook/pull/96) ([dhollinger](https://github.com/dhollinger))
+- MVC Rework [\#83](https://github.com/voxpupuli/puppet_webhook/pull/83) ([dhollinger](https://github.com/dhollinger))
+
+**Fixed bugs:**
+
+- Fix a http body param bug [\#88](https://github.com/voxpupuli/puppet_webhook/pull/88) ([dhollinger](https://github.com/dhollinger))
 
 **Closed issues:**
 
@@ -14,35 +50,27 @@
 - Add Docker container and example docker-compose [\#99](https://github.com/voxpupuli/puppet_webhook/pull/99) ([dhollinger](https://github.com/dhollinger))
 - Update the README in prep for 2.0.0 release [\#98](https://github.com/voxpupuli/puppet_webhook/pull/98) ([dhollinger](https://github.com/dhollinger))
 - Remove unecessary puppet integration [\#97](https://github.com/voxpupuli/puppet_webhook/pull/97) ([dhollinger](https://github.com/dhollinger))
-- Add sidekiq support with puppet and r10k libs [\#96](https://github.com/voxpupuli/puppet_webhook/pull/96) ([dhollinger](https://github.com/dhollinger))
 - Re-add user/pass support [\#95](https://github.com/voxpupuli/puppet_webhook/pull/95) ([dhollinger](https://github.com/dhollinger))
 - Added authentication model, controller, and tasks [\#94](https://github.com/voxpupuli/puppet_webhook/pull/94) ([dhollinger](https://github.com/dhollinger))
 - Remove gemnasium badge [\#93](https://github.com/voxpupuli/puppet_webhook/pull/93) ([alexjfisher](https://github.com/alexjfisher))
 - Reinstate stash support in 2.x [\#91](https://github.com/voxpupuli/puppet_webhook/pull/91) ([alexjfisher](https://github.com/alexjfisher))
+- Remove config file and have an example file in place [\#87](https://github.com/voxpupuli/puppet_webhook/pull/87) ([dhollinger](https://github.com/dhollinger))
 
 ## [v1.7.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.7.0) (2019-02-18)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.6.2...v1.7.0)
 
-**Implemented enhancements:**
-
-- Simplify Parser [\#71](https://github.com/voxpupuli/puppet_webhook/issues/71)
-- MVC Rework [\#83](https://github.com/voxpupuli/puppet_webhook/pull/83) ([dhollinger](https://github.com/dhollinger))
-
-**Fixed bugs:**
-
-- Fix a http body param bug [\#88](https://github.com/voxpupuli/puppet_webhook/pull/88) ([dhollinger](https://github.com/dhollinger))
-
-**Closed issues:**
+**Breaking changes:**
 
 - Restructure directory structure [\#74](https://github.com/voxpupuli/puppet_webhook/issues/74)
+- Simplify Parser [\#71](https://github.com/voxpupuli/puppet_webhook/issues/71)
 
 **Merged pull requests:**
 
-- Release 1.7.0 [\#92](https://github.com/voxpupuli/puppet_webhook/pull/92) ([alexjfisher](https://github.com/alexjfisher))
 - Re-enable `stash` \(post receive hook plugin\) support [\#90](https://github.com/voxpupuli/puppet_webhook/pull/90) ([alexjfisher](https://github.com/alexjfisher))
-- Remove config file and have an example file in place [\#87](https://github.com/voxpupuli/puppet_webhook/pull/87) ([dhollinger](https://github.com/dhollinger))
 
 ## [v1.6.2](https://github.com/voxpupuli/puppet_webhook/tree/v1.6.2) (2019-01-15)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.6.1...v1.6.2)
 
 **Fixed bugs:**
@@ -52,20 +80,17 @@
 **Merged pull requests:**
 
 - bump version in gemspec [\#86](https://github.com/voxpupuli/puppet_webhook/pull/86) ([dhollinger](https://github.com/dhollinger))
-- Release 1.6.2 [\#85](https://github.com/voxpupuli/puppet_webhook/pull/85) ([dhollinger](https://github.com/dhollinger))
 
 ## [v1.6.1](https://github.com/voxpupuli/puppet_webhook/tree/v1.6.1) (2018-12-23)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.6.0...v1.6.1)
 
 **Fixed bugs:**
 
 - Change webrick log constants to strings to match conf file [\#80](https://github.com/voxpupuli/puppet_webhook/pull/80) ([dhollinger](https://github.com/dhollinger))
 
-**Merged pull requests:**
-
-- Release 1.6.1 [\#81](https://github.com/voxpupuli/puppet_webhook/pull/81) ([dhollinger](https://github.com/dhollinger))
-
 ## [v1.6.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.6.0) (2018-12-19)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.2...v1.6.0)
 
 **Implemented enhancements:**
@@ -86,27 +111,27 @@
 
 **Merged pull requests:**
 
-- Release 1.6.0 [\#79](https://github.com/voxpupuli/puppet_webhook/pull/79) ([dhollinger](https://github.com/dhollinger))
 - Ensure that loglevel is using the const value [\#78](https://github.com/voxpupuli/puppet_webhook/pull/78) ([dhollinger](https://github.com/dhollinger))
 - Add Sidekiq support [\#76](https://github.com/voxpupuli/puppet_webhook/pull/76) ([dhollinger](https://github.com/dhollinger))
 
 ## [v1.5.2](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.2) (2018-11-02)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.1...v1.5.2)
 
 **Merged pull requests:**
 
-- Release 1.5.2 [\#67](https://github.com/voxpupuli/puppet_webhook/pull/67) ([dhollinger](https://github.com/dhollinger))
 - Only load mco and chatops plugins if enabled [\#66](https://github.com/voxpupuli/puppet_webhook/pull/66) ([dhollinger](https://github.com/dhollinger))
 
 ## [v1.5.1](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.1) (2018-11-02)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.0...v1.5.1)
 
 **Merged pull requests:**
 
-- Release 1.5.1 [\#64](https://github.com/voxpupuli/puppet_webhook/pull/64) ([dhollinger](https://github.com/dhollinger))
 - Remove global mcollective requirement as it has been moved into a plugin [\#63](https://github.com/voxpupuli/puppet_webhook/pull/63) ([dhollinger](https://github.com/dhollinger))
 
 ## [v1.5.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.5.0) (2018-11-02)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.4.0...v1.5.0)
 
 **Implemented enhancements:**
@@ -119,13 +144,13 @@
 
 **Merged pull requests:**
 
-- Release 1.5.0 [\#62](https://github.com/voxpupuli/puppet_webhook/pull/62) ([dhollinger](https://github.com/dhollinger))
 - Bitbucket Server \(stash\) detection / JSON updates [\#61](https://github.com/voxpupuli/puppet_webhook/pull/61) ([ChetHosey](https://github.com/ChetHosey))
 - Stray payload reference [\#60](https://github.com/voxpupuli/puppet_webhook/pull/60) ([ChetHosey](https://github.com/ChetHosey))
 - Changed minimum versions to Puppet 5/Ruby 2.2 [\#58](https://github.com/voxpupuli/puppet_webhook/pull/58) ([ChetHosey](https://github.com/ChetHosey))
 - Add tests for the DataParsers helper module [\#55](https://github.com/voxpupuli/puppet_webhook/pull/55) ([dhollinger](https://github.com/dhollinger))
 
 ## [v1.4.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.4.0) (2018-05-02)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.3.0...v1.4.0)
 
 **Implemented enhancements:**
@@ -133,11 +158,8 @@
 - Rocketchat plugin [\#53](https://github.com/voxpupuli/puppet_webhook/pull/53) ([dhollinger](https://github.com/dhollinger))
 - ChatOps Plugin Support [\#52](https://github.com/voxpupuli/puppet_webhook/pull/52) ([dhollinger](https://github.com/dhollinger))
 
-**Merged pull requests:**
-
-- Release 1.4.0 [\#54](https://github.com/voxpupuli/puppet_webhook/pull/54) ([dhollinger](https://github.com/dhollinger))
-
 ## [v1.3.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.3.0) (2018-04-24)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.2.0...v1.3.0)
 
 **Implemented enhancements:**
@@ -145,19 +167,16 @@
 - Add additional Slack options. [\#50](https://github.com/voxpupuli/puppet_webhook/pull/50) ([dhollinger](https://github.com/dhollinger))
 - Async routes [\#49](https://github.com/voxpupuli/puppet_webhook/pull/49) ([dhollinger](https://github.com/dhollinger))
 
-**Merged pull requests:**
-
-- Release 1.3.0 [\#51](https://github.com/voxpupuli/puppet_webhook/pull/51) ([dhollinger](https://github.com/dhollinger))
-
 ## [v1.2.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.2.0) (2018-04-06)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.1.0...v1.2.0)
 
 **Merged pull requests:**
 
-- Release 1.2.0 [\#48](https://github.com/voxpupuli/puppet_webhook/pull/48) ([dhollinger](https://github.com/dhollinger))
 - Clarify that mco is not a hard requirement [\#47](https://github.com/voxpupuli/puppet_webhook/pull/47) ([binford2k](https://github.com/binford2k))
 
 ## [v1.1.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.1.0) (2018-03-06)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.0.0...v1.1.0)
 
 **Implemented enhancements:**
@@ -170,10 +189,10 @@
 
 **Merged pull requests:**
 
-- Release 1.1.0 [\#46](https://github.com/voxpupuli/puppet_webhook/pull/46) ([dhollinger](https://github.com/dhollinger))
 - Replace all MCollective agent calls with the agent lib. [\#44](https://github.com/voxpupuli/puppet_webhook/pull/44) ([dhollinger](https://github.com/dhollinger))
 
 ## [v1.0.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.0.0) (2017-12-21)
+
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v0.1.0...v1.0.0)
 
 **Implemented enhancements:**
@@ -186,7 +205,6 @@
 
 **Merged pull requests:**
 
-- Release 1.0.0 [\#42](https://github.com/voxpupuli/puppet_webhook/pull/42) ([dhollinger](https://github.com/dhollinger))
 - Update config options and docs [\#41](https://github.com/voxpupuli/puppet_webhook/pull/41) ([dhollinger](https://github.com/dhollinger))
 - Fix payload gentypes [\#39](https://github.com/voxpupuli/puppet_webhook/pull/39) ([dhollinger](https://github.com/dhollinger))
 - Add simple config.ru file [\#38](https://github.com/voxpupuli/puppet_webhook/pull/38) ([dhollinger](https://github.com/dhollinger))
@@ -198,6 +216,9 @@
 - Report coverage to Codacy and add badge [\#31](https://github.com/voxpupuli/puppet_webhook/pull/31) ([alexjfisher](https://github.com/alexjfisher))
 
 ## [v0.1.0](https://github.com/voxpupuli/puppet_webhook/tree/v0.1.0) (2017-11-17)
+
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/218b91ded31f8053cd6871677fdace831af49107...v0.1.0)
+
 **Implemented enhancements:**
 
 - Cleanup config loader [\#2](https://github.com/voxpupuli/puppet_webhook/issues/2)
@@ -209,7 +230,6 @@
 
 **Merged pull requests:**
 
-- Development release 0.1.0 [\#24](https://github.com/voxpupuli/puppet_webhook/pull/24) ([dhollinger](https://github.com/dhollinger))
 - Add rubygems deploy to travis [\#23](https://github.com/voxpupuli/puppet_webhook/pull/23) ([dhollinger](https://github.com/dhollinger))
 - Fix TFS checks and add more fixtures/tests [\#22](https://github.com/voxpupuli/puppet_webhook/pull/22) ([dhollinger](https://github.com/dhollinger))
 - Fix README badges after project rename [\#21](https://github.com/voxpupuli/puppet_webhook/pull/21) ([dhollinger](https://github.com/dhollinger))
@@ -230,4 +250,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
