@@ -3,6 +3,15 @@
 component 'app' do |pkg, _settings, _platform|
   pkg.url 'https://github.com/voxpupuli/puppet_webhook'
 
+  if platform.is_deb?
+    pkg.requires 'sqlite3'
+  elsif platform.is_el?
+    pkg.requires 'sqlite'
+  else
+    raise("Plaform #{platform.name} is not yet supported")
+  end
+  pkg.requires 'redis'
+
   pkg.build_requires 'ruby-2.6'
   pkg.build_requires 'sqlite3'
   pkg.build_requires 'runtime'
@@ -11,6 +20,8 @@ component 'app' do |pkg, _settings, _platform|
 
   pkg.add_source 'file://resources/puppet-webhook.service'
   pkg.add_source 'file://resources/puppetwebhook'
+  pkg.add_source 'file://resources/postinst.sh'
+  pkg.add_source 'file://resources/generate_token'
 
   pkg.install do
     [
@@ -22,6 +33,9 @@ component 'app' do |pkg, _settings, _platform|
       'cp Gemfile* /opt/voxpupuli/webhook/',
       'cp README.md /opt/voxpupuli/webhook/',
       'cp Rakefile /opt/voxpupuli/webhook/',
+      'cp ../postinst.sh /opt/voxpupuli/webhook/bin/',
+      'cp ../generate_token /opt/voxpupuli/webhook/bin/',
+      'ln -s /opt/voxpupuli/webhook/bin/generate_token /usr/local/bin/generate_token',
       'cp /opt/voxpupuli/webhook/config/config.yml.example /etc/voxpupuli/webhook.yaml',
       "echo 'App installed'"
     ]
@@ -31,6 +45,7 @@ component 'app' do |pkg, _settings, _platform|
 
   pkg.add_postinstall_action('install', 'cd /opt/voxpupuli/webhook && bin/bundle update --bundler')
 
-  pkg.add_postinstall_action(%w[install upgrade], 'cd /opt/voxpupuli/webhook && bin/bundle install --with=default && bin/bundle exec rake db:migrate')
-  pkg.add_postinstall_action(%w[install upgrade], 'systemctl daemon-reload')
+  pkg.add_postinstall_action(%w[install upgrade], 'cd /opt/voxpupuli/webhook && bin/postinst.sh')
+
+  pkg.add_postremove_action('removal', 'rm -rf /opt/voxpupuli/webhook')
 end

@@ -14,6 +14,11 @@ namespace :db do
 
   desc 'Generate auth token for the application'
   task :generate_token do
+    require './app/models/auth_token'
+    ActiveRecord::Base.establish_connection(
+      adapter: 'sqlite3',
+      database: "db/#{ENV['SINATRA_ENV']}.sqlite3"
+    )
     token = SecureRandom.urlsafe_base64
     AuthToken.delete_all
     AuthToken.create(token: token).save!
