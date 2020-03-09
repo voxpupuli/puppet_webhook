@@ -7,10 +7,12 @@ services:
       - "9292:9292"
     environment:
       - REDIS_URL=redis://redis:6379/0
+      - SINATRA_ENV=production
+      - WEBHOOK_CONFDIR=/config/webhook.yaml
     volumes:
       - "/etc/puppetlabs/code:/puppetlabs/codedir"
-      - "/etc/puppetlabs/webhook/config.yml:/app/config/config.yml"
-      - "/etc/puppetlabs/r10k/r10k.yaml:/etc/r10k.yaml"
+      - "/etc/voxpupuli/:/config"
+      - "/etc/puppetlabs/r10k:/etc/r10k"
   redis:
     image: "redis:alpine"
   sidekiq:
@@ -19,10 +21,12 @@ services:
     command: "bash -c 'cd app/ && bundle exec sidekiq -r /app/config/environment.rb'"
     environment:
       - REDIS_URL=redis://redis:6379/0
+      - SINATRA_ENV=production
+      - WEBHOOK_CONFDIR=/config/webhook.yaml
     volumes:
-      - "/etc/puppetlabs/etc/code:/puppetlabs/codedir"
-      - "/etc/puppetlabs/webhook/config.yml:/app/config/config.yml"
-      - "/etc/puppetlabs/r10k/r10k.yaml:/etc/r10k.yaml"
+      - "/etc/puppetlabs/code:/puppetlabs/codedir"
+      - "/etc/voxpupuli/:/config"
+      - "/etc/puppetlabs/r10k:/etc/r10k"
       - "/root/.ssh/id_rsa:/root/.ssh/id_rsa"
     depends_on:
       - app
