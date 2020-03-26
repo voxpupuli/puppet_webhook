@@ -36,7 +36,7 @@ Please see the pre-2.x [documentation](docs/LEGACY.md) if using the old gem-base
 Add the Voxpupuli GPG key and repository:
 ```bash
 wget -qO - "https://bintray.com/user/downloadSubjectPublicKey?username=voxpupuli" | sudo apt-key add -
-echo "deb https://dl.bintray.com/voxpupuli/deb $(grep "VERSION_CODENAME=" /etc/os-release |awk -F= '{print $2}')  main" | sudo tee -a /etc/apt/sources.list.d/voxpupuli.list
+echo "deb https://dl.bintray.com/voxpupuli/deb $(awk -F= '/VERSION_CODENAME=/ {print $2}' /etc/os-release) main" | sudo tee -a /etc/apt/sources.list.d/voxpupuli.list
 sudo apt update
 ```
 
@@ -167,4 +167,3 @@ Default: []
 type: Boolean
 description: Allow uppercase within the name of the module or environment passed to the API.
 default: true
-
