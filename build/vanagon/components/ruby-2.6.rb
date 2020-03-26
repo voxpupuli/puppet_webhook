@@ -13,7 +13,7 @@ component 'ruby-2.6' do |pkg, settings, _platform|
 
   pkg.environment 'optflags', '-O2'
 
-  special_flags = " --prefix=#{ruby_dir} --with-opt-dir=#{settings[:prefix]} --enable-dtrace --with-baseruby=#{host_ruby}"
+  special_flags = " --prefix=#{ruby_dir} --with-opt-dir=#{settings[:prefix]} --with-baseruby=#{host_ruby} --with-compress-debug-sections=no"
 
   pkg.configure do
     [
