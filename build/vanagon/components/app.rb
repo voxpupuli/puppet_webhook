@@ -4,9 +4,11 @@ component 'app' do |pkg, _settings, _platform|
   pkg.url 'https://github.com/voxpupuli/puppet_webhook'
 
   if platform.is_deb?
+    pkg.build_requires 'sqlite3'
     pkg.requires 'sqlite3'
     pkg.requires 'redis-server'
   elsif platform.is_el?
+    build_requires 'sqlite-devel'
     pkg.requires 'sqlite'
     pkg.requires 'redis'
   else
@@ -14,7 +16,6 @@ component 'app' do |pkg, _settings, _platform|
   end
 
   pkg.build_requires 'ruby-2.6'
-  pkg.build_requires 'sqlite3'
   pkg.build_requires 'runtime'
   pkg.environment 'PATH', '/opt/voxpupuli/webhook/bin:$(PATH)'
   pkg.environment 'GEM_HOME', '/opt/voxpupuli/webhook/lib/ruby/2.6.0'

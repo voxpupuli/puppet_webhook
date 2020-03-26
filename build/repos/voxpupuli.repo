@@ -1,0 +1,7 @@
+[voxpupuli]
+name=voxpupuli
+baseurl=https://dl.bintray.com/voxpupuli/rpm/el/$releasever/$basearch
+gpgcheck=0
+repo_gpgcheck=1
+enabled=1
+gpgkey="https://bintray.com/user/downloadSubjectPublicKey?username=voxpupuli"

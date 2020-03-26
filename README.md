@@ -31,6 +31,43 @@ Please see the pre-2.x [documentation](docs/LEGACY.md) if using the old gem-base
 
 ### Modern puppet_webhook (>= 2.x)
 
+#### Ubuntu/Debian
+
+Add the Voxpupuli GPG key and repository:
+```bash
+wget -qO - "https://bintray.com/user/downloadSubjectPublicKey?username=voxpupuli" | sudo apt-key add -
+echo "deb https://dl.bintray.com/voxpupuli/deb $(grep "VERSION_CODENAME=" /etc/os-release |awk -F= '{print $2}')  main" | sudo tee -a /etc/apt/sources.list.d/voxpupuli.list
+sudo apt update
+```
+
+Install puppet_webhook
+```bash
+sudo apt install puppet-webhook
+```
+
+#### RedHat/CentOS/Oracle/Amazon
+
+Download the voxpupuli.repo file
+```bash
+wget https://raw.githubusercontent.com/voxpupuli/puppet_webhook/master/build/repos/voxpupuli.repo -o voxpupuli.repo
+sudo mv voxpupuli.repo /etc/yum.repos.d/voxpupuli.repo
+```
+
+Install puppet_webhook
+```
+yum install puppet-webhook
+```
+
+#### Docker Compose
+Experience with Docker and Docker Compose are assumed. The Docker Compose setup expects that the Webhook API container volumes will have access to the codedir, either via NFS or on system.
+
+1. Download the sample `docker-compose.yml` file from the github repo:
+```
+$ wget -O docker-compose.yml https://raw.githubusercontent.com/voxpupuli/puppet_webhook/master/build/docker/docker-compose.yml
+```
+2. Edit the image, environment, and volumes keys based on your own needs.
+3. run `docker-compose up`
+
 #### Generic
 
 This assumes you already have the correct Ruby version installed in the system or via a tool like `rbenv`, `rvm`, or `asdf`.
@@ -48,22 +85,6 @@ $ cd /opt/puppet_webhook && bundle install
 ```bash
 $ bundle exec puma config.ru
 ```
-
-#### Docker Compose
-Experience with Docker and Docker Compose are assumed. The Docker Compose setup expects that the Webhook API container volumes will have access to the codedir, either via NFS or on system.
-
-1. Download the sample `docker-compose.yml` file from the github repo:
-```
-$ wget -O docker-compose.yml https://raw.githubusercontent.com/voxpupuli/puppet_webhook/master/build/docker/docker-compose.yml
-```
-2. Edit the image, environment, and volumes keys based on your own needs.
-3. run `docker-compose up`
-
-#### What about RPM/DEB/Arch/Helm/ETC
-
-Packages for RPM and Deb systems are in the works, but are taking a bit longer to roll out due to needing to package the dependencies with the application. An Arch package is also on the way.
-
-A Helm chart is planned for the future, but not currently in development as we work to iron out any issues with the Webhook API Server after the initial 2.x release.
 
 ## Configuration
 
