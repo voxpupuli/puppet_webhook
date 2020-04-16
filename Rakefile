@@ -36,13 +36,6 @@ if ENV['SINATRA_ENV'] != 'production'
   desc 'Run all tests'
   task test: %i[rubocop spec]
 
-  require 'coveralls/rake/task'
-  desc 'Run all tests and report to coverage tools'
-  task test_and_report_coverage: [:test] do
-    Coveralls::RakeTask.new
-    Rake::Task['coveralls:push'].invoke
-  end
-
   GitHubChangelogGenerator::RakeTask.new :changelog do |config|
     config.user = 'voxpupuli'
     config.project = 'puppet_webhook'
