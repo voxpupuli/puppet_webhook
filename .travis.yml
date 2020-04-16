@@ -8,14 +8,9 @@ before_install:
   - bundle -v
 before_script:
   - cp ./config/config.yml.example ./config/config.yml
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
   - 'bundle exec rake db:migrate SINATRA_ENV=test'
 script:
   - 'bundle exec rake $CHECK'
-after_script:
-  - if [ "$CHECK" == "test_and_report_coverage" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
 matrix:
   fast_finish: true
   include:
@@ -23,8 +18,6 @@ matrix:
       env: CHECK=test
     - rvm: 2.6.5
       env: CHECK=test
-    - rvm: 2.5.3
-      env: CHECK=test_and_report_coverage
 branches:
   only:
     - master

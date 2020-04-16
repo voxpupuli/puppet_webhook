@@ -42,7 +42,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'coveralls'
   gem 'database_cleaner-active_record'
   gem 'rack-test'
   gem 'rspec'
