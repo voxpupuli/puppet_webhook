@@ -40,6 +40,7 @@ if ENV['SINATRA_ENV'] != 'production'
     config.user = 'voxpupuli'
     config.project = 'puppet_webhook'
     config.future_release = PuppetWebhook::VERSION
+    config.exclude_labels = %w[duplicate question invalid wontfix wont-fix modulesync skip-changelog]
   end
 end
 # vim: syntax=ruby

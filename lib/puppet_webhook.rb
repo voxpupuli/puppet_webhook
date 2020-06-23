@@ -5,5 +5,5 @@ require_relative 'puppet_webhook/orchestrators'
 require_relative 'puppet_webhook/chatops'
 
 module PuppetWebhook
-  VERSION = '2.1.0'
+  VERSION = '2.1.1'
 end
