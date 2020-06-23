@@ -1,8 +1,21 @@
 # Changelog
 
-## [2.1.0](https://github.com/voxpupuli/puppet_webhook/tree/2.1.0) (2020-03-09)
+## [2.1.1](https://github.com/voxpupuli/puppet_webhook/tree/2.1.1) (2020-06-23)
 
-[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.0.0...2.1.0)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.1.0...2.1.1)
+
+**Merged pull requests:**
+
+- Update puma version in vanagon [\#126](https://github.com/voxpupuli/puppet_webhook/pull/126) ([dhollinger](https://github.com/dhollinger))
+- Bump puma from 4.3.3 to 4.3.5 [\#125](https://github.com/voxpupuli/puppet_webhook/pull/125) ([dependabot[bot]](https://github.com/apps/dependabot))
+- Remove coveralls due to vulnerable dependencies [\#124](https://github.com/voxpupuli/puppet_webhook/pull/124) ([dhollinger](https://github.com/dhollinger))
+- Added several package versions and a yum repo file [\#123](https://github.com/voxpupuli/puppet_webhook/pull/123) ([dhollinger](https://github.com/dhollinger))
+- Update docker-compose file [\#120](https://github.com/voxpupuli/puppet_webhook/pull/120) ([dhollinger](https://github.com/dhollinger))
+- Some docker fixes [\#119](https://github.com/voxpupuli/puppet_webhook/pull/119) ([dhollinger](https://github.com/dhollinger))
+
+## [v2.1.0](https://github.com/voxpupuli/puppet_webhook/tree/v2.1.0) (2020-03-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.0.0...v2.1.0)
 
 **Implemented enhancements:**
 
@@ -77,10 +90,6 @@
 
 - Ensure that the ssl cert/key content is sent to WEBrick, not the path [\#84](https://github.com/voxpupuli/puppet_webhook/pull/84) ([dhollinger](https://github.com/dhollinger))
 
-**Merged pull requests:**
-
-- bump version in gemspec [\#86](https://github.com/voxpupuli/puppet_webhook/pull/86) ([dhollinger](https://github.com/dhollinger))
-
 ## [v1.6.1](https://github.com/voxpupuli/puppet_webhook/tree/v1.6.1) (2018-12-23)
 
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.6.0...v1.6.1)
@@ -104,9 +113,7 @@
 
 **Closed issues:**
 
-- Try out other code quality tools [\#28](https://github.com/voxpupuli/puppet_webhook/issues/28)
 - Build RPM/DEB/Arch Packages [\#25](https://github.com/voxpupuli/puppet_webhook/issues/25)
-- Add decommission endpoint [\#10](https://github.com/voxpupuli/puppet_webhook/issues/10)
 - Documentation [\#9](https://github.com/voxpupuli/puppet_webhook/issues/9)
 
 **Merged pull requests:**
@@ -187,10 +194,6 @@
 
 - Refactor binary to pass configuration values from file or CLI [\#27](https://github.com/voxpupuli/puppet_webhook/issues/27)
 
-**Merged pull requests:**
-
-- Replace all MCollective agent calls with the agent lib. [\#44](https://github.com/voxpupuli/puppet_webhook/pull/44) ([dhollinger](https://github.com/dhollinger))
-
 ## [v1.0.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.0.0) (2017-12-21)
 
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v0.1.0...v1.0.0)
@@ -205,6 +208,7 @@
 
 **Merged pull requests:**
 
+- Replace all MCollective agent calls with the agent lib. [\#44](https://github.com/voxpupuli/puppet_webhook/pull/44) ([dhollinger](https://github.com/dhollinger))
 - Update config options and docs [\#41](https://github.com/voxpupuli/puppet_webhook/pull/41) ([dhollinger](https://github.com/dhollinger))
 - Fix payload gentypes [\#39](https://github.com/voxpupuli/puppet_webhook/pull/39) ([dhollinger](https://github.com/dhollinger))
 - Add simple config.ru file [\#38](https://github.com/voxpupuli/puppet_webhook/pull/38) ([dhollinger](https://github.com/dhollinger))
@@ -230,6 +234,7 @@
 
 **Merged pull requests:**
 
+- Development release 0.1.0 [\#24](https://github.com/voxpupuli/puppet_webhook/pull/24) ([dhollinger](https://github.com/dhollinger))
 - Add rubygems deploy to travis [\#23](https://github.com/voxpupuli/puppet_webhook/pull/23) ([dhollinger](https://github.com/dhollinger))
 - Fix TFS checks and add more fixtures/tests [\#22](https://github.com/voxpupuli/puppet_webhook/pull/22) ([dhollinger](https://github.com/dhollinger))
 - Fix README badges after project rename [\#21](https://github.com/voxpupuli/puppet_webhook/pull/21) ([dhollinger](https://github.com/dhollinger))
