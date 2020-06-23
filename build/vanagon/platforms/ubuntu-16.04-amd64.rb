@@ -6,7 +6,7 @@ platform 'ubuntu-16.04-amd64' do |plat|
   plat.codename 'xenial'
   plat.servicedir '/etc/systemd/system'
 
-  plat.docker_image 'voxpupuli/pkg_builder:xenial'
+  plat.docker_image 'voxpupuli/builder:xenial'
   plat.docker_run_args '--privileged=true'
 
   plat.provision_with 'export DEBIAN_FRONTEND=noninteractive; apt-get update -qq; apt-get install -qy --no-install-recommends build-essential devscripts make quilt pkg-config debhelper rsync fakeroot'
