@@ -2,7 +2,7 @@
 language: ruby
 cache: bundler
 os: linux
-dist: trusty
+dist: bionic
 before_install:
   - gem install bundler:2.1.4
   - bundle -v
