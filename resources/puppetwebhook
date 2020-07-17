@@ -1,6 +1,7 @@
 # Environment Variables for the Puppet Webhook
 WEBHOOK_CONFDIR=/etc/voxpupuli/webhook.yaml
 SINATRA_ENV=production
+RACK_ENV=production
 RUBYLIB=/opt/voxpupuli/webhook/lib/ruby:/opt/voxpupuli/webhook
 GEM_HOME=/opt/voxpupuli/webhook/lib/ruby/gems/2.6.0
 GEM_PATH=/opt/voxpupuli/webhook/lib/ruby/gems/2.6.0
