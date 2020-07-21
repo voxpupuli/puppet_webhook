@@ -8,8 +8,7 @@ class Api
         # POST: /module
         post %r{\/(module|api\/v1\/r10k\/module)} do
           protected! if APP_CONFIG.protected
-          request.body.rewind
-          data = PuppetWebhook::Parsers.new(request).params
+          data = PuppetWebhook::Parsers.new(headers, req_body).params
 
           ModuleController.helpers R10kHelpers
 

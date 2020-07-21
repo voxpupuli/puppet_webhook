@@ -74,4 +74,17 @@ class ApplicationController < Sinatra::Base
                                                   {}
                                                 end
   end
+
+  def headers
+    headers = {}
+    request.env.each do |k, v|
+      headers[k.to_s] = v.to_s if k =~ %r{^([A-Z]|_)+$}
+    end
+    headers
+  end
+
+  def req_body
+    request.body.rewind
+    request.body.read
+  end
 end

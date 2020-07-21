@@ -30,19 +30,6 @@ class Api
 
         private
 
-        def headers
-          headers = {}
-          request.env.each do |k, v|
-            headers[k.to_s] = v.to_s if k =~ %r{^([A-Z]|_)+$}
-          end
-          headers
-        end
-
-        def req_body
-          request.body.rewind
-          request.body.read
-        end
-
         def get_prefix(data)
           case APP_CONFIG.prefix
           when 'repo'
