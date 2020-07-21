@@ -1,8 +1,30 @@
 # Changelog
 
-## [2.1.1](https://github.com/voxpupuli/puppet_webhook/tree/2.1.1) (2020-06-23)
+## [v2.1.2](https://github.com/voxpupuli/puppet_webhook/tree/v2.1.2) (2020-07-21)
 
-[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.1.0...2.1.1)
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.1.1...v2.1.2)
+
+**Fixed bugs:**
+
+- ArgumentError - wrong number of arguments \(given 1, expected 2\) [\#136](https://github.com/voxpupuli/puppet_webhook/issues/136)
+- puppet-webhook 2.1.1 runs in development mode [\#131](https://github.com/voxpupuli/puppet_webhook/issues/131)
+- Fix a parser issue with the module endpoint [\#137](https://github.com/voxpupuli/puppet_webhook/pull/137) ([dhollinger](https://github.com/dhollinger))
+- Bugfix: Run Puma in production mode [\#135](https://github.com/voxpupuli/puppet_webhook/pull/135) ([bastelfreak](https://github.com/bastelfreak))
+
+**Closed issues:**
+
+- Update r10k gem to 3.4.1 [\#121](https://github.com/voxpupuli/puppet_webhook/issues/121)
+
+**Merged pull requests:**
+
+- document webhook configuration [\#138](https://github.com/voxpupuli/puppet_webhook/pull/138) ([bastelfreak](https://github.com/bastelfreak))
+- Update r10k and dependencies [\#133](https://github.com/voxpupuli/puppet_webhook/pull/133) ([dhollinger](https://github.com/dhollinger))
+- Update gems to latest version [\#132](https://github.com/voxpupuli/puppet_webhook/pull/132) ([bastelfreak](https://github.com/bastelfreak))
+- remove legacy travis config keys / use bionic as CI image [\#129](https://github.com/voxpupuli/puppet_webhook/pull/129) ([bastelfreak](https://github.com/bastelfreak))
+
+## [v2.1.1](https://github.com/voxpupuli/puppet_webhook/tree/v2.1.1) (2020-06-23)
+
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.1.0...v2.1.1)
 
 **Merged pull requests:**
 
@@ -194,6 +216,10 @@
 
 - Refactor binary to pass configuration values from file or CLI [\#27](https://github.com/voxpupuli/puppet_webhook/issues/27)
 
+**Merged pull requests:**
+
+- Replace all MCollective agent calls with the agent lib. [\#44](https://github.com/voxpupuli/puppet_webhook/pull/44) ([dhollinger](https://github.com/dhollinger))
+
 ## [v1.0.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.0.0) (2017-12-21)
 
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v0.1.0...v1.0.0)
@@ -208,7 +234,6 @@
 
 **Merged pull requests:**
 
-- Replace all MCollective agent calls with the agent lib. [\#44](https://github.com/voxpupuli/puppet_webhook/pull/44) ([dhollinger](https://github.com/dhollinger))
 - Update config options and docs [\#41](https://github.com/voxpupuli/puppet_webhook/pull/41) ([dhollinger](https://github.com/dhollinger))
 - Fix payload gentypes [\#39](https://github.com/voxpupuli/puppet_webhook/pull/39) ([dhollinger](https://github.com/dhollinger))
 - Add simple config.ru file [\#38](https://github.com/voxpupuli/puppet_webhook/pull/38) ([dhollinger](https://github.com/dhollinger))
