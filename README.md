@@ -167,3 +167,16 @@ Default: []
 type: Boolean
 description: Allow uppercase within the name of the module or environment passed to the API.
 default: true
+
+### Configure the webhook
+
+This API provides two endpoints that need to be called:
+
+* `/api/v1/r10k/module` for every module
+* `api/v1/r10k/environment` for the control repository
+
+In GitHub, set setup looks like this:
+
+!![GitHub Webook configuration](images/gh.png)
+
+If you configured basic authentication, you need to add the username and password to the URL.
