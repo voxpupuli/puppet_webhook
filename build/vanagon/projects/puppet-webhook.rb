@@ -4,7 +4,7 @@ project 'puppet-webhook' do |proj|
   # Set preferred component versions
   platform = proj.get_platform
 
-  proj.version '2.1.1'
+  proj.version '2.1.2'
   proj.description 'The Webhook API server for trigger puppet actions'
   proj.license 'Apache 2.0'
   proj.vendor 'Vox Pupuli Organization <voxpupuli@groups.io>'
@@ -63,7 +63,7 @@ project 'puppet-webhook' do |proj|
   proj.component 'rubygem-byebug'
   proj.component 'rubygem-capybara'
   proj.component 'rubygem-coderay'
-  proj.component 'rubygem-colored'
+  proj.component 'rubygem-colored2'
   proj.component 'rubygem-concurrent-ruby'
   proj.component 'rubygem-connection_pool'
   proj.component 'rubygem-coveralls'
