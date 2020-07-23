@@ -6,7 +6,7 @@ platform 'ubuntu-18.04-amd64' do |plat|
   plat.codename 'bionic'
   plat.servicedir '/etc/systemd/system'
 
-  plat.docker_image 'ubuntu_build:bionic'
+  plat.docker_image 'voxpupuli/builder:bionic'
   plat.docker_run_args '--privileged=true'
 
   plat.provision_with 'export DEBIAN_FRONTEND=noninteractive; apt-get update -qq; apt-get install -qy --no-install-recommends build-essential devscripts make quilt pkg-config debhelper rsync fakeroot'
