@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-platform 'ubuntu-18.04-amd64' do |plat|
+platform 'ubuntu-20.04-amd64' do |plat|
   plat.defaultdir '/etc/default'
   plat.servicetype 'systemd'
-  plat.codename 'bionic'
+  plat.codename 'focal'
   plat.servicedir '/etc/systemd/system'
 
-  plat.docker_image 'voxpupuli/builder:bionic'
+  plat.docker_image 'voxpupuli/builder:focal'
   plat.docker_run_args '--privileged=true'
 
   plat.provision_with 'export DEBIAN_FRONTEND=noninteractive; apt-get update -qq; apt-get install -qy --no-install-recommends build-essential devscripts make quilt pkg-config debhelper rsync fakeroot'

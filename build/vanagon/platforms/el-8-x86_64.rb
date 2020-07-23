@@ -5,7 +5,7 @@ platform 'el-8-x86_64' do |plat|
   plat.defaultdir '/etc/sysconfig'
   plat.servicetype 'systemd'
 
-  plat.docker_image 'voxpupuli/pkg_builder:el8'
+  plat.docker_image 'voxpupuli/builder:el8'
   plat.docker_run_args '--privileged=true'
 
   plat.provision_with "yum update -y; yum groupinstall --assumeyes 'Development Tools'; yum install --assumeyes autoconf automake createrepo rsync gcc make rpmdevtools rpm-libs yum-utils rpm-sign"
