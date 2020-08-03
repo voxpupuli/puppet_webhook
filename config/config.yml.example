@@ -12,4 +12,7 @@ development:
   ignore_environments: []
   allow_uppercase: true
 
+  # Logging
+  loglevel: debug
+
 test: &development
