@@ -9,6 +9,7 @@ require 'github_changelog_generator/task'
 
 namespace :db do
   task :load_config do
+    require './config/environment.rb'
     require './app/controllers/application_controller'
   end
 

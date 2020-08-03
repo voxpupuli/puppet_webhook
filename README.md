@@ -168,6 +168,14 @@ type: Boolean
 description: Allow uppercase within the name of the module or environment passed to the API.
 default: true
 
+### Logging Settings
+
+#### `loglevel`
+
+type: String
+description: Set the Logging level for the application. Valid values are `debug`, `error`, `warn`, `fatal`, and `info`.
+default `warn`
+
 ### Configure the webhook
 
 This API provides two endpoints that need to be called:

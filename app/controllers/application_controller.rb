@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
     set :database, "sqlite3:db/#{ENV['SINATRA_ENV']}.sqlite3"
     set :public_folder, 'public'
     set :views, 'app/views'
-    set :logger, Logger.new(STDOUT)
+
+    # Logging settings
+    logger = Logger.new(STDOUT)
+    logger.level = PuppetWebhook.loglevel
+    set :logger, logger
   end
 
   not_found do
