@@ -9,6 +9,7 @@ group :default do
   gem 'activerecord', '4.2.11', require: 'active_record'
   gem 'bcrypt'
   gem 'github_changelog_generator'
+  gem 'log4r'
   gem 'mcollective-client'
   gem 'puma'
   gem 'puppet_forge', '>= 2.3.0'
@@ -29,14 +30,12 @@ end
 
 group :development do
   gem 'debase'
-  gem 'fustigit'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rack-console'
   gem 'rubocop'
   gem 'ruby-debug-ide'
   gem 'ruby-git'
-  gem 'vanagon', '0.15.25'
   gem 'yard', '>= 0.9.20'
 end
 
@@ -48,4 +47,9 @@ group :test do
   gem 'simplecov'
   gem 'simplecov-console'
   gem 'webmock'
+end
+
+group :build do
+  gem 'fustigit'
+  gem 'vanagon', '0.15.25'
 end

@@ -18,7 +18,7 @@ end
 
 Sidekiq::Logging.logger = nil
 
-ENV['SINATRA_ENV'] = 'test'
+ENV['RACK_ENV'] = 'test'
 
 require_relative '../config/environment'
 require 'rack/test'
@@ -27,7 +27,7 @@ require 'capybara/dsl'
 require 'database_cleaner'
 require 'webmock/rspec'
 
-raise 'Migrations are pending. Run `rake db:migrate SINATRA_ENV=test` to resolve the issue.' if ActiveRecord::Migrator.needs_migration?
+raise 'Migrations are pending. Run `rake db:migrate RACK_ENV=test` to resolve the issue.' if ActiveRecord::Migrator.needs_migration?
 
 ActiveRecord::Base.logger = nil
 

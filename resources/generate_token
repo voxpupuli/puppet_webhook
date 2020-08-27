@@ -8,7 +8,7 @@ echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    export SINATRA_ENV=production
+    export RACK_ENV=production
     export RUBYLIB=/opt/voxpupuli/webhook/lib/ruby:/opt/voxpupuli/webhook:/opt/voxpupuli/webhook/app/models
     export GEM_HOME=/opt/voxpupuli/webhook/lib/ruby/gems/2.6.0
     export GEM_PATH=$GEM_HOME

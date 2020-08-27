@@ -10,9 +10,11 @@ module Deploy
       # r10k doesn't like stringified hash keys. This forces symbolized keys
       config = config.symbolize_keys
       @basedir = config[:sources].first[1]['basedir']
-      deploy = R10K::Action::Deploy::Environment.new({ config: config }, [environment], config).call
+      deploy = R10K::Action::Deploy::Environment.new({ config: config }, [environment], config)
 
-      raise 'Failed to deploy' unless deploy
+      R10K::Logging.instance_variable_set(:@outputter, PuppetWebhook::R10KLogProxy.new(logger, logger.level))
+
+      raise 'Failed to deploy' unless deploy.call
     end
   end
 end
