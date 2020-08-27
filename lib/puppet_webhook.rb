@@ -3,6 +3,7 @@
 require_relative 'puppet_webhook/parsers'
 require_relative 'puppet_webhook/orchestrators'
 require_relative 'puppet_webhook/chatops'
+require_relative 'puppet_webhook/r10k_log_proxy'
 
 # Module to contain the PuppetWebhook library.
 module PuppetWebhook

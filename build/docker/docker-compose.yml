@@ -7,7 +7,7 @@ services:
       - "9292:9292"
     environment:
       - REDIS_URL=redis://redis:6379/0
-      - SINATRA_ENV=production
+      - RACK_ENV=production
       - WEBHOOK_CONFDIR=/config/webhook.yaml
     volumes:
       - "/etc/puppetlabs/code:/puppetlabs/codedir"
@@ -21,7 +21,7 @@ services:
     command: "bash -c 'cd app/ && bundle exec sidekiq -r /app/config/environment.rb'"
     environment:
       - REDIS_URL=redis://redis:6379/0
-      - SINATRA_ENV=production
+      - RACK_ENV=production
       - WEBHOOK_CONFDIR=/config/webhook.yaml
     volumes:
       - "/etc/puppetlabs/code:/puppetlabs/codedir"

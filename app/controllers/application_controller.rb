@@ -7,7 +7,7 @@ require 'sinatra/activerecord'
 class ApplicationController < Sinatra::Base
   configure do
     register Sinatra::ActiveRecordExtension
-    set :database, "sqlite3:db/#{ENV['SINATRA_ENV']}.sqlite3"
+    set :database, "sqlite3:db/#{environment}.sqlite3"
     set :public_folder, 'public'
     set :views, 'app/views'
 

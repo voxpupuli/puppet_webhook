@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ENV['SINATRA_ENV'] ||= 'development'
+environment = ENV.fetch('RACK_ENV', 'development')
 
 require './lib/puppet_webhook'
 require 'sinatra/activerecord/rake'
@@ -18,7 +18,7 @@ namespace :db do
     require './app/models/auth_token'
     ActiveRecord::Base.establish_connection(
       adapter: 'sqlite3',
-      database: "db/#{ENV['SINATRA_ENV']}.sqlite3"
+      database: "db/#{environment}.sqlite3"
     )
     token = SecureRandom.urlsafe_base64
     AuthToken.delete_all
@@ -27,7 +27,7 @@ namespace :db do
   end
 end
 
-if ENV['SINATRA_ENV'] != 'production'
+if environment != 'production'
   require 'rubocop/rake_task'
   RuboCop::RakeTask.new
 

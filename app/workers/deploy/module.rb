@@ -8,9 +8,11 @@ module Deploy
     def perform(ppt_module, config)
       # r10k doesn't like stringified hash keys. This forces symbolized keys
       config = config.symbolize_keys
-      deploy = R10K::Action::Deploy::Module.new({ config: config }, [ppt_module], config).call
+      deploy = R10K::Action::Deploy::Module.new({ config: config }, [ppt_module], config)
 
-      raise 'Failed to deploy' unless deploy
+      R10K::Logging.instance_variable_set(:@outputter, PuppetWebhook::R10KLogProxy.new(logger, logger.level))
+
+      raise 'Failed to deploy' unless deploy.call
     end
   end
 end

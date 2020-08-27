@@ -273,6 +273,7 @@ DEPENDENCIES
   debase
   fustigit
   github_changelog_generator
+  log4r
   mcollective-client
   pry
   pry-byebug
