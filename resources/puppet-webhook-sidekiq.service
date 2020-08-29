@@ -7,7 +7,7 @@ After=puppet-webhook.service
 EnvironmentFile=-/etc/sysconfig/puppet-webhook
 EnvironmentFile=-/etc/default/puppet-webhook
 WorkingDirectory=/opt/voxpupuli/webhook
-ExecStart=/opt/voxpupuli/webhook/bin/bundle exec sidekiq -C config/sidekiq.yml -r $WorkingDirectory/config/environment.rb
+ExecStart=/opt/voxpupuli/webhook/bin/bundle exec sidekiq -C config/sidekiq.yml -r ${WORKDIR}/config/environment.rb
 ExecReload=/bin/kill -HUP $PID
 KillMode=process
 

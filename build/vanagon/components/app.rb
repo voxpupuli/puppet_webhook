@@ -52,5 +52,7 @@ component 'app' do |pkg, _settings, _platform|
 
   pkg.add_postinstall_action(%w[install upgrade], 'cd /opt/voxpupuli/webhook && bin/postinst.sh')
 
+  pkg.add_postinstall_action('install', 'systemctl enable puppet-webhook puppet-webhook-app puppet-webhook-sidekiq && systemctl restart puppet-webhook')
+
   pkg.add_postremove_action('removal', 'rm -rf /opt/voxpupuli/webhook')
 end
