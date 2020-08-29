@@ -21,6 +21,8 @@ component 'app' do |pkg, _settings, _platform|
   pkg.environment 'GEM_HOME', '/opt/voxpupuli/webhook/lib/ruby/2.6.0'
 
   pkg.add_source 'file://resources/puppet-webhook.service'
+  pkg.add_source 'file://resources/puppet-webhook-app.service'
+  pkg.add_source 'file://resources/puppet-webhook-sidekiq.service'
   pkg.add_source 'file://resources/puppetwebhook'
   pkg.add_source 'file://resources/postinst.sh'
   pkg.add_source 'file://resources/generate_token'
@@ -42,9 +44,9 @@ component 'app' do |pkg, _settings, _platform|
     ]
   end
 
-  pkg.install_service('../puppet-webhook.service', nil, 'puppet-webhook')
-  pkg.install_service('../puppet-webhook-app.service', '../puppetwebhook', 'puppet-webhook-app')
-  pkg.install_service('../puppet-webhook-sidekiq.service', '../puppetwebhook', 'puppet-webhook-sidekiq')
+  pkg.install_service('../puppet-webhook.service', '../puppetwebhook', 'puppet-webhook')
+  pkg.install_service('../puppet-webhook-app.service', nil, 'puppet-webhook-app')
+  pkg.install_service('../puppet-webhook-sidekiq.service', nil, 'puppet-webhook-sidekiq')
 
   pkg.add_postinstall_action('install', 'cd /opt/voxpupuli/webhook && bin/bundle update --bundler')
 
