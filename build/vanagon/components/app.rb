@@ -48,11 +48,11 @@ component 'app' do |pkg, _settings, _platform|
   pkg.install_service('../puppet-webhook-app.service', nil, 'puppet-webhook-app')
   pkg.install_service('../puppet-webhook-sidekiq.service', nil, 'puppet-webhook-sidekiq')
 
-  pkg.add_postinstall_action('install', 'cd /opt/voxpupuli/webhook && bin/bundle update --bundler')
+  pkg.add_postinstall_action('install', 'cd /opt/voxpupuli/webhook && bin/bundle update --bundler --quiet')
 
   pkg.add_postinstall_action(%w[install upgrade], 'cd /opt/voxpupuli/webhook && bin/postinst.sh')
 
-  pkg.add_postinstall_action('install', 'systemctl enable puppet-webhook puppet-webhook-app puppet-webhook-sidekiq && systemctl restart puppet-webhook')
+  pkg.add_postinstall_action(%w[install upgrade], 'systemctl daemon-reload && systemctl enable puppet-webhook puppet-webhook-app puppet-webhook-sidekiq && systemctl restart puppet-webhook')
 
   pkg.add_postremove_action('removal', 'rm -rf /opt/voxpupuli/webhook')
 end
