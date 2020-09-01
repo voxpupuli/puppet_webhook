@@ -7,7 +7,7 @@ require_relative 'puppet_webhook/r10k_log_proxy'
 
 # Module to contain the PuppetWebhook library.
 module PuppetWebhook
-  VERSION = '2.1.2'
+  VERSION = '2.1.3'
 
   def self.loglevel
     case APP_CONFIG.loglevel
