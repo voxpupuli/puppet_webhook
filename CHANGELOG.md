@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.1.3](https://github.com/voxpupuli/puppet_webhook/tree/2.1.3) (2020-09-01)
+
+[Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.1.2...2.1.3)
+
+**Fixed bugs:**
+
+- Logging doesn't appear to be working anymore. [\#146](https://github.com/voxpupuli/puppet_webhook/issues/146)
+- Loglevel is not configureable anymore [\#140](https://github.com/voxpupuli/puppet_webhook/issues/140)
+
+**Merged pull requests:**
+
+- Ensure that systemctl is reloaded on upgrade [\#153](https://github.com/voxpupuli/puppet_webhook/pull/153) ([dhollinger](https://github.com/dhollinger))
+- More build process fixes [\#152](https://github.com/voxpupuli/puppet_webhook/pull/152) ([dhollinger](https://github.com/dhollinger))
+- More build fixes [\#151](https://github.com/voxpupuli/puppet_webhook/pull/151) ([dhollinger](https://github.com/dhollinger))
+- Some pre-release fixes [\#150](https://github.com/voxpupuli/puppet_webhook/pull/150) ([dhollinger](https://github.com/dhollinger))
+- Add new sidekiq service files [\#149](https://github.com/voxpupuli/puppet_webhook/pull/149) ([dhollinger](https://github.com/dhollinger))
+- Create r10k log proxy [\#147](https://github.com/voxpupuli/puppet_webhook/pull/147) ([dhollinger](https://github.com/dhollinger))
+- Add log level options [\#142](https://github.com/voxpupuli/puppet_webhook/pull/142) ([dhollinger](https://github.com/dhollinger))
+- Update build tools for 2.1.2 [\#141](https://github.com/voxpupuli/puppet_webhook/pull/141) ([dhollinger](https://github.com/dhollinger))
+
 ## [v2.1.2](https://github.com/voxpupuli/puppet_webhook/tree/v2.1.2) (2020-07-21)
 
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v2.1.1...v2.1.2)
@@ -116,10 +136,6 @@
 
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.6.0...v1.6.1)
 
-**Fixed bugs:**
-
-- Change webrick log constants to strings to match conf file [\#80](https://github.com/voxpupuli/puppet_webhook/pull/80) ([dhollinger](https://github.com/dhollinger))
-
 ## [v1.6.0](https://github.com/voxpupuli/puppet_webhook/tree/v1.6.0) (2018-12-19)
 
 [Full Changelog](https://github.com/voxpupuli/puppet_webhook/compare/v1.5.2...v1.6.0)
@@ -132,6 +148,7 @@
 **Fixed bugs:**
 
 - Logging settings don't work properly [\#77](https://github.com/voxpupuli/puppet_webhook/issues/77)
+- Change webrick log constants to strings to match conf file [\#80](https://github.com/voxpupuli/puppet_webhook/pull/80) ([dhollinger](https://github.com/dhollinger))
 
 **Closed issues:**
 
