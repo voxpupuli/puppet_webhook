@@ -14,5 +14,6 @@ map '/' do
 end
 
 map '/sidekiq' do
+  require './config/initializers/sidekiq'
   run Sidekiq::Web
 end
