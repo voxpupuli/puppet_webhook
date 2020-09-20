@@ -12,6 +12,10 @@ development:
   ignore_environments: []
   allow_uppercase: true
 
+  # Redis
+  redis_url: "redis://localhost:6379/0"
+  redis_password: password
+
   # Logging
   loglevel: debug
 

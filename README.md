@@ -168,6 +168,20 @@ type: Boolean
 description: Allow uppercase within the name of the module or environment passed to the API.
 default: true
 
+### Redis/Sidekiq Settings
+
+#### `redis_url`
+
+type: String
+description: The Redis connection url to use to connect to your Redis database.
+default: `redis://localhost:6379/0`
+
+#### `redis_password`
+
+type: String
+description: The password to authenticate to Redis with.
+default: `nil`
+
 ### Logging Settings
 
 #### `loglevel`
