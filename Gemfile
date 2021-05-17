@@ -3,24 +3,25 @@
 source 'https://rubygems.org'
 
 group :default do
-  gem 'sinatra'
-  gem 'sinatra-contrib'
-  # gem 'sinatra-authentication'
   gem 'activerecord', '4.2.11', require: 'active_record'
   gem 'bcrypt'
   gem 'github_changelog_generator'
   gem 'log4r'
   gem 'mcollective-client'
+  gem 'nokogiri', '>= 1.11.0' # Forced security update
   gem 'puma'
   gem 'puppet_forge', '>= 2.3.0'
   gem 'r10k', '>= 3.4.1'
   gem 'rake'
   gem 'rb-readline'
   gem 'require_all'
+  gem 'rexml', '>= 3.2.5' # Forced security update
   gem 'rocket-chat-notifier'
   gem 'shotgun'
   gem 'sidekiq', '< 6.0.0'
+  gem 'sinatra'
   gem 'sinatra-activerecord', require: 'sinatra/activerecord'
+  gem 'sinatra-contrib'
   gem 'slack-notifier'
   gem 'sqlite3', '1.3.13'
   gem 'thin'
@@ -30,12 +31,12 @@ end
 
 group :development do
   gem 'debase'
+  gem 'git'
   gem 'pry'
   gem 'pry-byebug'
   gem 'rack-console'
   gem 'rubocop'
   gem 'ruby-debug-ide'
-  gem 'ruby-git'
   gem 'yard', '>= 0.9.20'
 end
 
