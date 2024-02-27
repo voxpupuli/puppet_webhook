@@ -18,7 +18,7 @@ group :default do
   gem 'rexml', '>= 3.2.5' # Forced security update
   gem 'rocket-chat-notifier'
   gem 'shotgun'
-  gem 'sidekiq', '< 6.0.0'
+  gem 'sidekiq', '< 7.0.0'
   gem 'sinatra'
   gem 'sinatra-activerecord', require: 'sinatra/activerecord'
   gem 'sinatra-contrib'
